@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="admin_users")
      */
-    public function index(): Response
+    public function listerUtilisateurs(UtilisateurRepository $utilisateurRepository): Response
     {
+        $users = $utilisateurRepository->findAll();
+
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'controller_name'   => 'AdminController',
+            'users'             => $users
         ]);
     }
 }
