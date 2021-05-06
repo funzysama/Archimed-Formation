@@ -45,24 +45,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/security/changePass", name="security_changePass")
      */
-    public function changePassword(Utilisateur $user, Request $request): Response
-    {
-
-        return $this->render('security/monProfile.html.twig', [
-            'user' => $user
-        ]);
-    }
-
-    /**
-     * @Route("/PasswordUpdate/{id}", name="security_firstChangePass")
-     */
-    public function firstChangePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, UtilisateurRepository $userRepository, $id): Response
+    public function changePassword(UserPasswordEncoderInterface $passwordEncoder, Request $request): Response
     {
         $user = $this->getUser();
-        if(!$user){
-            $user = $userRepository->find($id);
-        }
-        //dump($user);
         $form = $this->createForm(ChangePassType::class);
         $form->handleRequest($request);
 
@@ -79,12 +64,48 @@ class SecurityController extends AbstractController
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
-                $entityManager->flush();                $this->addFlash('succes', 'c\'est goood !');
+                $entityManager->flush();
+                $this->addFlash('succes', 'c\'est goood !');
 
-                return $this->render('security/firstChangePass.html.twig', [
-                    'user'              => $user,
-                    'changePassForm'    => $form->createView()
-                ]);
+                return $this->RedirectToRoute('app_logout');
+
+            }
+        }
+
+        return $this->render('security/firstChangePass.html.twig', [
+            'user'              => $user,
+            'changePassForm'    => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/PasswordUpdate/{id}", name="security_firstChangePass")
+     */
+    public function firstChangePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, UtilisateurRepository $userRepository, $id): Response
+    {
+        $user = $this->getUser();
+        if(!$user){
+            $user = $userRepository->find($id);
+        }
+        $form = $this->createForm(ChangePassType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+
+            if($form->isValid()){
+                $password = $form->get('Password')->getData();
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $password
+                    )
+                );
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('succes', 'c\'est goood !');
+
+                return $this->RedirectToRoute('app_logout');
 
             }
         }
