@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    {{ parent() }} Mon Profile
+{% endblock %}
+
+{% block body %}
+    <div>
+        {{ user.sexe|formatSexe }}{{ user.nom }}{{ user.prenom }}
+    </div>
+    <div>
+        {{ user.email }} | <a>Changer l'address e-mail</a>
+    </div>
+    <form action="{{ path('security_changePass') }}"></form>
+
+{% endblock %}

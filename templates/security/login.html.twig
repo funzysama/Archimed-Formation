@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
+{% block title %}{{ parent() }}Identification{% endblock %}
 {% block body %}
-<form method="post">
+<h3 class="txtcnt">Espace restreint</h3>
+<div class="marginTop3">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -13,21 +13,36 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
+        <form method="post">
+            <div class="loginForm marginTop3">
+                <div class="loginForm-group">
+                    <div class="loginForm-item">
+                        <label class="loginForm-label" for="inputEmail">Votre Email:</label>
+                        <div class="loginForm-input">
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
+                        </div>
+                    </div>
+                    <div class="loginForm-item">
+                        <label class="loginForm-label" for="inputPassword">Mot de passe:</label>
+                        <div class="loginForm-input">
+                            <input type="password" name="password" id="inputPassword" required>
+                        </div>
+                    </div>
+                    <div class="checkbox marginTop1 marginBot1">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                        </label>
+                    </div>
+                </div>
+                <div class="marginTop2">
+                    <button class="submit" type="submit">
+                        Connexion
+                    </button>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </div>
+    </form>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi
-            </label>
-        </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    <p class="marginTop3">Identifiants oubliés ? <a href="#">Cliquez ici</a>..</p>
+</div>
 {% endblock %}

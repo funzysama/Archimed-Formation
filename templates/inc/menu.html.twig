@@ -1,0 +1,8 @@
+<div class="vertical-menu marginTop3">
+    {# TODO: Impleter les test dans la class Utilisateurs
+    {% if app.user.test == null %} #}
+        <a href="#">Demande d'acces aux tests</a>
+    {#{% endif %}#}
+    <a href="{{ path('monProfile', {id: app.user.id}) }}">Mon profile</a>
+    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+</div>

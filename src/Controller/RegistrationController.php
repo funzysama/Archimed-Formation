@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Repository\UtilisateurRepository;
+use App\Service\PasswordGenerator;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,36 +28,38 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, PasswordGenerator $passwordGenerator): Response
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            $randomPass = $passwordGenerator->generateRandomStrongPassword();
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $randomPass
                 )
             );
-
+            $user->setActif(true);
+            $role = array($form->get('role')->getData());
+            $user->setRoles($role);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('no-reply@archi-med.fr', 'Archi-Med'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->context(['password' => $randomPass])
             );
-            // do anything else you need here, like send an email
+            $this->addFlash('success', 'Vous avez enregistré un nouvel utilisateur, un email lui as été envoyer pour activer son compte.');
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -81,18 +84,19 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
+        if($user->isVerified()){
+            return $this->RedirectToRoute('security_firstChangePass', ['id' => $id]);
+        }
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
-
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Succes ! Votre compte est vérifié, veuillez changer votre Mot de passe');
 
-        return $this->redirectToRoute('app_register');
+        return $this->RedirectToRoute('security_firstChangePass', ['id' => $id]);
     }
 }

@@ -1,0 +1,6 @@
+<div class="vertical-menu marginTop3">
+    <a href="{{ path('app_register') }}">Créer un Utilisateur</a>
+    <a href="{{ path('admin_users') }}">Liste des Utilisateurs</a>
+    <a href="{{ path('monProfile', { id: app.user.id }) }}">Mon profile</a>
+    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+</div>
