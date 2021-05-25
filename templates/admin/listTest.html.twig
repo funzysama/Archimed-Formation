@@ -1,0 +1,33 @@
+{% extends 'admin-base.html.twig' %}
+{% block title %}{{ parent() }}Administration{% endblock %}
+{% block page_subtitle %}Gestion des tests{% endblock %}
+
+{% block page_content %}
+    <div class="marginTop3">
+        il y a actuellement {{ tests|length }} disponible<br>
+    </div>
+<table class="MainTable marginTop1">
+    <thead>
+    <tr>
+        <th class="tabStatusTh">Status</th>
+        <th class="tabNomTh">Nom</th>
+        <th class="tabAgenceTh">Question</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for test in tests %}
+        <tr class="tableRow pointer" onclick="document.location = '{{ path('admin_test_editer', {id: test.id}) }}';">
+            <td class="tabStatus">
+                <img class="ButtonOK" src="{{ asset('res/img/button_ok_12.png') }}" title="Compte activé" alt="V">
+            </td>
+            <td class="tabNom">
+                {{ test.nom }}
+            </td>
+            <td class="tabAgence">
+                {{ test.questions|length }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

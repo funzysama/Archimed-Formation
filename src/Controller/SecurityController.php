@@ -41,6 +41,28 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/profile/{id}/tests", name="mesTests")
+     */
+    public function mesTests(Utilisateur $user): Response
+    {
+        return $this->render('security/mesTests.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/profile/{id}/resultats", name="mesResultat")
+     */
+    public function mesResultats(Utilisateur $user): Response
+    {
+        $resultat = $user->getI3PResultats();
+        return $this->render('security/mesResultats.html.twig', [
+            'user' => $user,
+            'resultat'  => $resultat
+        ]);
+    }
+
 
     /**
      * @Route("/security/changePass", name="security_changePass")

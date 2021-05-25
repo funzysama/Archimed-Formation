@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4997d4635c4002a8e06125fb347dc20d",
+    "content-hash": "0ae311751356a0caddc66db470752462",
     "packages": [
         {
             "name": "antishov/doctrine-extensions-bundle",
@@ -85,6 +85,74 @@
             "time": "2020-12-10T20:46:02+00:00"
         },
         {
+            "name": "artgris/filemanager-bundle",
+            "version": "2.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artgris/FileManagerBundle.git",
+                "reference": "8f1a81b7c9d8006c2b58ccabe0372e65f5131b23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artgris/FileManagerBundle/zipball/8f1a81b7c9d8006c2b58ccabe0372e65f5131b23",
+                "reference": "8f1a81b7c9d8006c2b58ccabe0372e65f5131b23",
+                "shasum": ""
+            },
+            "require": {
+                "oomphinc/composer-installers-extender": "^1.1|^2.0",
+                "php": "^7.1.3",
+                "sensio/framework-extra-bundle": "^4.4|^5.0",
+                "symfony/asset": "^4.4|^5.0",
+                "symfony/event-dispatcher": "^4.4|^5.0",
+                "symfony/expression-language": "^4.4|^5.0",
+                "symfony/form": "^4.4|^5.0",
+                "symfony/translation": "^4.4|^5.0",
+                "symfony/twig-bridge": "^4.4|^5.0",
+                "symfony/twig-bundle": "^4.4|^5.0",
+                "symfony/validator": "^4.4|^5.0"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "^4.4|^5.0",
+                "symfony/css-selector": "^4.4|^5.0",
+                "symfony/phpunit-bridge": "^4.3.5|^5.0",
+                "symfony/security-bundle": "^4.4|^5.0",
+                "symfony/templating": "^4.4|^5.0",
+                "symfony/var-dumper": "^4.4|^5.0",
+                "symfony/yaml": "^4.4|^5.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Artgris\\Bundle\\FileManagerBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur Gribet",
+                    "email": "a.gribet@gmail.com"
+                }
+            ],
+            "description": "FileManager is a simple Multilingual File Manager Bundle for Symfony",
+            "homepage": "https://github.com/artgris/FileManagerBundle",
+            "keywords": [
+                "bundle",
+                "file manager",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/artgris/FileManagerBundle/issues",
+                "source": "https://github.com/artgris/FileManagerBundle/tree/2.2.3"
+            },
+            "time": "2020-10-30T10:36:42+00:00"
+        },
+        {
             "name": "behat/transliterator",
             "version": "v1.3.0",
             "source": {
@@ -132,6 +200,156 @@
                 "source": "https://github.com/Behat/Transliterator/tree/v1.3.0"
             },
             "time": "2020-01-14T16:39:13+00:00"
+        },
+        {
+            "name": "composer/installers",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "ae03311f45dfe194412081526be2e003960df74b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/ae03311f45dfe194412081526be2e003960df74b",
+                "reference": "ae03311f45dfe194412081526be2e003960df74b",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.6.* || ^2.0",
+                "composer/semver": "^1 || ^3",
+                "phpstan/phpstan": "^0.12.55",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "symfony/phpunit-bridge": "^4.2 || ^5",
+                "symfony/process": "^2.3"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "Lan Management System",
+                "MODX Evo",
+                "MantisBT",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Starbug",
+                "Thelia",
+                "Whmcs",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "eZ Platform",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "known",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "majima",
+                "mako",
+                "mediawiki",
+                "miaoxing",
+                "modulework",
+                "modx",
+                "moodle",
+                "osclass",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "processwire",
+                "puppet",
+                "pxcms",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "sylius",
+                "symfony",
+                "tastyigniter",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "support": {
+                "issues": "https://github.com/composer/installers/issues",
+                "source": "https://github.com/composer/installers/tree/v1.11.0"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-04-28T06:42:17+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -1797,6 +2015,223 @@
             "time": "2021-04-23T09:16:01+00:00"
         },
         {
+            "name": "kevinpapst/adminlte-bundle",
+            "version": "3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kevinpapst/AdminLTEBundle.git",
+                "reference": "3cb97b33b6b7c0c2fff70dd176a64784641431ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kevinpapst/AdminLTEBundle/zipball/3cb97b33b6b7c0c2fff70dd176a64784641431ed",
+                "reference": "3cb97b33b6b7c0c2fff70dd176a64784641431ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+                "symfony/asset": ">4.3",
+                "symfony/config": ">4.3",
+                "symfony/dependency-injection": ">4.3",
+                "symfony/event-dispatcher": ">4.3",
+                "symfony/http-foundation": ">4.3",
+                "symfony/http-kernel": ">4.3",
+                "symfony/options-resolver": ">4.3",
+                "symfony/security-core": ">4.3",
+                "symfony/translation": ">4.3",
+                "symfony/twig-bridge": ">4.3",
+                "twig/twig": ">2.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
+                "knplabs/knp-menu-bundle": "^2.2",
+                "phpspec/prophecy": "^1.6",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpunit/phpunit": "^7.3",
+                "symfony/framework-bundle": ">4.3"
+            },
+            "suggest": {
+                "knplabs/knp-menu-bundle": "Allows easy menu integration"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "KevinPapst\\AdminLTEBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Papst",
+                    "homepage": "https://www.kevinpapst.de"
+                },
+                {
+                    "name": "Marc Bach",
+                    "homepage": "http://www.avanzu.de"
+                },
+                {
+                    "name": "Ángel Guzmán Maeso",
+                    "homepage": "https://shakaran.net/blog"
+                }
+            ],
+            "description": "Admin theme bundle for Symfony 4+ based on AdminLTE 2.4 with FOSUserBundle support",
+            "support": {
+                "issues": "https://github.com/kevinpapst/AdminLTEBundle/issues",
+                "source": "https://github.com/kevinpapst/AdminLTEBundle/tree/3.4"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/kevinpapst",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/kevinpapst",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-05-05T10:59:11+00:00"
+        },
+        {
+            "name": "knplabs/knp-menu",
+            "version": "v3.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpMenu.git",
+                "reference": "bee33a4cb6b698447cd61c6b593589a82993f8c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/bee33a4cb6b698447cd61c6b593589a82993f8c9",
+                "reference": "bee33a4cb6b698447cd61c6b593589a82993f8c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "conflict": {
+                "twig/twig": "<1.40 || >=2,<2.9"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.8",
+                "psr/container": "^1.0",
+                "symfony/http-foundation": "^3.4 || ^4.2|| ^5.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.2|| ^5.0",
+                "symfony/routing": "^3.4 || ^4.2|| ^5.0",
+                "twig/twig": "^1.40 || ^2.9 || ^3.0"
+            },
+            "suggest": {
+                "twig/twig": "for the TwigRenderer and the integration with your templates"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\Menu\\": "src/Knp/Menu"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs",
+                    "homepage": "https://knplabs.com"
+                },
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "The Community",
+                    "homepage": "https://github.com/KnpLabs/KnpMenu/contributors"
+                }
+            ],
+            "description": "An object oriented menu library",
+            "homepage": "https://knplabs.com",
+            "keywords": [
+                "menu",
+                "tree"
+            ],
+            "support": {
+                "issues": "https://github.com/KnpLabs/KnpMenu/issues",
+                "source": "https://github.com/KnpLabs/KnpMenu/tree/v3.1.3"
+            },
+            "time": "2021-02-19T07:49:30+00:00"
+        },
+        {
+            "name": "knplabs/knp-menu-bundle",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
+                "reference": "2b4c3bcba1646aef17b5e368f3004b108330c59b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/2b4c3bcba1646aef17b5e368f3004b108330c59b",
+                "reference": "2b4c3bcba1646aef17b5e368f3004b108330c59b",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/knp-menu": "^3.1",
+                "php": "^7.2 || ^8.0",
+                "symfony/framework-bundle": "^3.4 | ^4.4 | ^5.0"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.8",
+                "symfony/expression-language": "^3.4 | ^4.4 | ^5.0",
+                "symfony/phpunit-bridge": "^3.4 | ^4.4 | ^5.0",
+                "symfony/templating": "^3.4 | ^4.4 | ^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\Bundle\\MenuBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Knplabs",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/KnpLabs/KnpMenuBundle/contributors"
+                }
+            ],
+            "description": "This bundle provides an integration of the KnpMenu library",
+            "keywords": [
+                "menu"
+            ],
+            "support": {
+                "issues": "https://github.com/KnpLabs/KnpMenuBundle/issues",
+                "source": "https://github.com/KnpLabs/KnpMenuBundle/tree/v3.1.0"
+            },
+            "time": "2020-11-29T17:04:51+00:00"
+        },
+        {
             "name": "laminas/laminas-code",
             "version": "4.2.1",
             "source": {
@@ -2090,6 +2525,63 @@
                 }
             ],
             "time": "2020-12-14T13:15:25+00:00"
+        },
+        {
+            "name": "oomphinc/composer-installers-extender",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oomphinc/composer-installers-extender.git",
+                "reference": "8d3fe38a1723e0e91076920c8bb946b1696e28ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/8d3fe38a1723e0e91076920c8bb946b1696e28ca",
+                "reference": "8d3fe38a1723e0e91076920c8bb946b1696e28ca",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1 || ^2.0",
+                "composer/installers": "^1.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "composer/composer": "^2.0",
+                "phpunit/phpunit": "^7.2",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "OomphInc\\ComposerInstallersExtender\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "OomphInc\\ComposerInstallersExtender\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Beemsterboer",
+                    "email": "stephen@oomphinc.com",
+                    "homepage": "https://github.com/balbuf"
+                },
+                {
+                    "name": "Nathan Dentzau",
+                    "email": "nate@oomphinc.com",
+                    "homepage": "http://oomph.is/ndentzau"
+                }
+            ],
+            "description": "Extend the composer/installers plugin to accept any arbitrary package type.",
+            "homepage": "http://www.oomphinc.com/",
+            "support": {
+                "issues": "https://github.com/oomphinc/composer-installers-extender/issues",
+                "source": "https://github.com/oomphinc/composer-installers-extender/tree/2.0.0"
+            },
+            "time": "2020-08-11T21:06:11+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

@@ -1,51 +1,52 @@
 
-// ATTENTION /!\
+function defineFocus() {
+	const profileLink = document.getElementById('profile-menu');
+	const testsLink = document.getElementById('tests-menu');
+	const resultatsLink = document.getElementById('resultats-menu');
 
-// Aucun caractère accentué ne doit être passé dans le JS lorsque le jeu de caractères
-// du site est Unicode / UTF-8 et que le JS reste en Occidental / iso-8859-1~15 !!
+	let path = window.location.pathname;
+	let pathArray = path.split('/');
+	let location = pathArray[3];
 
-// Bug relevé avec IE, mais uniquement dans le cas d'un JS distant..
-// Aucun pb avec un JS en local..
-
-
-function externalLinks() {
-	if (!document.getElementsByTagName)
-		return;
-	var anchors = document.getElementsByTagName("a");
-	for (var i = 0; i < anchors.length; i++) {
-		var anchor = anchors[i];
-		if (anchor.getAttribute("href") && anchor.getAttribute("rel") == "external") 
-			anchor.target = "_blank";
+	if(location === 'tests'){
+		testsLink.classList.add('focus');
+	}else if(location === 'resultats'){
+		resultatsLink.classList.add('focus');
+	}else{
+		profileLink.classList.add('focus');
 	}
 }
 
-function displayStatusMsg() { // Message Barre d'Etat au survol des liens
-	status = "Bienvenue sur le site d'Archi-Med";
-	document.returnValue = true;
+function openIframe() {
+	let iframe = document.getElementById("iframe");
+	let iframeDiv = document.getElementById("iframeDiv");
+	let iframeClass = iframeDiv.classList;
+	let iframeDoc = iframe.contentDocument;
+	let buttonCreateInIframe = iframeDoc.getElementById("question_Ajouter");
+	let buttonCancelInIframe = iframeDoc.getElementById("question_Annuler");
+
+	iframeClass.replace("closed", "open");
+	buttonCreateInIframe.addEventListener("click", closeIframeAfterSubmit);
+	buttonCancelInIframe.addEventListener("click", closeIframe);
+
 }
 
-function verif_textarea(cible,counter,taillemax) {
-	var texte = cible.value;
-	var taille = cible.value.length;
-	if (taille > taillemax) {
-		var texte_ok = texte.substring(0,taillemax);
-		cible.value = texte_ok;
-		counter.value = 0;	// 'nomform' est le nom du formulaire dans lequel la fonction est appelée
-	}							// Il doit être transmis dans la fonction sous la forme 'document.nom-du-form'..
-	else {							// En attendant mieux, bien-évidemment :-)..
-		counter.value = (taillemax - taille);
-	}
+function closeIframeAfterSubmit() {
+	let iframe = document.getElementById("iframe");
+	iframe.addEventListener("load", function(){
+		let iframeClass = iframe.classList;
+		iframeClass.replace("open", "closed");
+		closeIframe();
+	})
 }
 
-function buttonSizeIE() { // "redresse" la largeur des boutons avec IE.. Tire de 'ChangeClassNameStyle.doc'
-	NAV = navigator.appVersion
-	oldIE = (NAV.substr(NAV.indexOf('MSIE')+5,1) <= '5') ? true : false;
-	if (oldIE) { var elems = document.all; }
-	else { var elems = document.getElementsByTagName("*"); }
-	for ( var i = 0; ( elem = elems[i] ); i++ ) {
-		if ( elem.className == "Validate" ) {
-			var size = elem.clientWidth;
-			elem.style.width = ((size * 0.62) + 20) + 'px';
-		}
-	}
+function closeIframe() {
+	let iframe = document.getElementById("iframeDiv");
+	let iframeClass = iframe.classList;
+	iframeClass.replace("open", "closed");
+	window.location = window.location;
+}
+
+function comfirmationOpen(){
+	console.log('yahoooooo');
 }

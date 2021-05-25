@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
@@ -74,9 +75,15 @@ class Utilisateur implements UserInterface
      */
     private $agence;
 
+    /**
+     * @ORM\OneToMany(targetEntity=I3PResultat::class, mappedBy="Utilisateur", orphanRemoval=true)
+     */
+    private $i3PResultats;
+
     public function __construct()
     {
         $this->tests = new ArrayCollection();
+        $this->i3PResultats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,4 +262,47 @@ class Utilisateur implements UserInterface
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'actif' => $this->actif,
+            'nom' =>$this->nom,
+            'prenom' => $this->prenom,
+            'email' => $this->email,
+            'agence' => $this->agence->getNom(),
+            'verified' =>$this->isVerified()
+        ];
+    }
+
+    /**
+     * @return Collection|I3PResultat[]
+     */
+    public function getI3PResultats(): Collection
+    {
+        return $this->i3PResultats;
+    }
+
+    public function addI3PResultat(I3PResultat $i3PResultat): self
+    {
+        if (!$this->i3PResultats->contains($i3PResultat)) {
+            $this->i3PResultats[] = $i3PResultat;
+            $i3PResultat->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeI3PResultat(I3PResultat $i3PResultat): self
+    {
+        if ($this->i3PResultats->removeElement($i3PResultat)) {
+            // set the owning side to null (unless already changed)
+            if ($i3PResultat->getUtilisateur() === $this) {
+                $i3PResultat->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

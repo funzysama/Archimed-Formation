@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="Description" content="ARCHI-MED Plateforme de Test">
+        <meta name="robots" content="no-index, no-follow">
+        <meta name="revisit-after" content="7 days">
+        <meta name="copyright" content="ARCHI-MED">
+        <meta name="Date-Creation-yyyymmdd" content="20210506">
+        <title>{% block title %}Archi-med | {% endblock %}</title>
+        <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('res/js/site_main.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('res/css/main.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="pdf-container">
+            {% block body %}{% endblock %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+        <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+        {% block bottom_javascript %}{% endblock %}
+    </body>
+</html>

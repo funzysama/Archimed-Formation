@@ -1,0 +1,16 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
+
+{% block page_title%}Test {{ testName }}{% endblock %}
+
+{% block page_subtitle %}Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('res/css/test-'~ testName ~'.css') }}">
+{% endblock %}
+
+{% block page_content %}
+    {{ form(testForm) }}
+{% endblock %}

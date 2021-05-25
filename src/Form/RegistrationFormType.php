@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Agence;
-use App\Entity\Test;
 use App\Entity\Utilisateur;
 use App\EventSubscriber\renderSelectFieldSubscriber;
 use App\Repository\AgenceRepository;
@@ -12,11 +11,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationFormType extends AbstractType
@@ -49,7 +46,7 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom :'
             ])
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'Email :'
             ])
             ->add('role', ChoiceType::class, [

@@ -1,0 +1,80 @@
+/* stylesheet for I3P test */
+
+#test{
+    margin-top: 3em;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#i3_p{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0 12.5px;
+    max-height: calc(100vh - 25%);
+    overflow: auto;
+}
+.skin-black .left-side, .skin-black .main-sidebar, .skin-black .wrapper {
+    background-color: #222d32;
+    overflow: -moz-hidden-unscrollable;
+}
+.radio + .radio {
+    margin-top: 10px;
+}
+
+.testI3P-formGroup{
+    width: 30%;
+    min-height: 130px;
+    border: 1px solid #93371D;
+    background-color: #fff6f0;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 20px 0;
+}
+
+.testI3P-formLabel{
+    display: block;
+    padding: 5px;
+    font-weight: bold;
+    border-bottom: 1px solid #93371D;
+    background-color: #fff0e4;
+    min-height: 30px;
+}
+
+.testI3P-formItem{
+    min-height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1em;
+    margin: 1em;
+    max-width: 90%;
+}
+.control-label.required::after {
+    content: " ";
+    font-size: 110%;
+}
+
+
+.testI3P-formItem > .radio > label{
+    text-align: center;
+    padding: 5px 2px;
+    display: inline-block;
+    line-height: 15px;
+}
+
+.testI3P-formItem > .radio > label > input{
+    padding: 5px 0;
+}
+
+.I3P_submit{
+    margin: auto;
+    flex-basis: 100%;
+}
+
+.tableDescription{
+    margin: 3em auto 0 auto;
+}

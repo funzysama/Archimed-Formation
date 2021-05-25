@@ -9,23 +9,20 @@
         <meta name="copyright" content="ARCHI-MED">
         <meta name="Date-Creation-yyyymmdd" content="20210506">
         <title>{% block title %}Archi-med | {% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('res/js/site_main.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('res/css/main.css') }}">
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-            <link rel="stylesheet" href="{{ asset('res/css/main.css') }}">
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-            <script src="{{ asset('res/js/site_main.js') }}"></script>
         {% endblock %}
     </head>
     <body>
         <div><a id="HautPage">&nbsp;</a></div>
         <div class="container">
             <header>
-                <img id="AMLogo" src="{{ asset('/res/img/Archi-Med_Logo_2020_90p.png') }}" alt="ARCHI-MED">
+                <a href="{{ path('main_home') }}"><img id="AMLogo" src="{{ asset('/res/img/Archi-Med_Logo_2020_90p.png') }}" alt="ARCHI-MED"></a>
                 <h1 class="BigF4 txtcnt">{% block body_title %}Plateforme De Test{% endblock %}</h1>
             </header>
             <main>
@@ -33,7 +30,6 @@
                     <p class="AdminDate">
                         <em>{{ "now"|localizeddate('none', 'none', 'FR', null, "EEEE d MMMM Y', 'H'h'mm")|capitalize }}</em>
                     </p>
-
                         {% block body %}{% endblock %}
                     <p class="font10 txtcnt" id="HautPageButt">
                         <a href="#HautPage">Haut de page</a>
@@ -47,5 +43,9 @@
             </div>
         </div>
         <div id="BottContain"></div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+        <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+        {% block bottom_javascript %}{% endblock %}
     </body>
 </html>

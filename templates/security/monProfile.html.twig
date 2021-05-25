@@ -1,17 +1,51 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin-base.html.twig' %}
 
 {% block title %}
     {{ parent() }} Mon Profile
 {% endblock %}
 
-{% block body %}
-    <div>
-        {{ user.sexe|formatSexe }}{{ user.nom }}{{ user.prenom }}
-    </div>
-    <div>
-        {{ user.email }} | <a>Changer l'address e-mail</a>
-    </div>
-    <form action="{{ path('security_changePass') }}"></form>
+{% block stylesheets%}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('res/css/profile.css') }}">
+{% endblock %}
+{% block page_title%}Mon Profil{% endblock %}
+{% block page_subtitle %}Bonjour {{ user.sexe|formatSexe }} {{ user.nom }} {{ user.prenom }}{% endblock %}
+{% block page_content %}
+    <div class="card marginTop3">
+        <div class="profile-container">
+                <div class="profile-left-container">
+                    <div class="profile-menu-container">
+                        <a href="{{ path('monProfile', {id: app.user.id}) }}"><h6 id="profile-menu" class="profile-buttons">Mon Profile</h6></a>
+                        <a href="{{ path('mesTests', {id: app.user.id}) }}"><h6 id="tests-menu" class="profile-buttons">Mes Tests</h6></a>
+                        <a href="{{ path('mesResultat', {id: app.user.id}) }}"><h6 id="resultats-menu" class="profile-buttons">Mes Résultat</h6></a>
+                        <a href="{{ path('app_logout') }}"><h6 class="profile-buttons">Déconnexion</h6></a>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    defineFocus();
+                </script>
+            <div class="profile-right-container">
+                {% block profilebody %}
+                    <h2>{{ user.nom }} {{ user.prenom }}</h2>
+                    <div class="profile-content">
 
+                        <div class="actions-container">
+                            <a href="{{ path('security_changePass') }}"><button id="buttonPass" class="buttonFA"><i class="fas fa-key fa-2x pointer"></i></button></a>
+                            <button id="buttonEmail" class="buttonFA"><i class="fas fa-envelope fa-2x pointer"></i></button>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block bottom_javascript %}
+    <script>
+        tippy('#buttonPass', {
+            content: 'Modifier votre mot de passe',
+        });
+        tippy('#buttonEmail', {
+            content: 'Modifier votre email',
+        });
+    </script>
 {% endblock %}

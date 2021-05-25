@@ -1,17 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
 html {
-    background: url(/res/img/AM_BkGrnd_Brown01.png) 0 0 repeat-x #93371D;
 }
 
 body{
     padding: 0;
     margin: 0;
+    width: 100%;
     /*box-sizing: border-box;*/
     text-align: center;
     font-family: Verdana, Lucida, sans-serif;
     color: #460B01;
-
+    background: url(/res/img/AM_BkGrnd_Brown01.png) 0 0 repeat-x #93371D;
 }
-
+@media screen and (min-width: 1200px) {
+    body{
+        position:fixed;
+        overflow:hidden;
+    }
+}
 #HautPage {
     position: absolute;
     left: 0;
@@ -31,6 +38,37 @@ body{
     background: #FFFCFB;
 }
 
+.pdf-container{
+    width: 95%;
+    margin: auto;
+    height: 99.74vh;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 101px);
+    background-color: #ecf0f5;
+}
+
+.content {
+    max-height: calc(100vh - 101px - 51px);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.manager-container{
+    position: relative;
+    display: block;
+    top: 10px;
+    margin: 0 auto 10px auto;
+    width: 75%;
+    height: calc(99.7vh - 20px);
+    padding: 0;
+    text-align: left;
+    font-size: 0.7em;
+    box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.35);
+    background: #FFFCFB;
+}
+
 #BottContain {
     height: 10px;
     font-size: 3px;
@@ -41,10 +79,8 @@ body{
 
 
 header {
-    width: 760px;
     border-top: 1px solid #fff1e7;
     height: 126px;
-    background: #fff1e7;
 }
 
 #AMLogo {
@@ -185,9 +221,123 @@ main {
     color: white;
 }
 
+/* ----< SideBar Menu >----*/
+
+.sidebar-menu li{
+    text-align: left;
+}
+
+.sidebar-menu .header{
+    text-align: center;
+}
+
+/* ----< Modal box >---- */
+
+
+.modal {
+    display: none;
+    position: fixed;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 30%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closed{
+    display: none;
+}
+
+.open{
+    display: block;
+}
+
+.iframeDiv{
+    position: fixed;
+    background-color: rgba(255,255,255, 0.9);
+    width: 600px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: #0a0a0a 5px 5px 5px 5px;
+    top: calc((100vh - 300px) / 2);
+    left: calc((100vw - 600px) / 2);
+}
+
+
+.addQuestion-iframe{
+    width: 100%;
+    height: 85%;
+    margin-top: 1em;
+    border: none;
+}
+
+#addQuestionBody form{
+    margin: 0;
+}
+
+.textArea{
+    resize: none;
+    width: 100%;
+    height: 60%;
+    margin: 5px 0;
+}
+
+.numeroField{
+    margin: 0.5em 0;
+}
+
+.addButton{
+    max-width: 100px;
+    display: inline;
+    margin-right: 10px;
+}
+
+.cancelButton{
+    max-width: 100px;
+    margin-left: 10px;
+    display: inline;
+}
+
 
 /* ----< Tableau des Utilisateurs >---- */
 
+.userTable th {
+    display: table-cell;
+    text-align: center;
+
+}
+
+.userTable td {
+    display: table-cell;
+}
 
 .MainTable {
     margin: 2em auto 0 auto;
@@ -220,6 +370,7 @@ main {
     width: 60px;
 }
 
+
 /* ----< Balises Globales >---- */
 
 
@@ -244,7 +395,7 @@ a {
 
 a:hover {
     color: #AF503D;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 input {
@@ -263,10 +414,6 @@ th {
 td {
     height: 2em;
     border-top: 1px solid #F9C2B2;
-}
-
-tr{
-    cursor: pointer;
 }
 
 tr:hover{
@@ -297,6 +444,18 @@ tr:hover{
 }
 
 
+/* ----< Règles de pointer et tooltip >---- */
+
+
+.pointer{
+    cursor: pointer;
+}
+
+.cursor{
+    cursor: default;
+}
+
+
 /* ----< Règles de marge >---- */
 
 
@@ -310,6 +469,18 @@ tr:hover{
 
 .marginTop3{
     margin-top: 3em;
+}
+
+.marginTop4{
+    margin-top: 4em;
+}
+
+.marginTop5{
+    margin-top: 5em;
+}
+
+.marginTop6{
+    margin-top: 6em;
 }
 
 .marginBot1{
@@ -374,7 +545,7 @@ tr:hover{
 
 .BigF4 {
     margin: 30px auto 0;
-    font-size: 3em;
+    font-size: 4em;
     color: #ea6a0a;
     font-family: "Century Gothic", sans-serif;
 }

@@ -1,0 +1,6 @@
+knp_menu:
+  twig:
+    template: KnpMenuBundle::menu.html.twig
+  #  if true, enables the helper for PHP templates
+  templating: false
+  default_renderer: twig

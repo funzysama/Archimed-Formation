@@ -13,12 +13,21 @@ class twigExtension extends AbstractExtension
     {
         return [
             new TwigFilter('formatSexe', [$this, 'formatSexe']),
+            new TwigFilter('formatTableData', [$this, 'formatTableData']),
         ];
     }
 
     public function formatSexe(string $text)
     {
-        return $text == 'M' ? 'Mr' : 'Mme';
+        return $text == 'M' ? 'Mr.' : 'Mme.';
+    }
+
+    public function formatTableData(array $array)
+    {
+        foreach ($array as $item){
+            dump($item);
+        }
+        return json_encode($array);
     }
 
 }

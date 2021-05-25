@@ -1,0 +1,64 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block page_title %}
+    I3P(Typologie de Jung)
+{% endblock %}
+{% block page_subtitle %}
+    <b>I</b>ndicateur de <b>P</b>rofil <b>P</b>ersonnel et <b>P</b>rofessionnel
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('res/css/test-i3P.css') }}">
+{% endblock %}
+
+{% block page_content %}
+    {% if (app.user != resultat.utilisateur) %}
+        profil d'un autre
+    {% endif %}
+    <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>
+    <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>
+    <table class="tableDescription" style="width: 528px">
+        <colgroup>
+            <col style="width: 250px">
+            <col style="width: 150px">
+            <col style="width: 100px">
+        </colgroup>
+        <tbody>
+        <tr>
+            <td>Source d’énergie :</td>
+            <td>{{ resultat.profil.energie }}</td>
+            <td>{{ resultat.profil.energieLetter }}</td>
+        </tr>
+        <tr>
+            <td>Traitement de l’information :</td>
+            <td>{{ resultat.profil.information }}</td>
+            <td>{{ resultat.profil.informationLetter }}</td>
+        </tr>
+        <tr>
+            <td>Prise de décision :</td>
+            <td>{{ resultat.profil.descision }}</td>
+            <td>{{ resultat.profil.descisionLetter }}</td>
+        </tr>
+        <tr>
+            <td>Mode d’organisation :</td>
+            <td>{{ resultat.profil.organisation }}</td>
+            <td>{{ resultat.profil.organisationLetter }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="profilPerso marginTop3">
+        <h3>Profile Personnel</h3>
+        <div class="marginTop2">
+            {{ resultat.profil.profilPerso|raw }}
+        </div>
+    </div>
+    <div class="profilPro marginTop3">
+        <h3>Profil Professionnel</h3>
+        <div class="marginTop2">
+            {{ resultat.profil.profilPro }}
+        </div>
+    </div>
+{% endblock %}
+{% block bottom_javascript %}
+{% endblock %}

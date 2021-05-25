@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="marginTop3">
+        <a href="{{ path('main_home') }}">Retour au menu</a>
+    </div>
+    <h3 class="marginTop3">RIASEC Flash 2</h3>
+    <h4>TODO: Mise en forme etendu.</h4>
+    <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+    <h2>Indice de différenciation de votre profile: {{ diff[0] }}</h2>
+    <div class="marginTop2 riasecResult-table">
+        <table style="table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Réaliste</th>
+                    <th>Investigateur</th>
+                    <th>Artiste</th>
+                    <th>Social</th>
+                    <th>Entrepreneur</th>
+                    <th>Conventionnel</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Score brute</td>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[1] }}</td>
+                <td>{{ data[2] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[5] }}</td>
+            </tr>
+            <tr>
+                <td>Score étalonné</td>
+                <td>{{ etalData[0] }}</td>
+                <td>{{ etalData[1] }}</td>
+                <td>{{ etalData[2] }}</td>
+                <td>{{ etalData[3] }}</td>
+                <td>{{ etalData[4] }}</td>
+                <td>{{ etalData[5] }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block bottom_javascript %}
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        const data = {
+            labels: {{ labels|json_encode|raw }},
+            datasets: [{
+                label: 'Resultats',
+                data: {{ data|json_encode|raw }},
+                backgroundColor: [
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+                {
+                label: 'Resultats étalonnés',
+                data: {{ etalData|json_encode|raw }},
+                    backgroundColor: [
+                        'rgba(64,112,255,0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(64,112,255, 1)'
+                    ],
+                    borderWidth: 1
+            }]
+        };
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                    }
+                }
+            }
+        }
+        var myChart = new Chart(ctx, config);
+    </script>
+{% endblock %}

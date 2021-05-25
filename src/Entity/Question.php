@@ -28,6 +28,11 @@ class Question
      */
     private $test;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numero;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +58,18 @@ class Question
     public function setTest(?Test $test): self
     {
         $this->test = $test;
+
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): self
+    {
+        $this->numero = $numero;
 
         return $this;
     }

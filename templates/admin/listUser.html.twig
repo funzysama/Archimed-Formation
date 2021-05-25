@@ -1,63 +1,38 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <div class="marginTop2">
-        <a href="{{ path('main_home') }}">Retour au menu</a>
+{% extends 'admin-base.html.twig' %}
+{% block title %}{{ parent() }}Administration{% endblock %}
+{% block page_subtitle %}Gestion utilisateurs{% endblock %}
+{% block page_content %}
+    <div class="marginTop3">
+        <p>il y a actuellement {{ users|length }} utilisateurs enregistrés </p>
+        <a href="{{ path('app_register') }}"><button class="marginTop1">Ajouter un utilisateur</button></a>
     </div>
-<table class="MainTable marginTop1">
-    <thead>
-    <tr>
-        <th class="tabStatusTh">Status</th>
-        <th class="tabPrenomTh">Prénom</th>
-        <th class="tabNomTh">Nom</th>
-        <th class="tabEmailTh">e-mail</th>
-        <th class="tabAgenceTh">Agence</th>
-        <th class="tabRolesTh">Role</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for user in users %}
-        <a href="{# {{ path('user_profile', [ id => user.id ]) }} #}" title="Détails du compte">
-            <tr class="tableRow" onclick="document.location = '{{ path('main_home') }}';">
-                {% if user.actif %}
-                    <td class="tabStatus">
-                        <img class="ButtonOK" src="{{ asset('res/img/button_ok_12.png') }}" title="Compte activé" alt="V">
-                    </td>
-                {% else %}
-                    <td class="tabStatus">
-                        <img class="ButtonCan" src="{{ asset('res/img/button_cancel_02_12.png') }}" title="Compte désactivé" alt="X">
-                    </td>
-                {% endif %}
-                <td class="tabPrenom">
-                    {{ user.prenom }}
-                </td>
-                <td class="tabNom">
-                    {{ user.nom }} ({{ user.sexe|formatSexe }})
-                </td>
-                <td class="tabEmail">
-                    {{ user.email }}
-                </td>
-                <td class="tabAgence">
-                    {{ user.agence.nom }}
-                </td>
-                <td class="tabRoles">
-                    {% if 'ROLE_ADMIN' in user.roles %}
-                        Admin
-                    {% elseif 'ROLE_CONSULTANT' in user.roles %}
-                        Consultant
-                    {% elseif 'ROLE_USER' in user.roles %}
-                        Client
-                    {% endif %}
-
-                </td>
-            </tr>
-        </a>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class="marginTop2">
+        {% embed '@AdminLTE/Widgets/box-widget.html.twig' %}
+            {% block box_title %}
+                <h3 class="txtcnt">Gestion des utilisateurs</h3>
+            {% endblock %}
+            {% block box_body %}
+                <table class="userTable"></table>
+            {% endblock %}
+        {% endembed %}
+    </div>
 {% endblock %}
-
-{% block title %}
+{% block bottom_javascript %}
+    <script>
+        let jsonData = {{ jsonUsers|json_encode|raw }};
+        jQuery(function($){
+            $('.userTable').footable({
+                "columns": [
+                    {"name": "actif", "title": "Actif", "breakpoints": "xs" },
+                    {"name": "prenom", "title": "Prenom"},
+                    {"name": "nom", "title": "Nom"},
+                    {"name": "email", "title": "E-mail"},
+                    {"name": "agence", "title": "Agence", "breakpoints": "xs"},
+                    {"name": "verified", "title": "Vérifier", "breakpoints": "xs"},
+                ],
+                "rows": {{ jsonUsers|json_encode|raw }},
+            });
+        });
+    </script>
 
 {% endblock %}
-
