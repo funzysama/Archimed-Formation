@@ -11,6 +11,7 @@ use App\Repository\I3pProfilsRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\TestRepository;
 use App\Service\I3PCalculator;
+use App\Service\pdfDataFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,9 +47,6 @@ class I3PController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('resultat', ['name' => 'I3P', 'id' => $i3presultat->getId()]);
-            /*return $this->forward('App\Controller\Tests\I3PController::resultatI3P', [
-                'resultat' => $i3presultat,
-            ]);*/
         }
         return $this->render('test/I3P/index.html.twig', [
             'testName' => 'I3P',
@@ -60,10 +58,15 @@ class I3PController extends AbstractController
      * @param $resultat
      * @return Response
      */
-    public function resultatI3P(I3PResultat $resultat): Response
+    public function resultatI3P(I3PResultat $resultat, pdfDataFormatter $dataFormatter): Response
     {
+
+        $profil = $resultat->getProfil();
+        $resultatArrayForPdf = $dataFormatter->convertI3PResultat($resultat, $profil);
+        $jsonResult = json_encode($resultatArrayForPdf, JSON_UNESCAPED_SLASHES);
         return $this->render('test/I3P/resultat.html.twig', [
             'resultat' => $resultat,
+            'jsonResultat' => $jsonResult
         ]);
     }
 }

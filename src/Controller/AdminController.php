@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\RessourceRepository;
 use App\Repository\TestRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,6 +55,23 @@ class AdminController extends AbstractController
         return $this->render('admin/listTest.html.twig', [
             'tests' => $tests
         ]);
+    }
+
+    /**
+     * @Route("/ressources", name="ressources")
+     */
+    public function listerRessources(RessourceRepository $ressourceRepository): Response
+    {
+        $ressources = $ressourceRepository->findAll();
+
+        return $this->render('admin/listRessources.html.twig', [
+            'ressources' => $ressources
+        ]);
+    }
+
+    public function userPreferences()
+    {
+        return $this->render('admin/userPreferences.html.twig');
     }
 
 }

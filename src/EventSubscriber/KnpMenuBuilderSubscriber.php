@@ -27,6 +27,29 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
         $token = $this->tokenStorage->getToken();
         $user = $token->getUser();
+        if(in_array("ROLE_USER", $token->getRoleNames())) {
+            $menu->addChild('mainMenu', [
+                'label' => 'MENU PRINCIPAL',
+                'childOptions' => $event->getChildOptions()
+            ])->setAttribute('class', 'header');
+            $tests = $user->getTests()->getValues();
+            $menu->addChild('acceuil', [
+                'route' => 'main_home',
+                'label' => 'Acceuil',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-id-badge');
+            $menu->addChild('monProfile', [
+                'route' => 'monProfile',
+                'routeParameters' => ['id' => $user->getId()],
+                'label' => 'Mon Profile',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-id-badge');
+            $menu->addChild('deco', [
+                'route' => 'app_logout',
+                'label' => 'Déconnection',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-sign-out-alt');
+        }
         if(in_array("ROLE_ADMIN", $token->getRoleNames()) || in_array("ROLE_CONSULTANT", $token->getRoleNames())){
             $menu->addChild('AdminHeader', [
                 'label' => 'ADMINISTRATION',
@@ -35,6 +58,11 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
             $menu->addChild('listUser', [
                 'route' => 'admin_users',
                 'label' => 'Gestion Utilisateurs',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-users');
+            $menu->addChild('listRessource', [
+                'route' => 'admin_ressources',
+                'label' => 'Gestion Resources',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-users');
             $menu->addChild('listTests', [
@@ -58,48 +86,5 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
             }
 
         }
-        if(in_array("ROLE_USER", $token->getRoleNames())){
-            $menu->addChild('mainMenu', [
-                'label' =>  'MENU PRINCIPAL',
-                'childOptions' => $event->getChildOptions()
-            ])->setAttribute('class', 'header');
-            $tests = $user->getTests()->getValues();
-            if($tests){
-                foreach ($tests as $test){
-                    if($test->getNom() === "IRMR"){
-                        $menu->addChild('testIRMR', [
-                            'route' => 'test',
-                            'routeParameters' => ['name' => $test->getNom()],
-                            'label' => 'Riasec Flash 2',
-                            'childOptions' => $event->getChildOptions(),
-                        ])->setLabelAttribute('icon', 'fas fa-copy');
-                    }else{
-                        $menu->addChild('test'.$test->getNom(), [
-                            'route' => 'test',
-                            'routeParameters' => ['name' => $test->getNom()],
-                            'label' => 'Passer le test '.$test->getNom(),
-                            'childOptions' => $event->getChildOptions(),
-                        ])->setLabelAttribute('icon', 'fas fa-copy');
-                    }
-                }
-            }else{
-                $menu->addChild('demandeTest', [
-                    'label' => 'Demande d\'accès',
-                    'childOptions' => $event->getChildOptions(),
-                ])->setLabelAttribute('icon', 'fas fa-plus');
-            }
-        }
-        $menu->addChild('monProfile', [
-            'route' => 'monProfile',
-            'routeParameters' => ['id' => $user->getId()],
-            'label' => 'Mon Profile',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-id-badge');
-        $menu->addChild('deco', [
-            'route' => 'app_logout',
-            'label' => 'Déconnection',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-sign-out-alt');
-
     }
 }

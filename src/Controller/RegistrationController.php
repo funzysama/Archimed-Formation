@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
+use App\Repository\TestRepository;
 use App\Security\EmailVerifier;
 use App\Repository\UtilisateurRepository;
 use App\Service\PasswordGenerator;
@@ -28,7 +29,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/admin/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, PasswordGenerator $passwordGenerator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, PasswordGenerator $passwordGenerator, TestRepository $testRepository): Response
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -36,6 +37,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $randomPass = $passwordGenerator->generateRandomStrongPassword();
+            $consultant = $this->getUser();
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -43,10 +45,24 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setActif(true);
-            $role = array($form->get('role')->getData());
+            dump($consultant);
+            if($form->has('role')){
+                $role = array($form->get('role')->getData());
+            }else{
+                $role = ["ROLE_USER"];
+            }
+            $testData = array($form->get('testsInscris')->getData());
+            if(!empty($testData[0])){
+                for ($i = 0; $i < count($testData[0]);$i++){
+                    $test = $testRepository->findOneBy(['Nom' => $testData[0][$i]]);
+                    $user->addTest($test);
+                }
+            }
             $user->setRoles($role);
             $entityManager = $this->getDoctrine()->getManager();
+            $consultant->addClient($user);
             $entityManager->persist($user);
+            $entityManager->persist($consultant);
             $entityManager->flush();
 
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,

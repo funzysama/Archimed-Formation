@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use App\Repository\I3pProfilsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=I3pProfilsRepository::class)
@@ -21,6 +21,7 @@ class I3pProfils
 
     /**
      * @ORM\Column(type="string", length=4)
+     * @Groups({"profil_formated"})
      */
     private $nom;
 
@@ -31,83 +32,94 @@ class I3pProfils
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Energie;
 
     /**
      * @ORM\Column(type="string", length=1)
+     * @Groups({"profil_formated"})
      */
     private $EnergieLetter;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Information;
 
     /**
      * @ORM\Column(type="string", length=1)
+     * @Groups({"profil_formated"})
      */
     private $InformationLetter;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Descision;
 
     /**
      * @ORM\Column(type="string", length=1)
+     * @Groups({"profil_formated"})
      */
     private $DescisionLetter;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Organisation;
 
     /**
      * @ORM\Column(type="string", length=1)
+     * @Groups({"profil_formated"})
      */
     private $OrganisationLetter;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Dominant;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Auxiliaire;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Tertiaire;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"profil_formated"})
      */
     private $Infeur;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"profil_formated"})
      */
     private $ProfilPerso;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"profil_formated"})
      */
     private $ProfilPro;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"profil_formated"})
      */
     private $Valeurs;
 
-    /**
-     * @ORM\OneToMany(targetEntity=I3PResultat::class, mappedBy="Profil")
-     */
-    private $i3PResultats;
 
     public function __construct()
     {
@@ -319,36 +331,6 @@ class I3pProfils
     public function setValeurs(string $Valeurs): self
     {
         $this->Valeurs = $Valeurs;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|I3PResultat[]
-     */
-    public function getI3PResultats(): Collection
-    {
-        return $this->i3PResultats;
-    }
-
-    public function addI3PResultat(I3PResultat $i3PResultat): self
-    {
-        if (!$this->i3PResultats->contains($i3PResultat)) {
-            $this->i3PResultats[] = $i3PResultat;
-            $i3PResultat->setProfil($this);
-        }
-
-        return $this;
-    }
-
-    public function removeI3PResultat(I3PResultat $i3PResultat): self
-    {
-        if ($this->i3PResultats->removeElement($i3PResultat)) {
-            // set the owning side to null (unless already changed)
-            if ($i3PResultat->getProfil() === $this) {
-                $i3PResultat->setProfil(null);
-            }
-        }
 
         return $this;
     }

@@ -16,9 +16,11 @@
     {% if (app.user != resultat.utilisateur) %}
         profil d'un autre
     {% endif %}
+
+    <button id="pdf-button" data-controller="pdf" data-pdf-data="{{ resultat.id }}">Click Pdf!</button>
     <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>
-    <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>
-    <table class="tableDescription" style="width: 528px">
+    <h3>votre profile i3p est: </h3>
+        <table class="tableDescription" style="width: 528px">
         <colgroup>
             <col style="width: 250px">
             <col style="width: 150px">
@@ -27,7 +29,7 @@
         <tbody>
         <tr>
             <td>Source d’énergie :</td>
-            <td>{{ resultat.profil.energie }}</td>
+            <td> {{ resultat.profil.energie }}</td>
             <td>{{ resultat.profil.energieLetter }}</td>
         </tr>
         <tr>
@@ -59,6 +61,7 @@
             {{ resultat.profil.profilPro }}
         </div>
     </div>
+    <div id="pdf-data" style="display: none"></div>
 {% endblock %}
 {% block bottom_javascript %}
 {% endblock %}

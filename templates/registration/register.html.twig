@@ -1,17 +1,45 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
-
-{% block title %}Register{% endblock %}
-
+{% extends 'admin-base.html.twig' %}
+{% block page_title %}
+    Utilisateurs
+{% endblock %}
+{% block page_subtitle %}
+    Crétion d'un utilisateur
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('res/css/register.css') }}">
+{% endblock %}
 {% block page_content %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    <div class="row middle-half">
+    <div class="col-md-12">
+        {% embed '@AdminLTE/Widgets/box-widget.html.twig' %}
+            {% block box_before %}{{ form_start(registrationForm) }}{% endblock %}
+            {% block box_title %}Creation d'un utilisateur{% endblock %}
+            {% block box_body %}
+                    {{ form_row(registrationForm.sexe) }}
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.prenom) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.agence) }}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>
+                        {{ form_row(registrationForm.role) }}
+                    </div>
+                {% endif %}
+                <div class="testSelect-container">
+                    {{ form_row(registrationForm.testsInscris) }}
+                    {{ form_row(registrationForm.resultatInscris) }}
+                </div>
+            {% endblock %}
+            {% block box_footer %}
+                <div class="pull-right">
+                    <button type="reset" class="btn btn-warning "><i class="fa fa-times"></i> Annuler</button>
+                    <button type="submit" class="btn btn-primary "><i class="fa fa-check-square"></i> Créer</button>
+                </div>
+            {% endblock %}
 
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
-        <button type="submit"><a class="pointer">Register</a></button>
-        <button type="button"><a href="{{ path('main_home') }}">Annuler</a></button>
-    {{ form_end(registrationForm) }}
+            {% block box_after %}{{ form_end(registrationForm)}}{% endblock %}
+        {% endembed %}
+    </div>
+</div>
 {% endblock %}

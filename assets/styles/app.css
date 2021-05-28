@@ -1,0 +1,27 @@
+body{
+    line-height: 1.5;
+}
+.navbar::after, .navbar::before {
+    display: table;
+    content: none;
+}
+
+.content-header{
+    text-align: center;
+}
+
+.center{
+    text-align: center;
+}
+
+.main-header .navbar {
+    max-height: 50px;
+}
+
+#ButtEnBas{
+    position: absolute;
+    left: 0;
+    bottom: 65px;
+    width: 80%;
+    margin: auto;
+}

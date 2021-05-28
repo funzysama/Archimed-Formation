@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\I3PResultatRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=I3PResultatRepository::class)
@@ -20,41 +21,49 @@ class I3PResultat
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Extraversion;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Introversion;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Sensation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Intuition;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Thinking;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Feeling;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Rightness;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"resultat_formated"})
      */
     private $Opening;
 
@@ -65,16 +74,17 @@ class I3PResultat
     private $DateDeCreation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="i3PResultats")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="i3PResultats", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Utilisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=I3pProfils::class, inversedBy="i3PResultats")
+     * @ORM\ManyToOne(targetEntity=I3pProfils::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Profil;
+    private $profil;
+
 
     public function getId(): ?int
     {
@@ -196,12 +206,12 @@ class I3PResultat
 
     public function getProfil(): ?I3pProfils
     {
-        return $this->Profil;
+        return $this->profil;
     }
 
-    public function setProfil(?I3pProfils $Profil): self
+    public function setProfil(?I3pProfils $profil): self
     {
-        $this->Profil = $Profil;
+        $this->profil = $profil;
 
         return $this;
     }

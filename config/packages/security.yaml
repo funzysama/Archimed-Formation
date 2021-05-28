@@ -26,6 +26,7 @@ security:
             logout:
                 path: app_logout
     role_hierarchy:
+        ROLE_USER:          IS_AUTHENTICATED_FULLY
         ROLE_CONSULTANT:    ROLE_USER
         ROLE_ADMIN:         [ROLE_CONSULTANT, ROLE_ALLOWED_TO_SWITCH]
     access_control:

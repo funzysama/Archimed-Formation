@@ -80,10 +80,22 @@ class Utilisateur implements UserInterface
      */
     private $i3PResultats;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="Clients")
+     */
+    private $Consultant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="Consultant")
+     */
+    private $Clients;
+
+
     public function __construct()
     {
         $this->tests = new ArrayCollection();
         $this->i3PResultats = new ArrayCollection();
+        $this->Clients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -299,6 +311,48 @@ class Utilisateur implements UserInterface
             // set the owning side to null (unless already changed)
             if ($i3PResultat->getUtilisateur() === $this) {
                 $i3PResultat->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getConsultant(): ?self
+    {
+        return $this->Consultant;
+    }
+
+    public function setConsultant(?self $Consultant): self
+    {
+        $this->Consultant = $Consultant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getClients(): Collection
+    {
+        return $this->Clients;
+    }
+
+    public function addClient(self $client): self
+    {
+        if (!$this->Clients->contains($client)) {
+            $this->Clients[] = $client;
+            $client->setConsultant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(self $client): self
+    {
+        if ($this->Clients->removeElement($client)) {
+            // set the owning side to null (unless already changed)
+            if ($client->getConsultant() === $this) {
+                $client->setConsultant(null);
             }
         }
 

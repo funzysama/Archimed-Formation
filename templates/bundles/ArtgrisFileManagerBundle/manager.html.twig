@@ -1,31 +1,23 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% form_theme formRename 'bootstrap_3_layout.html.twig' %}
-<!doctype html>
-<html lang="en" id="dropzone">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% block stylesheets %}
-        <link rel="stylesheet"
-              href="{{ asset('bundles/artgrisfilemanager/libs/bootstrap/dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-              integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-              crossorigin="anonymous">
-        <link rel="stylesheet"
-              href="{{ asset('bundles/artgrisfilemanager/libs/jstree/dist/themes/default/style.min.css') }}">
-        <link rel="stylesheet"
-              href="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/css/jquery.fileupload.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/artgrisfilemanager/css/manager.css') }}">
-        <link rel="stylesheet"
-              href="{{ asset('bundles/artgrisfilemanager/libs/jQuery-contextMenu/dist/jquery.contextMenu.min.css') }}">
-        <script src="{{ asset('res/js/site_main.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('res/css/main.css') }}">
-    {% endblock %}
-    <title>{% block title %}File Manager{% endblock %}</title>
-</head>
-<body>
-    <div><a id="HautPage">&nbsp;</a></div>
+{% extends 'admin-base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/jstree/dist/themes/default/style.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/artgrisfilemanager/css/manager.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('bundles/artgrisfilemanager/libs/jQuery-contextMenu/dist/jquery.contextMenu.min.css') }}">
+{% endblock %}
+{% block title %}File Manager{% endblock %}
+{% block full_page_content %}
     <div class="manager-container">
         {% block body %}
             <div class="container-fluid ">
@@ -144,11 +136,12 @@
             </div>
         {% endblock %}
     </div>
-    <div id="BottContain"></div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-    {% block bottom_javascript %}                <script src="{{ asset('bundles/artgrisfilemanager/libs/jquery/dist/jquery.min.js') }}"></script>
+{% endblock %}
+{% block bottom_javascript %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+        <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+        <script src="{{ asset('bundles/artgrisfilemanager/libs/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('bundles/artgrisfilemanager/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('bundles/artgrisfilemanager/libs/jstree/dist/jstree.min.js') }}"></script>
         <script src="{{ asset('bundles/artgrisfilemanager/libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
@@ -205,5 +198,3 @@
         </script>
         <script src="{{ asset('bundles/artgrisfilemanager/js/manager.js') }}"></script>
     {% endblock %}
-</body>
-</html>

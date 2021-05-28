@@ -10,12 +10,13 @@
     {% block stylesheets %}
         <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ asset('bundles/adminlte/adminlte.css') }}">
-        <script src="{{ asset('res/js/site_main.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('res/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('res/css/footable.standalone.css') }}">
         <link rel="stylesheet" href="{{ asset('res/css/FooTable.FontAwesome.css') }}">
+        <script src="{{ asset('res/js/site_main.js') }}"></script>
+        {{ encore_entry_link_tags('app') }}
 
     {% endblock %}
+    {{ encore_entry_script_tags('app') }}
 </head>
 {#
 Apply one of the following classes for the skin:
@@ -74,16 +75,9 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
 
     <aside class="main-sidebar">
         <section class="sidebar">
-            {% block sidebar_user %}
-                {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {% include '@AdminLTE/Sidebar/user-panel.html.twig' with {'adminlte_direct_include': true} %}
-                {% endif %}
-            {% endblock %}
-
             {% block sidebar_search %}
-                {% include '@AdminLTE/Sidebar/search-form.html.twig' with {'adminlte_direct_include': true} %}
+                {#  {% include '@AdminLTE/Sidebar/search-form.html.twig' with {'adminlte_direct_include': true} %} #}
             {% endblock %}
-
             {% block sidebar_nav %}
                 {% if admin_lte_context.knp_menu.enable %}
                     {% include '@AdminLTE/Sidebar/knp-menu.html.twig' %}
@@ -95,30 +89,32 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
     </aside>
 
     <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-                {% block page_title %}{{ 'Administration'|trans({}, 'AdminLTEBundle') }}{% endblock %}
-                <small>{% block page_subtitle %}{{ 'A short subtitle for your page'|trans({}, 'AdminLTEBundle') }}{% endblock %}</small>
-            </h1>
+        {% block full_page_content %}
+            <section class="content-header">
+                <h1>
+                    {% block page_title %}Archi-med{% endblock %}
+                    <small>{% block page_subtitle %}Plateforme de tests{% endblock %}</small>
+                </h1>
 
-            {% block breadcrumb %}
-                {% if admin_lte_context.knp_menu.enable %}
-                    {% include '@AdminLTE/Breadcrumb/knp-breadcrumb.html.twig' %}
-                {% else %}
-                    {% include '@AdminLTE/Breadcrumb/breadcrumb.html.twig' with {'adminlte_direct_include': true} %}
-                {% endif %}
-            {% endblock %}
-        </section>
+                {% block breadcrumb %}
+                    {% if admin_lte_context.knp_menu.enable %}
+                        {% include '@AdminLTE/Breadcrumb/knp-breadcrumb.html.twig' %}
+                    {% else %}
+                        {% include '@AdminLTE/Breadcrumb/breadcrumb.html.twig' with {'adminlte_direct_include': true} %}
+                    {% endif %}
+                {% endblock %}
+            </section>
 
-        {% block page_content_before %}{% endblock %}
+            {% block page_content_before %}{% endblock %}
 
-        <section class="{% block page_content_class %}content{% endblock %}">
-            {% block page_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
-            {% block page_content %}{% endblock %}
-            {% block page_content_end %}{% endblock %}
-        </section>
+            <section class="{% block page_content_class %}content{% endblock %}">
+                {% block page_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
+                {% block page_content %}{% endblock %}
+                {% block page_content_end %}{% endblock %}
+            </section>
 
-        {% block page_content_after %}{% endblock %}
+            {% block page_content_after %}{% endblock %}
+        {% endblock %}
     </div>
 
     {% block footer %}
@@ -139,6 +135,7 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
     <script src="{{ asset('bundles/adminlte/adminlte.js') }}"></script>
     <script src="{{ asset('res/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('res/js/footable.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}
 {% block bottom_javascript %}{% endblock %}
 </body>

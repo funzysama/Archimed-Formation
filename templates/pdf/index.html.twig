@@ -1,8 +1,8 @@
-{% extends 'pdf-base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
 {% block title %}{{ parent() }} Pdf View{% endblock %}
 
-{% block body %}
+{% block page_content %}
 <object data="{{ chemin }}" type="application/pdf" class="pdf-viewer" width="100%" height="100%">
     <p>Apparement votre navigateur Web n'est pas configuré ou compatible pour l'affichage des fichiers PDF.
         Pas d'inquiétude, <a href="{{ chemin }}">Cliquez ici pour télécharger le fichier PDF.</a>

@@ -1,12 +1,1 @@
-{% extends 'admin-base.html.twig' %}
-{% block title %}{{ parent() }}Administration{% endblock %}
-{% block page_subtitle %}Index{% endblock %}
-
-{% block page_content %}
-    <div class="vertical-menu marginTop3">
-        <a href="{{ path('app_register') }}">Créer un Utilisateur</a>
-        <a href="{{ path('admin_users') }}">Liste des Utilisateurs</a>
-        <a href="{{ path('admin_tests') }}">Gestion des tests</a>
-        <a href="{{ path('main_home') }}">Retour</a>
-    </div>
-{% endblock %}
+{% extends 'kero-base.html.twig' %}

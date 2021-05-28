@@ -1,0 +1,569 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+html {
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    /*box-sizing: border-box;*/
+    text-align: center;
+    font-family: Verdana, Lucida, sans-serif;
+    color: #460B01;
+    /*background: url(/res/img/AM_BkGrnd_Brown01.png) 0 0 repeat-x #93371D;*/
+}
+@media screen and (min-width: 1200px) {
+    body{
+        position:fixed;
+        overflow:hidden;
+    }
+}
+#HautPage {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.container{
+    position: relative;
+    display: block;
+    top: 10px;
+    margin: 0 auto 10px auto;
+    width: 760px;
+    padding: 0;
+    text-align: left;
+    font-size: 0.7em;
+    box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.35);
+    background: #FFFCFB;
+}
+
+.pdf-container{
+    width: 95%;
+    margin: auto;
+    height: 99.74vh;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 101px);
+    background-color: #ecf0f5;
+}
+
+.content {
+    max-height: calc(100vh - 101px - 51px);
+    overflow: auto;
+    overflow-x: hidden;
+}
+@media screen and (max-width: 1200px){
+
+}
+
+.box {
+    box-shadow: 0 0 20px 3px rgba(0,0,0,.1);
+}
+
+.manager-container{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(99.7vh - 50px);
+    padding: 0;
+    text-align: left;
+    font-size: 0.7em;
+    background: #FFFCFB;
+}
+
+#BottContain {
+    height: 10px;
+    font-size: 3px;
+}
+
+
+/* ----< Section Header >---- */
+
+
+header {
+    border-top: 1px solid #fff1e7;
+}
+
+#AMLogo {
+    position: absolute;
+    top: 22px;
+    left: 40px;
+    width: 90px;
+    height: 90px;
+    /* background: url(/res/img/Archi-Med_Logo_2020_90p.png); */
+}
+.Titre { color: #460b01; }
+
+/* ----< Section Bords + Frame >---- */
+
+
+main {
+    position: relative;
+    display: block;
+    width: 760px;
+    padding-top: 8px;
+    text-align: center;
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.35);
+}
+
+#HautPageButt {
+    position: absolute;
+    left: 0;
+    bottom: 1em;
+    width: 760px;
+}
+
+.frame {
+    position: relative;
+    margin: 0;
+    width: 760px;
+    padding-bottom: 5em;
+    min-height: 500px;
+}
+
+.middle-half{
+    margin: auto;
+    width: 50%;
+}
+/* ----< Change Password Form >---- */
+
+.changePassForm{
+    width: 400px;
+    margin: auto;
+}
+
+.changePassForm-item{
+    margin: 15px;
+    position: relative;
+    width: 370px;
+}
+
+.changePassForm-errors{
+    color: red;
+}
+
+.changePassForm-errors > ul{
+    /* list-style-image: url("/res/img/button_cancel_02_12.png"); */
+}
+
+.changePassForm-label{
+    width: 120px;
+    position: absolute;
+    left: 0;
+    margin: 2px 0;
+    text-align: right;
+}
+
+.changePassForm-input {
+    width: 200px;
+    margin-left: 130px;
+}
+
+/* ----< Login Form >---- */
+
+
+.loginForm{
+    width: 400px;
+    margin: auto;
+}
+
+.loginForm-group{
+    border: 1px solid #000000;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .content{
+        padding: 0;
+    }
+    .loginForm-group{
+        border: 1px solid #000000;
+        max-width: 100%;
+        margin: auto;
+    }
+}
+
+.loginForm-item{
+    margin: 15px;
+    position: relative;
+    width: 370px;
+
+}
+
+.loginForm-label{
+    width: 120px;
+    position: absolute;
+    left: 0;
+    margin: 2px 0;
+    text-align: right;
+}
+
+.loginForm-input {
+    width: 200px;
+    margin-left: 130px;
+}
+
+.submit{
+    padding: 3px 8px 3px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    font-family: Verdana,sans-serif;
+
+}
+
+
+/* ----< Menu principal >---- */
+
+
+.vertical-menu {
+    width: 400px;
+    margin: auto;
+}
+
+.vertical-menu a {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ffede6;
+    border-radius: 35px;
+}
+
+.vertical-menu a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* ----< SideBar Menu >----*/
+
+.sidebar-menu li{
+    text-align: left;
+}
+
+.sidebar-menu .header{
+    text-align: center;
+}
+
+/* ----< Modal box >---- */
+
+
+.modal {
+    display: none;
+    position: fixed;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 30%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closed{
+    display: none;
+}
+
+.open{
+    display: block;
+}
+
+.iframeDiv{
+    position: fixed;
+    background-color: rgba(255,255,255, 0.9);
+    width: 600px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: #0a0a0a 5px 5px 5px 5px;
+    top: calc((100vh - 300px) / 2);
+    left: calc((100vw - 600px) / 2);
+}
+
+
+.addQuestion-iframe{
+    width: 100%;
+    height: 85%;
+    margin-top: 1em;
+    border: none;
+}
+
+#addQuestionBody form{
+    margin: 0;
+}
+
+.textArea{
+    resize: none;
+    width: 100%;
+    height: 60%;
+    margin: 5px 0;
+}
+
+.numeroField{
+    margin: 0.5em 0;
+}
+
+.addButton{
+    max-width: 100px;
+    display: inline;
+    margin-right: 10px;
+}
+
+.cancelButton{
+    max-width: 100px;
+    margin-left: 10px;
+    display: inline;
+}
+
+
+/* ----< Tableau des Utilisateurs >---- */
+
+.userTable th {
+    display: table-cell;
+    text-align: center;
+
+}
+
+.userTable td {
+    display: table-cell;
+}
+
+.MainTable {
+    margin: 2em auto 0 auto;
+    width: 700px;
+    border-collapse: collapse;
+    border: 1px solid #E9572C;
+}
+
+.tabDelTh, .tabDel, .tabStatusTh, .tabStatus{
+    width: 50px;
+}
+
+.tabPrenom, .tabPrenomTh{
+    width: 140px;
+}
+
+.tabNom, .tabNomTh{
+    width: 180px;
+}
+
+.tabEmail, .tabEmailTh{
+    width: 190px;
+}
+
+.tabAgence, .tabAgenceTh{
+    width: 65px;
+}
+
+.tabRoles, .tabRolesTh{
+    width: 60px;
+}
+
+
+/* ----< Balises Globales >---- */
+
+
+h3 {
+    margin: 2em auto 0 auto;
+    font-size: 1.45em;
+    font-weight: bold;
+}
+
+p {
+    position: relative;
+    margin: 0;
+    border: 0 none;
+}
+
+
+a {
+    font-weight: bold;
+    color: #460B01;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #AF503D;
+    text-decoration: none;
+}
+
+input {
+    margin: 0;
+    font-size: 1em;
+    font-family: Verdana,sans-serif;
+}
+
+th {
+    height: 2.4em;
+    font-size: 1.15em;
+    color: #ff0000;
+    border-bottom: 1px solid #E9572C;
+}
+
+td {
+    height: 2em;
+    border-top: 1px solid #F9C2B2;
+}
+
+tr:hover{
+    background-color: #ffede6;
+}
+
+
+/* ----< Section Footer >---- */
+
+
+.footer {
+    height: 42px;
+    width: 760px;
+    background: #fff1e7;
+    box-shadow: inset 0 8px 8px -8px rgba(0,0,0,0.35);
+}
+
+.FooterTexte {
+    left: 0;
+    margin-top: 10px;
+    width: 760px;
+    padding: 0;
+    position: absolute;
+}
+
+.copyright {
+    margin-top: 3px;
+}
+
+
+/* ----< Règles de pointer et tooltip >---- */
+
+
+.pointer{
+    cursor: pointer;
+}
+
+.cursor{
+    cursor: default;
+}
+
+
+/* ----< Règles de marge >---- */
+
+
+.marginTop1{
+    margin-top: 1em;
+}
+
+.marginTop2{
+    margin-top: 2em;
+}
+
+.marginTop3{
+    margin-top: 3em;
+}
+
+.marginTop4{
+    margin-top: 4em;
+}
+
+.marginTop5{
+    margin-top: 5em;
+}
+
+.marginTop6{
+    margin-top: 6em;
+}
+
+.marginBot1{
+    margin-bottom: 1em;
+}
+
+.marginBot2{
+    margin-bottom: 2em;
+}
+
+.marginBot3{
+    margin-bottom: 3em;
+}
+
+
+/* ----< Règles pour le text >---- */
+
+
+.font10 {
+    font-size: 0.9em;
+}
+
+.font14 {
+    font-size: 1.23em;
+}
+
+.font16 {
+    font-size: 1.45em;
+}
+
+.font20 {
+    font-size: 1.82em;
+}
+
+.font24 {
+    font-size: 2.18em;
+}
+
+.font32 {
+    font-size: 2.9em;
+}
+
+.font48 {
+    font-size: 4.32em;
+}
+
+.font48p {
+    font-size: 48px;
+}
+
+.txtlft {
+    text-align: left;
+}
+
+.txtrgt {
+    text-align: right;
+}
+
+.txtcnt {
+    text-align: center;
+}
+
+.BigF4 {
+    margin: 30px auto 0;
+    font-size: 4em;
+    color: #ea6a0a;
+    font-family: "Century Gothic", sans-serif;
+}

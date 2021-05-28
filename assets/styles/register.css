@@ -1,0 +1,24 @@
+.testSelect-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#testsInscris {
+    width: 45%;
+}
+
+#testsInscris label{
+    width: 100%;
+    text-align: center;
+}
+
+#resultatInscris{
+    width: 45%;
+}
+
+#resultatInscris label{
+    width: 100%;
+    text-align: center;
+}
+
