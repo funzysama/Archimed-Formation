@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Question;
-use App\Form\Question1Type;
+use App\Form\QuestionType;
 use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class QuestionController extends AbstractController
     public function new(Request $request): Response
     {
         $question = new Question();
-        $form = $this->createForm(Question1Type::class, $question);
+        $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,13 +71,17 @@ class QuestionController extends AbstractController
      */
     public function edit(Request $request, Question $question): Response
     {
-        $form = $this->createForm(Question1Type::class, $question);
+        $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('question_index');
+            $data = $request->request->all();
+            $intituler = $data["question"]["intituler"]."\r\n".$data["question"]["choix1"]."\r\n".$data["question"]["choix2"];
+            $question->setIntituler($intituler);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+            $em->flush();
+            return $this->render('question/success.html.twig');
         }
 
         return $this->render('question/edit.html.twig', [

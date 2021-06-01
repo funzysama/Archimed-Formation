@@ -9,10 +9,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class KnpMenuBuilderSubscriber implements EventSubscriberInterface
 {
     private $tokenStorage;
+    private $repository;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(TokenStorageInterface $tokenStorage, TestRepository $repository)
     {
         $this->tokenStorage = $tokenStorage;
+        $this->repository = $repository;
     }
 
     public static function getSubscribedEvents(): array
@@ -32,7 +34,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
                 'label' => 'MENU PRINCIPAL',
                 'childOptions' => $event->getChildOptions()
             ])->setAttribute('class', 'header');
-            $tests = $user->getTests()->getValues();
+            $tests = $this->repository->findAll();
             $menu->addChild('acceuil', [
                 'route' => 'main_home',
                 'label' => 'Acceuil',
@@ -41,7 +43,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
             $menu->addChild('monProfile', [
                 'route' => 'monProfile',
                 'routeParameters' => ['id' => $user->getId()],
-                'label' => 'Mon Profile',
+                'label' => 'Mon Profil',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-user');
             $menu->addChild('deco', [
@@ -50,7 +52,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-exit');
         }
-        if(in_array("ROLE_ADMIN", $token->getRoleNames()) || in_array("ROLE_CONSULTANT", $token->getRoleNames())){
+        if(in_array("ROLE_ADMIN", $token->getRoleNames()) || in_array("ROLE_CONSULTANT", $token->getRoleNames())) {
             $menu->addChild('AdminHeader', [
                 'label' => 'ADMINISTRATION',
                 'childOptions' => $event->getChildOptions()
@@ -60,36 +62,24 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
                 'label' => 'Gestion Utilisateurs',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-users');
-            $menu->addChild('gestionI3P', [
-                'route' => 'admin_i3Pgestion',
-                'label' => 'Gestion I3P',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'lnr lnr-certif');
-            $menu->addChild('listRessource', [
-                'route' => 'main_ressources',
+        }
+        if(in_array("ROLE_ADMIN", $token->getRoleNames())){
+                $menu->addChild('listRessource', [
+                'route' => 'ressource_index',
                 'label' => 'Gestion Resources',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-earth');
             $menu->addChild('listTests', [
-                'route' => 'main_tests',
                 'label' => 'Gestion des Tests',
                 'childOptions' => $event->getChildOptions(),
+                'options' => ['branch_class' => 'treeview']
             ])->setLabelAttribute('icon', 'lnr lnr-cog');
-            $tests = $user->getTests()->getValues();
-            if($tests){
-                foreach ($tests as $test){
-                    $menu->addChild('admintest'.$test->getNom(), [
-                        'label' => 'Aperçu du test '.$test->getNom(),
-                        'childOptions' => $event->getChildOptions(),
-                    ])->setLabelAttribute('icon', 'lnr lnr-eye');
-                }
-            }else{
-                $menu->addChild('ajoutTest', [
-                    'label' => 'Ajout d\'accès',
-                    'childOptions' => $event->getChildOptions(),
-                ])->setLabelAttribute('icon', 'fas fa-plus');
-            }
-
+            $menu->getChild('listTests')->addChild('gestionI3P', [
+                'route' => 'admin_i3Pgestion',
+                'label' => 'Gestion I3P',
+                'childOptions' => $event->getChildOptions(),
+            ])
+                ->setLabelAttribute('icon', 'lnr lnr-cog');
         }
     }
 }

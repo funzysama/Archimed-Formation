@@ -146,8 +146,7 @@ class I3PCalculator
         $i3pResultat->setFeeling($resultat["Sentiment (Feeling)"]);
         $i3pResultat->setRightness($resultat["Structuration (Rightness)"]);
         $i3pResultat->setOpening($resultat["Flexibilité (Opening)"]);
-        $profil = $this->repository->findOneBy(['nom' => 'ENTO']);
-        dump($profil);
+        $profil = $this->repository->findOneBy(['nom' => $resultat[0]]);
         $i3pResultat->setProfil($profil);
         return $i3pResultat;
     }

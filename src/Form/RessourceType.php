@@ -2,25 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Question;
+use App\Entity\Ressource;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Question1Type extends AbstractType
+class RessourceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('intituler')
-            ->add('numero')
+            ->add('nom')
+            ->add('url')
+            ->add('description')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Question::class,
+            'data_class' => Ressource::class,
         ]);
     }
 }

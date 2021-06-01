@@ -1,4 +1,30 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    {{ form_label(form.numero) }}
+                    {{ form_widget(form.numero) }}
+                </div>
+                <div class="row">
+                    {{ form_label(form.intituler) }}
+                    {{ form_widget(form.intituler) }}
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    {{ form_label(form.choix1) }}
+                    {{ form_widget(form.choix1) }}
+                </div>
+                <div class="row">
+                    {{ form_label(form.choix2) }}
+                    {{ form_widget(form.choix2) }}
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center marginTop2">
+            <button id="question_edit_submit" class="btn btn-pill btn-hover-shine btn-gradient-success btn-shadow">{{ button_label|default('Save') }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}

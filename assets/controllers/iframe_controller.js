@@ -15,16 +15,22 @@ import jQuery from 'jquery';
 export default class extends Controller {
     connect() {
         jQuery('#iframeEdit').on('load', (e) => {
-            console.log(e);
             jQuery('#iframeApercu')[0].contentWindow.location.reload(true);
         });
 
 
         jQuery('#questions').on('click', (e) => {
             let id = e.target.parentElement.dataset.id;
-            let url = new URL(window.location.origin+'/question/'+id);
-            jQuery('#viewingIframe').attr('src',url);
+            let urlView = new URL(window.location.origin+'/question/'+id);
+            let urlEdit = new URL(window.location.origin+'/question/'+id+'/edit');
+            jQuery('#viewingIframe').attr('src',urlView);
+            jQuery('#editingIframe').attr('src',urlEdit);
             jQuery('.content').animate({ scrollTop: 0 }, 'fast');
         })
+
+        jQuery('#editingIframe').on('load', (e) => {
+            jQuery('#viewingIframe')[0].contentWindow.location.reload(true);
+        });
+
     }
 }

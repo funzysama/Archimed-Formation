@@ -1,0 +1,18 @@
+<html>
+<head>
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+</head>
+<body style="max-width: 95%">
+<div class="col-sm-12 text-success">
+    <div>Mise a jour réussi</div>
+    <button class="btn btn-success btn-shadow btn-hover-shine btn-pill" id="closeIframe">Fermer</button>
+</div>
+</body>
+<script>
+    let elem = document.getElementById('closeIframe')
+    elem.addEventListener('click', (e) => {
+        window.location = 'about:blank';
+    })
+</script>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'main-base.html.twig' %}
+
+{% block title %}Ressources{% endblock %}
+
+{% block page_content %}
+    <h1>Ressource index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Url</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ressource in ressources %}
+            <tr>
+                <td>{{ ressource.id }}</td>
+                <td>{{ ressource.nom }}</td>
+                <td>{{ ressource.url }}</td>
+                <td>{{ ressource.description }}</td>
+                <td>
+                    <a href="{{ path('ressource_edit', {'id': ressource.id}) }}">edit</a>
+                    {{ include('ressource/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ressource_new') }}">Create new</a>
+{% endblock %}
