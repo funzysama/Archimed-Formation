@@ -2,76 +2,34 @@
 
 namespace App\Controller;
 
-use App\Repository\RessourceRepository;
 use App\Repository\TestRepository;
-use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
+ * Class AdminController
+ * @package App\Controller
  * @Route("/admin", name="admin_")
  */
 class AdminController extends AbstractController
 {
+    private $testRepository;
 
-    /**
-     * @Route("/index", name="index")
-     */
-    public function adminIndex(): Response
+    public function __construct(TestRepository $testRepository)
     {
-        return $this->render('admin/index.html.twig');
+        $this->testRepository = $testRepository;
     }
 
     /**
-     * @Route("/utilisateurs", name="users")
+     * @Route("/gestion/i3p", name="i3Pgestion")
      */
-    public function listerUtilisateurs(UtilisateurRepository $utilisateurRepository): Response
+    public function gestionI3P(): Response
     {
-        $users = $utilisateurRepository->findAll();
-        $jsonUsers = [];
-        foreach($users as $user) {
-            array_push($jsonUsers, $user->toArray());
-        }
-        return $this->render('admin/listUser.html.twig', [
-            'controller_name'   => 'AdminController',
-            'users'             => $users,
-            'jsonUsers'         => $jsonUsers
+        $test = $this->testRepository->findOneBy(['Nom' => 'I3P']);
+
+        return $this->render('/admin/gestioni3p.html.twig', [
+            'test' => $test,
         ]);
     }
-
-    /**
-     * @Route("/tests", name="tests")
-     */
-    public function listerTests(TestRepository $testRepository): Response
-    {
-        $tests = $testRepository->findAll();
-
-        return $this->render('admin/listTest.html.twig', [
-            'tests' => $tests
-        ]);
-    }
-
-    /**
-     * @Route("/ressources", name="ressources")
-     */
-    public function listerRessources(RessourceRepository $ressourceRepository): Response
-    {
-        $ressources = $ressourceRepository->findAll();
-
-        return $this->render('admin/listRessources.html.twig', [
-            'ressources' => $ressources
-        ]);
-    }
-
-    public function userPreferences()
-    {
-        return $this->render('admin/userPreferences.html.twig');
-    }
-
 }

@@ -71,7 +71,7 @@ class ArchimedAppAuthenticator extends AbstractFormLoginAuthenticator implements
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Cette e-mail n\'existe pas.');
         }
 
         return $user;
@@ -79,7 +79,11 @@ class ArchimedAppAuthenticator extends AbstractFormLoginAuthenticator implements
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        $check = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if(!$check){
+            throw new CustomUserMessageAuthenticationException('l\'email as été trouvé mais le mot de passe est incorect.');
+        }
+        return $check;
     }
 
     /**
@@ -96,8 +100,7 @@ class ArchimedAppAuthenticator extends AbstractFormLoginAuthenticator implements
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('main_home'));
     }
 
     protected function getLoginUrl()

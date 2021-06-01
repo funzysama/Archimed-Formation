@@ -36,6 +36,11 @@ class Test
      */
     private $slug;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Presentation::class, mappedBy="test", cascade={"persist", "remove"})
+     */
+    private $presentation;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -91,5 +96,27 @@ class Test
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    public function getPresentation(): ?Presentation
+    {
+        return $this->presentation;
+    }
+
+    public function setPresentation(?Presentation $presentation): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($presentation === null && $this->presentation !== null) {
+            $this->presentation->setTest(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($presentation !== null && $presentation->getTest() !== $this) {
+            $presentation->setTest($this);
+        }
+
+        $this->presentation = $presentation;
+
+        return $this;
     }
 }

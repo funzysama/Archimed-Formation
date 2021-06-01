@@ -19,7 +19,6 @@ class IRMRType extends AbstractType
 
             $form = $event->getForm();
             $questions = $event->getForm()->getConfig()->getOptions()['questions'];
-            //$testName = $questions[0]->getTest()->getNom();
             $sexe = $event->getForm()->getConfig()->getOptions()['sexe'];
             if($questions != null){
                 $j = 1;
@@ -27,7 +26,7 @@ class IRMRType extends AbstractType
                     $intitule = $questions[$i]->getIntituler();
                     $form->add('Question'.$j, LikertType::class, [
                         'attr'          => [
-                            'class'     => 'inputsContainer marginTop1'
+                            'class'     => 'inputsContainer marginTop1 col-sm-12'
                         ],
                         'row_attr'      => [
                             'class'     => 'question-row marginTop1',

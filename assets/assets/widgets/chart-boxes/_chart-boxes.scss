@@ -12,8 +12,9 @@ $widget-spacer: $spacer;
 
 .widget-chart {
   text-align: center;
-  padding: $widget-spacer;
+  padding: $widget-spacer / 2;
   position: relative;
+  height: 100%;
 
   .progress-sub-label {
     opacity: .8;
@@ -55,7 +56,7 @@ $widget-spacer: $spacer;
 
   .widget-numbers {
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     display: block;
     line-height: 1;
     margin: $widget-spacer auto;

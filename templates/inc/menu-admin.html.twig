@@ -1,9 +1,0 @@
-<div class="vertical-menu marginTop3">
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('admin_index') }}">Administration</a>
-    {% endif %}
-    <a href="{{ path('test', {name: 'I3P'}) }}">Apercu I3P</a>
-    <a href="{{ path('test', {name: 'IRMR'}) }}">Apercu RIASEC</a>
-    <a href="{{ path('monProfile', { id: app.user.id }) }}">Mon profile</a>
-    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-</div>

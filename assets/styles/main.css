@@ -69,7 +69,7 @@ body{
     height: calc(99.7vh - 50px);
     padding: 0;
     text-align: left;
-    font-size: 0.7em;
+    font-size: 1.0em;
     background: #FFFCFB;
 }
 
@@ -83,7 +83,6 @@ body{
 
 
 header {
-    border-top: 1px solid #fff1e7;
 }
 
 #AMLogo {

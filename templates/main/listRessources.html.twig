@@ -1,0 +1,23 @@
+{% extends 'main-base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}Ressources
+{% endblock %}
+
+{% block page_title %}
+
+{% endblock %}
+{% block page_subtitle %}
+    Gestion des Ressources
+{% endblock %}
+{% block page_content %}
+    <ul>
+        {% for ressource in ressources %}
+            <li>
+                <p>{{ ressource.nom }} : <a href="{{ ressource.url }}">{{ ressource.url }}</a></p>
+                <p>{{ ressource.description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

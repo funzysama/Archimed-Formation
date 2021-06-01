@@ -1,45 +1,54 @@
-{% extends 'admin-base.html.twig' %}
+{% extends 'main-base.html.twig' %}
 {% block page_title %}
-    Utilisateurs
 {% endblock %}
 {% block page_subtitle %}
-    Crétion d'un utilisateur
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('res/css/register.css') }}">
 {% endblock %}
 {% block page_content %}
-    <div class="row middle-half">
     <div class="col-md-12">
-        {% embed '@AdminLTE/Widgets/box-widget.html.twig' %}
-            {% block box_before %}{{ form_start(registrationForm) }}{% endblock %}
-            {% block box_title %}Creation d'un utilisateur{% endblock %}
-            {% block box_body %}
-                    {{ form_row(registrationForm.sexe) }}
-                    {{ form_row(registrationForm.nom) }}
-                    {{ form_row(registrationForm.prenom) }}
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.agence) }}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <div>
-                        {{ form_row(registrationForm.role) }}
+        {{ form_start(registrationForm) }}
+            <div class="mx-auto app-login-box col-md-12">
+                <div class="modal-dialog w-100">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="col-md-12 d-flex flex-md-column">
+                                    {{ form_row(registrationForm.sexe) }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form_widget(registrationForm.nom) }}
+                                </div>
+                                <div class="col-md-12 marginTop1">
+                                    {{ form_widget(registrationForm.prenom) }}
+                                </div>
+                                <div class="col-md-12 marginTop1">
+                                    {{ form_widget(registrationForm.email) }}
+                                </div>
+                                <div class="col-md-12 marginTop1">
+                                    {{ form_widget(registrationForm.agence) }}
+                                </div>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <div class="col-md-12 marginTop1">
+                                        {{ form_widget(registrationForm.role) }}
+                                    </div>
+                                {% endif %}
+                                <div class="is-hidden col-sm-12 marginTop1" id="visibility-container">
+                                    <div class="testSelect-container d-flex justify-content-around col-sm-12" id="testResultatContainer">
+                                        {{ form_row(registrationForm.testsInscris) }}
+                                        {{ form_row(registrationForm.resultatInscris) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-block text-center">
+                                <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Ajouter utilisateur</button>
+                            </div>
+                        </div>
                     </div>
-                {% endif %}
-                <div class="testSelect-container">
-                    {{ form_row(registrationForm.testsInscris) }}
-                    {{ form_row(registrationForm.resultatInscris) }}
-                </div>
-            {% endblock %}
-            {% block box_footer %}
-                <div class="pull-right">
-                    <button type="reset" class="btn btn-warning "><i class="fa fa-times"></i> Annuler</button>
-                    <button type="submit" class="btn btn-primary "><i class="fa fa-check-square"></i> Créer</button>
-                </div>
-            {% endblock %}
-
-            {% block box_after %}{{ form_end(registrationForm)}}{% endblock %}
-        {% endembed %}
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

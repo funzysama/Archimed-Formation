@@ -14,14 +14,11 @@
     justify-content: space-around;
     padding: 0 12.5px;
     max-height: calc(100vh - 25%);
-    overflow: auto;
 }
+
 .skin-black .left-side, .skin-black .main-sidebar, .skin-black .wrapper {
     background-color: #222d32;
     overflow: -moz-hidden-unscrollable;
-}
-.radio + .radio {
-    margin-top: 10px;
 }
 
 .testI3P-formGroup{

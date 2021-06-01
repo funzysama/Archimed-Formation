@@ -1,6 +1,6 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% form_theme formRename 'bootstrap_3_layout.html.twig' %}
-{% extends 'admin-base.html.twig' %}
+{% extends 'main-base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet"
@@ -31,11 +31,11 @@
                 {% endblock %}
                 <div class="row top-bar" id="top-bar">
                     {% block actions %}
-                        <a type="button" title="{{ 'button.tree'|trans }}"
+                        {#  <a type="button" title="{{ 'button.tree'|trans }}"
                            href="{{ path('file_manager', fileManager.queryParameters|merge({'tree': fileManager.tree == true ? 0 : 1 })) }}"
                            class="btn btn-sm btn-default {{ fileManager.tree ? 'active' }}">
                             <span class="fas fa-bars"></span>
-                        </a>
+                        </a> #}
                         {% if fileManager.parent %}
                             <a class="btn btn-default btn-sm"
                                title="{{ 'button.parent'|trans }}"
@@ -46,46 +46,47 @@
                                 onClick="window.location.reload()">
                             <span class="fas fa-sync"></span>
                         </button>
-
-                        <span class="btn btn-success btn-sm fileinput-button btn-action">
-                            <span class="far fa-file"></span>
-                            <span class="bar-action">{{ 'button.add.files'|trans }}</span>
-                                <input id="fileupload" type="file"
-                                       data-url="{{ path('file_manager_upload', fileManager.queryParameters) }}"
-                                       name="files[]" multiple=""
-                                       accept="{{ fileManager.configuration.accept is defined ? fileManager.configuration.accept : (fileManager.type ? accept(fileManager.type)) }}">
-                        </span>
-                        <button type="button" class="btn btn-primary btn-sm btn-action" data-toggle="modal"
-                                data-target="#addFolder">
-                            <span class="far fa-folder-open"></span>
-                            <span class="bar-action">{{ 'button.add.folder'|trans }}</span>
-                        </button>
-                        {% if fileManager.parent %}
-                            <button type="button"
-                                    class="btn btn-sm btn-danger btn-action js-delete-modal"
-                                    data-trigger="click"
-                                    data-container="body"
-                                    data-toggle="modal"
-                                    data-target="#js-confirm-delete"
-                                    data-placement="left"
-                                    data-html="true"
-                                    data-href='{{ path('file_manager_delete', fileManager.queryParameters) }}'>
-                                <span class="far fa-trash-alt"></span>
-                                <span class="bar-action">{{ 'button.delete.current'|trans }}</span>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <span class="btn btn-success btn-sm fileinput-button btn-action">
+                                <span class="far fa-file"></span>
+                                <span class="bar-action">{{ 'button.add.files'|trans }}</span>
+                                    <input id="fileupload" type="file"
+                                           data-url="{{ path('file_manager_upload', fileManager.queryParameters) }}"
+                                           name="files[]" multiple=""
+                                           accept="{{ fileManager.configuration.accept is defined ? fileManager.configuration.accept : (fileManager.type ? accept(fileManager.type)) }}">
+                            </span>
+                            <button type="button" class="btn btn-primary btn-sm btn-action" data-toggle="modal"
+                                    data-target="#addFolder">
+                                <span class="far fa-folder-open"></span>
+                                <span class="bar-action">{{ 'button.add.folder'|trans }}</span>
                             </button>
+                            {% if fileManager.parent %}
+                                <button type="button"
+                                        class="btn btn-sm btn-danger btn-action js-delete-modal"
+                                        data-trigger="click"
+                                        data-container="body"
+                                        data-toggle="modal"
+                                        data-target="#js-confirm-delete"
+                                        data-placement="left"
+                                        data-html="true"
+                                        data-href='{{ path('file_manager_delete', fileManager.queryParameters) }}'>
+                                    <span class="far fa-trash-alt"></span>
+                                    <span class="bar-action">{{ 'button.delete.current'|trans }}</span>
+                                </button>
+                            {% endif %}
+                            <a id="js-delete-multiple-modal"
+                               class="btn btn-sm btn-danger btn-action disabled"
+                               type="button"
+                               data-trigger="click"
+                               data-container="body"
+                               data-toggle="modal"
+                               data-target="#js-confirm-delete"
+                               data-placement="left"
+                               data-html="true">
+                                <span class="far fa-check-square"></span>
+                                <span class="bar-action">{{ 'button.delete.selected'|trans }}</span>
+                            </a>
                         {% endif %}
-                        <a id="js-delete-multiple-modal"
-                           class="btn btn-sm btn-danger btn-action disabled"
-                           type="button"
-                           data-trigger="click"
-                           data-container="body"
-                           data-toggle="modal"
-                           data-target="#js-confirm-delete"
-                           data-placement="left"
-                           data-html="true">
-                            <span class="far fa-check-square"></span>
-                            <span class="bar-action">{{ 'button.delete.selected'|trans }}</span>
-                        </a>
                     {% endblock %}
                     {% block display %}
                         <div class="btn-group pull-right">
@@ -98,6 +99,7 @@
                                 {{ order(fileManager, 'size') }}
                                 {{ order(fileManager, 'dimension') }}
                             {% endif %}
+                            {#
                             <a type="button"
                                href="{{ path('file_manager', fileManager.queryParameters|merge({'view':"list"})) }}"
                                class="btn btn-sm btn-default {{ fileManager.view == 'list' ? 'active' }}">
@@ -107,7 +109,7 @@
                                href="{{ path('file_manager', fileManager.queryParameters|merge({'view':'thumbnail'})) }}"
                                class="btn btn-sm btn-default {{ fileManager.view == 'thumbnail' ? 'active' }}">
                                 <span class="fas fa-th"></span>
-                            </a>
+                            </a> #}
                         </div>
                     {% endblock %}
                 </div>

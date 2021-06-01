@@ -1,0 +1,26 @@
+<html>
+<head>
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+</head>
+<body style="max-width: 95%">
+    <div class="card i3p-control col-sm-12">
+        <div class="i3p-intitule">
+            <label class="col-sm-12 text-center col-sm-2 control-label required">{{ title }}</label>
+        </div>
+        <div class="i3p-inputs">
+            <div id="i3_p_Question1" class="col-sm-12">
+                {% for question in choices %}
+                    <div class="radio">
+                        <label for="i3_p_Question1_0" class="required">
+                            <input type="radio" id="i3_p_Question1_0" name="i3_p[Question1]" required="required" class=" checkbox">
+                            {{ question }}
+                        </label>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

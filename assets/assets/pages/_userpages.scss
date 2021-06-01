@@ -1,15 +1,16 @@
 // User Pages
 
 .app-logo {
-  height: 17px;
-  width: 68px;
-  background: url('utils/images/logo.png') 50% 50% no-repeat;
+  height: 40px;
+  width: 160px;
+  background: url('utils/images/logo.png') 100% 100% no-repeat;
 }
 
 .app-logo-inverse {
-  height: 17px;
-  width: 68px;
-  background: url('utils/images/logo-inverse.png') 50% 50% no-repeat;
+  height: 40px;
+  width: 160px;
+  background: url("utils/images/logo-inverse.png") 100% 100% no-repeat;
+  background-size: contain;
 }
 
 .app-login-box {

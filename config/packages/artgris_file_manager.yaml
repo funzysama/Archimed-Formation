@@ -1,10 +1,9 @@
 artgris_file_manager:
   web_dir: public
   conf:
-    default:
+    main:
       dir: "../public/uploads/"
-      tree: true
-      view: thumbnail
+      tree: false
     private:
       dir: "../public/private/"
       upload:

@@ -15,6 +15,7 @@ use App\Service\pdfDataFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class I3PController extends AbstractController
 {
@@ -48,7 +49,7 @@ class I3PController extends AbstractController
 
             return $this->redirectToRoute('resultat', ['name' => 'I3P', 'id' => $i3presultat->getId()]);
         }
-        return $this->render('test/I3P/index.html.twig', [
+        return $this->render('test/I3P/test.html.twig', [
             'testName' => 'I3P',
             'testForm' => $form->createView()
         ]);
@@ -67,6 +68,20 @@ class I3PController extends AbstractController
         return $this->render('test/I3P/resultat.html.twig', [
             'resultat' => $resultat,
             'jsonResultat' => $jsonResult
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @Route("/i3P", name="presentation_I3P")
+     */
+    public function presentationi3p(TestRepository $repository): Response
+    {
+        $test = $repository->findOneBy(['Nom' => 'I3P']);
+
+        return $this->render('test/I3P/index.html.twig', [
+            'testName'  => 'I3P',
+            'test'      => $test
         ]);
     }
 }

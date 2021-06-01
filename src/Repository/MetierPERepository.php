@@ -19,22 +19,29 @@ class MetierPERepository extends ServiceEntityRepository
         parent::__construct($registry, MetierPE::class);
     }
 
-    // /**
-    //  * @return MetierPE[] Returns an array of MetierPE objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+      * @return MetierPE[] Returns an array of MetierPE objects
+      */
+
+    public function findByRiasec($riasecMajeur, $riasecMineur)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+         $qb = $this->createQueryBuilder('m')
+                ->select()
+                ->orderBy('m.code', 'ASC');
+         if($riasecMajeur){
+             $qb->andWhere('m.riasecMajeur = :riasecMaj')
+                ->setParameter('riasecMaj', $riasecMajeur);
+         }
+         if($riasecMineur){
+             $qb->andWhere('m.riasecMineur = :riasecMin')
+                 ->setParameter('riasecMin', $riasecMineur);
+         }
+
+         $query = $qb->getQuery();
+
+         return $query->execute();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?MetierPE

@@ -1,0 +1,18 @@
+<html lang="fr">
+<head>
+    <title></title>
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+</head>
+<body>
+<div class="col-sm-12">
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            {{ include('presentation/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

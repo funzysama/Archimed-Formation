@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("admin/tests/{id}", name="admin_test_")
+ * @Route("main/tests/{id}", name="admin_test_")
  */
 class TestAdminController extends AbstractController
 {
@@ -23,7 +23,7 @@ class TestAdminController extends AbstractController
     public function editerTest(Test $test): Response
     {
 
-        return $this->render('admin/editerTest.html.twig', [
+        return $this->render('main/editerTest.html.twig', [
             'test' => $test
         ]);
     }
@@ -46,7 +46,7 @@ class TestAdminController extends AbstractController
             return $this->redirectToRoute('admin_test_editer', ['id' => $test->getId()]);
         }
 
-        return $this->render('admin/addQuestion.html.twig', [
+        return $this->render('main/addQuestion.html.twig', [
             'form' => $form->createView(),
             'test' => $test
         ]);

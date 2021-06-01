@@ -37,18 +37,18 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
                 'route' => 'main_home',
                 'label' => 'Acceuil',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-id-badge');
+            ])->setLabelAttribute('icon', 'lnr lnr-home');
             $menu->addChild('monProfile', [
                 'route' => 'monProfile',
                 'routeParameters' => ['id' => $user->getId()],
                 'label' => 'Mon Profile',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-id-badge');
+            ])->setLabelAttribute('icon', 'lnr lnr-user');
             $menu->addChild('deco', [
                 'route' => 'app_logout',
                 'label' => 'Déconnection',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-sign-out-alt');
+            ])->setLabelAttribute('icon', 'lnr lnr-exit');
         }
         if(in_array("ROLE_ADMIN", $token->getRoleNames()) || in_array("ROLE_CONSULTANT", $token->getRoleNames())){
             $menu->addChild('AdminHeader', [
@@ -56,27 +56,32 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
                 'childOptions' => $event->getChildOptions()
             ])->setAttribute('class', 'header');
             $menu->addChild('listUser', [
-                'route' => 'admin_users',
+                'route' => 'main_users',
                 'label' => 'Gestion Utilisateurs',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-users');
+            ])->setLabelAttribute('icon', 'lnr lnr-users');
+            $menu->addChild('gestionI3P', [
+                'route' => 'admin_i3Pgestion',
+                'label' => 'Gestion I3P',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'lnr lnr-certif');
             $menu->addChild('listRessource', [
-                'route' => 'admin_ressources',
+                'route' => 'main_ressources',
                 'label' => 'Gestion Resources',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-users');
+            ])->setLabelAttribute('icon', 'lnr lnr-earth');
             $menu->addChild('listTests', [
-                'route' => 'admin_tests',
+                'route' => 'main_tests',
                 'label' => 'Gestion des Tests',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-copy');
+            ])->setLabelAttribute('icon', 'lnr lnr-cog');
             $tests = $user->getTests()->getValues();
             if($tests){
                 foreach ($tests as $test){
                     $menu->addChild('admintest'.$test->getNom(), [
                         'label' => 'Aperçu du test '.$test->getNom(),
                         'childOptions' => $event->getChildOptions(),
-                    ])->setLabelAttribute('icon', 'fas fa-copy');
+                    ])->setLabelAttribute('icon', 'lnr lnr-eye');
                 }
             }else{
                 $menu->addChild('ajoutTest', [

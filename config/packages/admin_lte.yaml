@@ -13,23 +13,19 @@ admin_lte:
         boxed_layout: false
         collapsed_sidebar: false
         mini_sidebar: true
-    theme:
-        widget:
-            type: warning
-            bordered: true
-            collapsible: true
-            collapsible_title: 'Collapse'
-            removable: false
-            removable_title: 'Remove'
-            solid: false
-            use_footer: false
-        button:
-            type: 'primary'
-            size: false
-    control_sidebar:
-        settings:
-            icon: fas fa-cogs
-            controller: 'App\Controller\AdminController::userPreferences'
+#    theme:
+#        widget:
+#            type: warning
+#            bordered: true
+#            collapsible: true
+#            collapsible_title: 'Collapse'
+#            removable: false
+#            removable_title: 'Remove'
+#            solid: false
+#            use_footer: false
+#        button:
+#            type: 'primary'
+#            size: false
 
     knp_menu:
         enable: true

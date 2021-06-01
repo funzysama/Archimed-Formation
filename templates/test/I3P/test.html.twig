@@ -1,0 +1,33 @@
+{% extends 'main-base.html.twig' %}
+
+{% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
+
+{% block page_title%}Test {{ testName }}{% endblock %}
+
+{% block page_subtitle %}<strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_content %}
+    {{ form_start(testForm, { 'attr': {'class': 'form-i3p'} }) }}
+    {% for question in testForm.children %}
+        {% if question.vars.name == '_token' %}
+            {{ form_row(question) }}
+        {% elseif question.vars.name == 'Question0' %}
+            {{ form_row(question) }}
+        {% else %}
+            <div class="card i3p-control">
+                <div class="i3p-intitule">
+                    {{ form_label(question) }}
+                </div>
+                <div class="i3p-inputs">
+                    {{ form_widget(question) }}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="i3p-submit"><button>Valider</button></div>
+    {{ form_end(testForm) }}
+{% endblock %}

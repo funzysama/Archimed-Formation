@@ -1,10 +1,10 @@
-{% extends 'admin-base.html.twig' %}
+{% extends 'main-base.html.twig' %}
 
 {% block title %}{{ parent() }}Identification{% endblock %}
-{% block page_title %}Archi-med{% endblock %}
-{% block page_subtitle %}Plateforme de test{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
 {% block page_content %}
-<div class="marginTop3">
+<div class="col-md-12">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,36 +14,45 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-        <form method="post">
-            <div class="loginForm marginTop3">
-                <div class="loginForm-group">
-                    <div class="loginForm-item">
-                        <label class="loginForm-label" for="inputEmail">Votre Email:</label>
-                        <div class="loginForm-input">
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
+    <div class="mx-auto app-login-box col-md-8">
+        <div class="app-logo-inverse mx-auto mb-3"></div>
+        <div class="modal-dialog w-100 mx-auto">
+            <div class="modal-content">
+                <form method="post">
+                <div class="modal-body">
+                    <div class="h5 modal-title text-center">
+                        <h4 class="mt-2">
+                            <div>Bienvenue,</div>
+                            <span>Merci de vous connecter.</span>
+                        </h4>
+                    </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="position-relative form-group">
+                                    <input value="{{ last_username }}" name="email" id="inputEmail" placeholder="E-mail..." type="email" class="form-control" required autofocus>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="position-relative form-group">
+                                    <input name="password" id="inputPassword" placeholder="Mot de passe..." type="password" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="loginForm-item">
-                        <label class="loginForm-label" for="inputPassword">Mot de passe:</label>
-                        <div class="loginForm-input">
-                            <input type="password" name="password" id="inputPassword" required>
+                        <div class="position-relative form-check">
+                            <input id="rememberCheck" name="_remember_me" type="checkbox" class="form-check-input">
+                            <label for="rememberCheck" class="form-check-label">Se souvenir de moi</label>
                         </div>
-                    </div>
-                    <div class="checkbox marginTop1 marginBot1">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                        </label>
-                    </div>
                 </div>
-                <div class="marginTop2">
-                    <button class="submit" type="submit">
-                        Connexion
-                    </button>
+                <div class="modal-footer clearfix">
+                    <div class="float-left"><a href="javascript:void(0);" class="btn-lg btn btn-link">Mot de passe oublié</a></div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg">Se connecter</button>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </div>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </form>
             </div>
-    </form>
-
-    <p class="marginTop3">Mot de passe oubliés ? <a href="#">Cliquez ici</a>..</p>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,20 @@
+.iframe-wrapper{
+    min-width: 200px;
+    width: 100%;
+}
+
+.iframe-wrapper iframe {
+    display:block;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.presentationLabel-container > label {
+    max-width: 100%;
+}
+
+.question-apercu-iframe{
+    width: 100%;
+    min-height: 300px;
+}

@@ -33,6 +33,12 @@ function onInit(){
         labelcontainer.appendChild(labelmiddle);
         labelcontainer.appendChild(labelright);
         container.prepend(labelcontainer);
+        let elem = document.getElementsByClassName('col-sm-10');
+        console.log(elem);
+        for(let i = 0; i < elem.length; i++){
+            elem[i].classList.add('col-sm-12');
+            elem[i].classList.remove('col-sm-10');
+        }
     }
 }
 

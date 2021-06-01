@@ -1,10 +1,10 @@
-{% extends 'admin-base.html.twig' %}
+{% extends 'main-base.html.twig' %}
 
 {% block title %}{{ parent() }} Menu Principal{% endblock %}
 {% block body_title %}{{ parent() }}{% endblock %}
 {% block page_content %}
 
-    <h4>Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}</h4>
+    {# <h4>Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}</h4> #}
     {% include '/inc/menu-acceuil.html.twig' %}
 
 {% endblock %}

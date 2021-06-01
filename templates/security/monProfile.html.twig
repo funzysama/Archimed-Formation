@@ -1,40 +1,82 @@
-{% extends 'admin-base.html.twig' %}
+{% extends 'main-base.html.twig' %}
 
 {% block title %}
     {{ parent() }} Mon Profile
 {% endblock %}
 
-{% block stylesheets%}
+{% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('res/css/profile.css') }}">
 {% endblock %}
-{% block page_title%}Mon Profil{% endblock %}
+{% block page_title %}Mon Profil{% endblock %}
 {% block page_subtitle %}Bonjour {{ user.sexe|formatSexe }} {{ user.nom }} {{ user.prenom }}{% endblock %}
 {% block page_content %}
-    <div class="card marginTop3">
-        <div class="profile-container">
-                <div class="profile-left-container">
-                    <div class="profile-menu-container">
-                        <a href="{{ path('monProfile', {id: app.user.id}) }}"><h6 id="profile-menu" class="profile-buttons">Mon Profile</h6></a>
-                        <a href="{{ path('mesTests', {id: app.user.id}) }}"><h6 id="tests-menu" class="profile-buttons">Mes Tests</h6></a>
-                        <a href="{{ path('mesResultat', {id: app.user.id}) }}"><h6 id="resultats-menu" class="profile-buttons">Mes Résultat</h6></a>
-                        <a href="{{ path('app_logout') }}"><h6 class="profile-buttons">Déconnexion</h6></a>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    defineFocus();
-                </script>
-            <div class="profile-right-container">
-                {% block profilebody %}
-                    <h2>{{ user.nom }} {{ user.prenom }}</h2>
-                    <div class="profile-content">
-
-                        <div class="actions-container">
-                            <a href="{{ path('security_changePass') }}"><button id="buttonPass" class="buttonFA"><i class="fas fa-key fa-2x pointer"></i></button></a>
-                            <button id="buttonEmail" class="buttonFA"><i class="fas fa-envelope fa-2x pointer"></i></button>
+    <div class="col-xl-4 col-lg-6 col-xs-8 margin-h-center">
+        <div class="card-hover-shadow profile-responsive card-border mb-3 card">
+            <div class="dropdown-menu-header">
+                <div class="dropdown-menu-header-inner bg-global">
+                    <div class="menu-header-content">
+                        <div><h5 class="menu-header-title">{{ user.prenom }} {{ user.nom }}</h5>
+                            <h6 class="menu-header-subtitle">Voici votre profil.</h6>
+                        </div>
+                        <div class="menu-header-btn-pane pt-2">
+                            <div role="group" class="btn-group text-center">
+                                <div class="nav">
+                                    <a href="#tab-2-eg1" data-toggle="tab" class="active btn btn-dark">Profil</a>
+                                    <a href="#tab-2-eg2" data-toggle="tab" class="btn btn-dark mr-1 ml-1">Resultats</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                {% endblock %}
+                </div>
+            </div>
+            <div class="p-0 card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="tab-2-eg1">
+                        <div class="col-xl-12">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-left">
+                                                        E-mail
+                                                    </div>
+                                                    <div class="widget-subheading opacity-10 text-left">
+                                                        <span class="pr-2">{{ user.email }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-left">
+                                                        Compte vérifier
+                                                    </div>
+                                                    <div class="widget-subheading opacity-10 text-left">
+                                                        <span class="pr-2">{{ user.verified ? 'Oui' : 'Non' }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-2-eg2">
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-center d-block card-footer">
+                <button class="mr-2 text-danger btn btn-link btn-sm">Modifier mot de passe</button>
+                <button class="btn-shadow-primary btn btn-primary btn-lg">Changer d'Email</button>
             </div>
         </div>
     </div>

@@ -33,6 +33,6 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/PasswordUpdate, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/verify/email, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/admin, roles: ROLE_CONSULTANT }
-        #- { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/main, roles: ROLE_CONSULTANT }
+        #- { path: ^/main, roles: ROLE_ADMIN }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

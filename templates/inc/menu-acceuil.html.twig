@@ -1,42 +1,87 @@
-<div class="main-card middle-half">
-    <div class="card-body">
-        <div class="row marginTop3">
-            <div class="grid-menu grid-menu-2col">
-                <div class="no-gutters row">
-                    <div class="col-sm-6">
-                        <a href="/test/I3P"><button class="btn-icon-vertical btn-transition btn-outline-link">
-                            <i class="lnr-license btn-icon-wrapper btn-icon-lg mb-3"> </i>
-                            I3P
-                        </button></a>
+<div class="col-xl-6 middle-half">
+    <div class="main-card mb-3 card">
+        <div class="grid-menu grid-menu-2col">
+            <div class="no-gutters row">
+                <div class="col-sm-6">
+                    <a href="{{ path('presentation_I3P') }}">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="icon-wrapper-bg bg-success"></div>
+                            <i class="lnr-graduation-hat text-success"></i>
+                        </div>
+                        <div class="widget-numbers">I3P</div>
+                        <div class="widget-subheading">
+                            <strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{{ path('test', {name: "IRMR"}) }}">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="icon-wrapper-bg bg-info"></div>
+                            <i class="lnr-graduation-hat text-info"></i>
+                        </div>
+                        <div class="widget-numbers">Riasec Flash</div>
+                        <div class="widget-subheading">
+                            Petite description
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="/test/IRMR"><button class="btn-icon-vertical btn-transition btn-outline-link">
-                            <i class="lnr-license btn-icon-wrapper btn-icon-lg mb-3"> </i>
-                            Riasec Flash
-                        </button></a>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="icon-wrapper-bg bg-danger"></div>
+                            <i class="lnr-graduation-hat text-danger"></i>
+                        </div>
+                        <div class="widget-numbers">Positioning Skills</div>
+                        <div class="widget-subheading">
+                            Petite description
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <a href=""><button class="btn-icon-vertical btn-transition btn-outline-link">
-                            <i class="lnr-license btn-icon-wrapper btn-icon-lg mb-3"> </i>
-                            Positioning skills
-                        </button></a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{{ path('main_api_pole_emploi') }}">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="pole-emploi-icon"></div>
+                            <div class="icon-wrapper-bg bg-warning"></div>
+                        </div>
+                        <div class="widget-numbers">API Pole-Emploi</div>
+                        <div class="widget-subheading">
+                            Petite description
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <a href=""><button class="btn-icon-vertical btn-transition btn-outline-link">
-                            <i class="lnr-database btn-icon-wrapper btn-icon-lg mb-3"> </i>
-                            API Pole-emploi
-                        </button></a>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{{ path('file_manager', {conf: 'default'}) }}">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="icon-wrapper-bg bg-secondary"></div>
+                            <i class="pe-7s-folder text-secondary"></i>
+                        </div>
+                        <div class="widget-numbers">Espace Documents</div>
+                        <div class="widget-subheading">
+                            Petite description
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="/manager/?conf=default"><button class="btn-icon-vertical btn-transition btn-outline-link">
-                            <i class="lnr-file-empty btn-icon-wrapper btn-icon-lg mb-3"> </i>Documents
-                        </button></a>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{{ path('main_ressources') }}">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="icon-wrapper-bg bg-warning"></div>
+                            <i class="pe-7s-drawer text-danger"></i>
+                        </div>
+                        <div class="widget-numbers">Espace ressources</div>
+                        <div class="widget-subheading">
+                            Petite description
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="/admin/ressources"><button class="btn-icon-vertical btn-transition btn-outline-link">
-                            <i class="lnr-earth btn-icon-wrapper btn-icon-lg mb-3"> </i>Ressources
-                        </button></a>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

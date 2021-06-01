@@ -66,9 +66,9 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
     .enableStimulusBridge('./assets/controllers.json')
-    // uncomment if you use API Platform Admin (composer require api-admin)
+    // uncomment if you use API Platform Admin (composer require api-main)
     //.enableReactPreset()
-    //.addEntry('admin', './assets/admin.js')
+    //.addEntry('main', './assets/main.js')
 ;
 
 module.exports = Encore.getWebpackConfig();

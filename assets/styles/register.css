@@ -5,20 +5,28 @@
 }
 
 #testsInscris {
-    width: 45%;
+    width: 50%;
+    text-align: left;
 }
 
 #testsInscris label{
-    width: 100%;
-    text-align: center;
+    max-width: 100%;
+}
+
+#testsInscris > label{
+    border-bottom: 1px solid rgba(0,0,0, 0.15);
 }
 
 #resultatInscris{
-    width: 45%;
+    width: 50%;
+    text-align: left;
 }
 
 #resultatInscris label{
-    width: 100%;
-    text-align: center;
+    max-width: 100%;
+}
+
+#resultatInscris > label{
+    border-bottom: 1px solid rgba(0,0,0, 0.15);
 }
 

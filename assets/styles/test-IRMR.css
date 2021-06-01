@@ -36,9 +36,7 @@
     justify-content: space-around;
     align-items: center;
 }
-.radio + .radio {
-    margin-top: 10px;
-}
+
 .inputsContainer label {
     margin-top: 0.5em;
     flex-basis: 14.28%;

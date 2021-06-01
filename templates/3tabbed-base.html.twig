@@ -1,0 +1,162 @@
+<!DOCTYPE html{% block html_start %}{% endblock %}>
+<html lang="{{ app.request.locale }}">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {% endblock %}
+    <title>{% block title %}Archimed | {% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('res/js/site_main.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('res/css/footable.standalone.css') }}">
+        <link rel="stylesheet" href="{{ asset('res/css/FooTable.FontAwesome.css') }}">
+
+    {% endblock %}
+    {{ encore_entry_script_tags('app') }}
+</head>
+{#
+Apply one of the following classes for the skin:
+skin-blue, skin-black, skin-purple, skin-yellow, skin-red, skin-green
+
+Apply one or more of the following classes for the layout options:
+fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
+#}
+<body{% block body_start %}{% endblock %} class="hold-transition {{ admin_lte_context.skin|default("")|body_class }}">
+{% block after_body_start %}{% endblock %}
+<div class="wrapper">
+    <header class="main-header">
+        <a href="{% block logo_path %}{{ path('adminlte_welcome'|route_alias) }}{% endblock %}" class="logo">
+            <span class="logo-mini">
+                {% block logo_mini %}<img src="{{ asset('res/img/Archi-Med_Logo_2020_354p.png') }}" alt="logo"> {% endblock %}
+            </span>
+            <span class="logo-lg">
+               {% block logo_large %} <img src="{{ asset('res/img/Archi-Med_Logo_2021_large.png') }}" alt="logo"> {% endblock %}
+            </span>
+        </a>
+
+        <nav class="navbar-custom navbar-static-top" role="navigation">
+            {% block navbar_toggle %}
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">{{ 'Toggle navigation'|trans({}, 'AdminLTEBundle')  }}</span>
+                </a>
+            {% endblock %}
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            {% block sidebar_nav %}
+                {% if admin_lte_context.knp_menu.enable %}
+                    {% include '@AdminLTE/Sidebar/knp-menu.html.twig' %}
+                {% else %}
+                    {% include '@AdminLTE/Sidebar/menu.html.twig' with {'adminlte_direct_include': true} %}
+                {% endif %}
+            {% endblock %}
+        </section>
+    </aside>
+
+    <div class="content-wrapper">
+        {% block full_page_content %}
+            <section class="content-header">
+                <h1>
+                    {% block page_title %}Archi-med{% endblock %}
+                    <small>{% block page_subtitle %}Plateforme de tests{% endblock %}</small>
+                </h1>
+            </section>
+
+            {% block page_content_before %}{% endblock %}
+
+            <section class="{% block page_content_class %}content{% endblock %}">
+                <div class="col-sm-12">
+                    <div class="app-inner-layout app-inner-layout-page">
+                        <div class="app-inner-bar bg-white">
+                            <div class="inner-bar-center">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a role="tab" data-toggle="tab" id="tab-nav-0" class="nav-link active"
+                                           href="#tab-content-0">
+                                            <span>{% block tab1_title %}{% endblock %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a role="tab" data-toggle="tab" id="tab-nav-1" class="nav-link"
+                                           href="#tab-content-1">
+                                            <span>{% block tab2_title %}{% endblock %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a role="tab" data-toggle="tab" id="tab-nav-1" class="nav-link"
+                                           href="#tab-content-2">
+                                            <span>{% block tab3_title %}{% endblock %}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="app-inner-layout__wrapper">
+                            <div class="app-inner-layout__content">
+                                <div class="tab-content height-container">
+                                    <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                {% block tab1_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
+                                                {% block tab1_content %}{% endblock %}
+                                                {% block tab1_content_end %}{% endblock %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                {% block tab2_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
+                                                {% block tab2_content %}{% endblock %}
+                                                {% block tab2_content_end %}{% endblock %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                {% block tab3_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
+                                                {% block tab3_content %}{% endblock %}
+                                                {% block tab3_content_end %}{% endblock %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {% block page_content_after %}{% endblock %}
+        {% endblock %}
+    </div>
+
+    {% block footer %}
+        {% include '@AdminLTE/Partials/_footer.html.twig' %}
+    {% endblock %}
+    {% block control_sidebar %}
+        {% if admin_lte_context.control_sidebar %}
+            {% include '@AdminLTE/Partials/_control-sidebar.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+</div>
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+    <script src="{{ asset('bundles/adminlte/adminlte.js') }}"></script>
+    <script src="{{ asset('res/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('res/js/footable.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
+{% block bottom_javascript %}{% endblock %}
+</body>
+</html>

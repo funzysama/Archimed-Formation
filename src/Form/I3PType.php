@@ -33,14 +33,14 @@ class I3PType extends AbstractType
                     $questionChoices = array_values($questionArray);
                     $form->add('Question'.$j, ChoiceType::class,[
                         'row_attr' => [
-                            'class' => 'test'.$testName.'-formGroup'
+                            'class' => 'col-sm-12'
                         ],
                         'attr' => [
-                            'class' => 'test'.$testName.'-formItem'
+                            'class' => 'col-sm-12'
                         ],
                         'label' => $questionIntituler,
                         'label_attr' => [
-                            'class' => 'test'.$testName.'-formLabel'
+                            'class' => 'col-sm-12 text-center'
                         ],
                         'choices' => array_flip($questionChoices),
                         'multiple' => false,
@@ -51,21 +51,18 @@ class I3PType extends AbstractType
                 if($sexe === "M"){
                     $form->add('Question0', HiddenType::class, [
                         'attr'  => [
-                            'value' => 0
+                            'value' => 0,
+                            'style' => 'display: hidden'
                         ]
                     ]);
                 }else{
                     $form->add('Question0', HiddenType::class, [
                         'attr'  => [
-                            'value' => 1
+                            'value' => 1,
+                            'style' => 'display: hidden'
                         ]
                     ]);
                 }
-                $form->add('Valider', SubmitType::class, [
-                    'row_attr'  => [
-                        'class' =>  'I3P_submit'
-                    ]
-                ]);
             }
         });
     }
