@@ -1,98 +1,108 @@
 {% extends 'main-base.html.twig' %}
 
 {% block title %}
-
+    {{ parent() }}API Pole-Emploi
 {% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+{% endblock %}
 {% block page_content %}
-    <div class="col-sm-12">
-        <form method="post" name="riasec-filters" id="riasec-filters">
-            <div class="d-flex flex-md-row justify-content-center align-items-center riasecFilters-Container">
-            <div>
-                <div class="radios-Container d-flex flex-md-row justify-content-center">
-                    <div>
-                        Majeur:
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMajeur" id="R" value="R">
-                        <label for="R">R</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMajeur" id="I" value="I">
-                        <label for="I">I</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMajeur" id="A" value="A">
-                        <label for="A">A</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMajeur" id="S" value="S">
-                        <label for="S">S</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMajeur" id="E" value="E">
-                        <label for="E">E</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMajeur" id="C" value="C">
-                        <label for="C">C</label>
-                    </div>
-                </div>
-                <div class="radios-Container d-flex flex-md-row justify-content-center">
-                    <div>
-                        Mineur:
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMineur" id="R" value="R">
-                        <label for="R">R</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMineur" id="I" value="I">
-                        <label for="I">I</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMineur" id="A" value="A">
-                        <label for="A">A</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMineur" id="S" value="S">
-                        <label for="S">S</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMineur" id="E" value="E">
-                        <label for="E">E</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="riasecMineur" id="C" value="C">
-                        <label for="C">C</label>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button>Ok</button>
-            </div>
+{#    <div class="col-sm-12">#}
+{#        <form method="post" name="riasec-filters" id="riasec-filters">#}
+{#            <div class="d-flex flex-md-row justify-content-center align-items-center riasecFilters-Container">#}
+{#            <div>#}
+{#                <div class="radios-Container d-flex flex-md-row justify-content-center">#}
+{#                    <div>#}
+{#                        Majeur:#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMajeur" id="R" value="R">#}
+{#                        <label for="R">R</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMajeur" id="I" value="I">#}
+{#                        <label for="I">I</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMajeur" id="A" value="A">#}
+{#                        <label for="A">A</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMajeur" id="S" value="S">#}
+{#                        <label for="S">S</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMajeur" id="E" value="E">#}
+{#                        <label for="E">E</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMajeur" id="C" value="C">#}
+{#                        <label for="C">C</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="radios-Container d-flex flex-md-row justify-content-center">#}
+{#                    <div>#}
+{#                        Mineur:#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMineur" id="R" value="R">#}
+{#                        <label for="R">R</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMineur" id="I" value="I">#}
+{#                        <label for="I">I</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMineur" id="A" value="A">#}
+{#                        <label for="A">A</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMineur" id="S" value="S">#}
+{#                        <label for="S">S</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMineur" id="E" value="E">#}
+{#                        <label for="E">E</label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <input type="radio" name="riasecMineur" id="C" value="C">#}
+{#                        <label for="C">C</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div>#}
+{#                <button>Ok</button>#}
+{#            </div>#}
+{#        </div>#}
+{#        </form>#}
+{#    </div>#}
+<div class="col-lg-12 margin-h-center" data-controller="poleEmploi">
+    <div class="main-card mb-3 card">
+        <div class="table-responsive col-sm-12 marginTop1 marginBot1 dataTables_wrapper dt-jqueryui">
+            <table class="display" id="metiers" data-pole-emploi="{{ metiers|json_encode }}"></table>
+{#            <table class="align-middle mb-0 table table-hover table-borderless display" id="metiersOld">#}
+{#                <thead>#}
+{#                    <tr>#}
+{#                        <th>Riasec</th>#}
+{#                        <th>Libelle</th>#}
+{#                        <th>BMO</th>#}
+{#                        <th>Offre d'emploi</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    {% for metier in metiers %}#}
+{#                        <tr class="pointer">#}
+{#                            <td>{{ metier.riasecMajeur }} - {{ metier.riasecMineur }}</td>#}
+{#                            <td data-code="{{ metier.code }}">{{ metier.code }} - {{ metier.libelle }}</td>#}
+{#                            <td></td>#}
+{#                            <td><button class="btn btn-pill btn-outline-warning btn-shadow btn-icon"><i class="fa fa-share-square btn-icon-wrapper"></i><a href="https://candidat.pole-emploi.fr/offres/recherche?motsCles={{ metier.code }}&offresPartenaires=true&rayon=10&tri=0" target="_blank">Offres d'emploi</a></button></td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
         </div>
-        </form>
     </div>
-    <table>
-        <tr>
-            <th>Code</th>
-            <th>Libelle</th>
-            <th>Domaine Pro</th>
-            <th>Grand Domaine Pro</th>
-            <th>Riasec Maj</th>
-            <th>Riasec Min</th>
-        </tr>
-        {% for metier in metiers %}
-            <tr>
-                <td>{{ metier.code }}</td>
-                <td>{{ metier.libelle }}</td>
-                <td>{{ metier.domainePro.libelle }}</td>
-                <td>{{ metier.domainePro.grandDomainePro.libelle }}</td>
-                <td>{{ metier.riasecMajeur }}</td>
-                <td>{{ metier.riasecMineur }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+</div>
 {% endblock %}
 

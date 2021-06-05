@@ -1,26 +1,27 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <div class="changePassForm marginTop3">
+{% extends 'main-base.html.twig' %}
+{% block page_content %}
+    <div class="col-sm-6 marginTop3 margin-h-center">
         {{ form_start(changePassForm) }}
-        <div class="changePassForm-errors">
+        <div class="col-sm-12">
             {{ form_errors(changePassForm.Password.first) }}
         </div>
-        <div class="changePassForm-item">
-            {{ form_label(changePassForm.Password.first) }}
-            {{ form_widget(changePassForm.Password.first) }}
+        <div class="col-xl-12 d-flex flex-xl-row marginTop2">
+            <div class="col-xl-3">
+                {{ form_label(changePassForm.Password.first) }}
+            </div>
+            <div class="col-xl-9">
+                {{ form_widget(changePassForm.Password.first) }}
+            </div>
         </div>
-        <div class="changePassForm-item">
-            {{ form_label(changePassForm.Password.second) }}
-            {{ form_widget(changePassForm.Password.second) }}
+        <div class="col-sm-12 d-flex flex-xl-row marginTop2">
+            <div class="col-sm-3">
+                {{ form_label(changePassForm.Password.second) }}
+            </div>
+            <div class="col-sm-9">
+                {{ form_widget(changePassForm.Password.second) }}
+            </div>
         </div>
-
+        <button class="btn btn-success btn-hover-shine btn-pill marginTop2">Sauvegarder</button>
+        {{ form_end(changePassForm) }}
     </div>
-    <button>Sauvegarder</button>
-    {{ form_end(changePassForm) }}
 {% endblock %}
-
-{% block title %}
-
-{% endblock %}
-

@@ -6,14 +6,14 @@
 {% block tab2_title %}Questions{% endblock %}
 {% block tab3_title %}Resultats{% endblock %}
 {% block tab1_content %}
-    <div class="col-sm-12 d-flex flex-md-row" data-controller="iframe">
-        <div class="col-sm-6 iframe-wrapper">
-            <h4>Aperçu</h4>
-            <iframe id="iframeApercu" width="100%" height="100%" src="{{ path('presentation_I3P') }}" frameborder="0"></iframe>
-        </div>
-        <div class="col-sm-6 iframe-wrapper">
+    <div class="col-sm-12 d-flex flex-md-column" data-controller="iframe">
+        <div class="col-sm-12 iframe-wrapper">
             <h4>Modifier</h4>
             <iframe id="iframeEdit" src="{{ path('presentation_edit', { id: test.presentation.id }) }}" frameborder="0">iframe2</iframe>
+        </div>
+        <div class="col-sm-12 iframe-wrapper marginTop3">
+            <h4>Aperçu</h4>
+            <iframe id="iframeApercu" width="100%" height="100%" src="{{ path('apercu_I3P') }}" frameborder="0"></iframe>
         </div>
     </div>
 {% endblock %}
@@ -32,10 +32,10 @@
                         </thead>
                         <tbody>
                         {% for question in test.questions %}
-                        <tr data-id="{{ question.id }}">
-                            <th scope="row">{{ question.numero }}</th>
-                            <td>{{ question.intituler }}</td>
-                        </tr>
+                            <tr data-id="{{ question.id }}">
+                                <th scope="row">{{ question.numero }}</th>
+                                <td>{{ question.intituler }}</td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>

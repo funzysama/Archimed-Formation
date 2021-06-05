@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Entity\IrmrResultat;
 use Symfony\Component\Process\Exception\LogicException;
 
 class IRMRCalculator
@@ -392,22 +393,110 @@ class IRMRCalculator
         rsort($riasec);
         $D = ($riasec[0]-(($riasec[1]+$riasec[2])/2))+($riasec[2]-(($riasec[3]+$riasec[4]) / 2));
 
-        $resultat = [
-            'Réaliste' => $R,
-            'Investigateur' => $I,
-            'Artistique' => $A,
-            'Social' => $S,
-            'Entreprenant' => $E,
-            'Conventionnel' => $C,
-            '1'  => $etalR,
-            '2'  => $etalI,
-            '3'  => $etalA,
-            '4'  => $etalS,
-            '5'  => $etalE,
-            '6'  => $etalC,
-            'différenciation' => $D,
-            'orderedRiasec' => $riasec
-        ];
-        return $resultat;
+        $IrmrResultat = new IrmrResultat();
+        $IrmrResultat->setUtilisateur($this->user);
+
+        $IrmrResultat->setDifferenciation($D);
+
+        $IrmrResultat->setRealiste($R);
+        $IrmrResultat->setInvestigateur($I);
+        $IrmrResultat->setArtiste($A);
+        $IrmrResultat->setSocial($S);
+        $IrmrResultat->setEntrepreneur($E);
+        $IrmrResultat->setConventionnel($C);
+
+        $IrmrResultat->setRealisteEtalonne($etalR);
+        $IrmrResultat->setInvestigateurEtalonne($etalI);
+        $IrmrResultat->setArtisteEtalonne($etalA);
+        $IrmrResultat->setSocialEtalonne($etalS);
+        $IrmrResultat->setEntrepreneurEtalonne($etalE);
+        $IrmrResultat->setConventionnelEtalonne($etalC);
+
+        $IrmrResultat->setRealistePourcent($R*(100/24));
+        $IrmrResultat->setInvestigateurPourcent($I*(100/24));
+        $IrmrResultat->setArtistePourcent($A*(100/24));
+        $IrmrResultat->setSocialPourcent($S*(100/24));
+        $IrmrResultat->setEntrepreneurPourcent($E*(100/24));
+        $IrmrResultat->setConventionnelPourcent($C*(100/24));
+        $baseValueArray = [];
+        $baseValueArray["Realiste"] =  $R;
+        $baseValueArray["Investigateur"] =  $I;
+        $baseValueArray["Artiste"] =  $A;
+        $baseValueArray["Social"] =  $S;
+        $baseValueArray["Entrepreneur"] =  $E;
+        $baseValueArray["Conventionnel"] =  $C;
+
+        $twoBest = array_filter($baseValueArray, function ($value) use ($baseValueArray) {
+            if($value == $this->twoHighest($baseValueArray)){
+                return $value;
+            }
+            if($value == max($baseValueArray)){
+                return $value;
+            }
+            return null;
+        });
+
+        $twoLowest = array_filter($baseValueArray, function ($value) use ($baseValueArray) {
+            if($value == min($baseValueArray)){
+                return $value;
+            }
+            if($value == $this->twoLowest($baseValueArray)){
+                return $value;
+            }
+            if($value == min($baseValueArray) || $value == 0){
+                $data = [];
+                dump($data);
+                array_push($data, $value);
+                return $data;
+            }
+            return null;
+        });
+
+        arsort($twoBest);
+        $majMin = array_flip($twoBest);
+        dump($twoLowest);
+        arsort($twoLowest);
+        $inferieurs = array_flip($twoLowest);
+        if(in_array(0, $baseValueArray)){
+            $flippedArray = array_flip($baseValueArray);
+            ksort($flippedArray);
+            $firstLowest = array_shift($flippedArray);
+        }else{
+            $firstLowest = $inferieurs[min($baseValueArray)];
+        }
+        $secondLowest = $inferieurs[$this->twoLowest($baseValueArray)];
+        $firstBest = $majMin[max($baseValueArray)];
+        $secondBest = $majMin[$this->twoHighest($baseValueArray)];
+        $IrmrResultat->setMajeur($firstBest);
+        $IrmrResultat->setMineur($secondBest);
+        $IrmrResultat->setInferieur1($firstLowest);
+        $IrmrResultat->setInferieur2($secondLowest);
+
+        return $IrmrResultat;
     }
+
+    function twoHighest(array $arr) {
+
+        sort($arr);
+
+        return $arr[sizeof($arr)-2];
+    }
+
+    function twoLowest(array $arr) {
+
+        rsort($arr);
+        return $arr[sizeof($arr)-2];
+    }
+
+    function change_key( $array, $old_key, $new_key ) {
+
+        if( ! array_key_exists( $old_key, $array ) )
+            return $array;
+
+        $keys = array_keys( $array );
+        $keys[ array_search( $old_key, $keys ) ] = $new_key;
+
+        return array_combine( $keys, $array );
+    }
+
 }

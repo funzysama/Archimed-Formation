@@ -3,9 +3,16 @@
 {% block title %}New Ressource{% endblock %}
 
 {% block page_content %}
-    <h1>Create new Ressource</h1>
-
-    {{ include('ressource/_form.html.twig') }}
-
-    <a href="{{ path('ressource_index') }}">back to list</a>
+    <div class="main-card card col-sm-6 margin-h-center">
+        <div class="card-header">Créer une ressource</div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('ressource_index') }}"><button class="btn btn-link">Annuler</button></a>
+            <button class="btn border-0 btn-transition btn-shadow btn-hover-shine btn-outline-dark">Créer ressource</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

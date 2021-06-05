@@ -84,4 +84,17 @@ class I3PController extends AbstractController
             'test'      => $test
         ]);
     }
+    /**
+     * @return Response
+     * @Route("/i3P/apercu", name="apercu_I3P")
+     */
+    public function apercui3p(TestRepository $repository): Response
+    {
+        $test = $repository->findOneBy(['Nom' => 'I3P']);
+
+        return $this->render('test/aperçu.html.twig', [
+            'testName'  => 'I3P',
+            'test'      => $test
+        ]);
+    }
 }

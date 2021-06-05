@@ -11,6 +11,7 @@ use App\Service\IRMRCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class IRMRController extends AbstractController
 {
@@ -36,22 +37,21 @@ class IRMRController extends AbstractController
             $data = $form->getData();
             $calculator = new IRMRCalculator($data, $user);
             $resultat = $calculator->calculate();
-            $result_chunk = array_chunk($resultat, 6, true);
-            $labels = array_keys($result_chunk[0]);
-            $data = array_values($result_chunk[0]);
-            $etalData = array_values($result_chunk[1]);
-            $diff = array_values($result_chunk[2]);
-
+            $orderedPourcent = [];
+            $orderedPourcent["Realiste"] = $resultat->getRealistePourcent();
+            $orderedPourcent["Investigateur"] = $resultat->getInvestigateurPourcent();
+            $orderedPourcent["Artiste"] = $resultat->getArtistePourcent();
+            $orderedPourcent["Social"] = $resultat->getSocialPourcent();
+            $orderedPourcent["Entrepreneur"] = $resultat->getEntrepreneurPourcent();
+            $orderedPourcent["Conventionnel"] = $resultat->getConventionnelPourcent();
+            arsort($orderedPourcent);
             return $this->forward('App\Controller\Tests\IRMRController::resultatIRMR', [
-                'resultat' => $resultat,
-                'labels' => $labels,
-                'data' => $data,
-                'etalData' => $etalData,
-                'diff'  => $diff,
+                'resultat'              => $resultat,
+                'orderedPourcent'       => $orderedPourcent
             ]);
         }
-        return $this->render('test/IRMR/index.html.twig', [
-            'testName' => 'Riasec Flash 2',
+        return $this->render('test/IRMR/test.html.twig', [
+            'testName' => 'R.i.a.s.e.c.',
             'testForm' => $form->createView()
         ]);
     }
@@ -60,14 +60,40 @@ class IRMRController extends AbstractController
      * @param $resultat
      * @return Response
      */
-    public function resultatIRMR($resultat, $labels, $data, $etalData, $diff): Response
+    public function resultatIRMR($resultat, $orderedPourcent): Response
     {
         return $this->render('test/IRMR/resultat.html.twig', [
-            'resultat' => $resultat,
-            'labels' => $labels,
-            'data' => $data,
-            'etalData' => $etalData,
-            'diff'  => $diff,
+            'resultat'              => $resultat,
+            'orderedPourcent'       => $orderedPourcent
         ]);
     }
+
+    /**
+     * @return Response
+     * @Route("/Riasec", name="presentation_Riasec")
+     */
+    public function presentationRiasec(TestRepository $repository): Response
+    {
+        $test = $repository->findOneBy(['Nom' => 'IRMR']);
+
+        return $this->render('test/IRMR/index.html.twig', [
+            'testName'  => 'R.i.a.s.e.c.',
+            'test'      => $test
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @Route("/Riasec/apercu", name="apercu_Riasec")
+     */
+    public function apercuRiasec(TestRepository $repository): Response
+    {
+        $test = $repository->findOneBy(['Nom' => 'IRMR']);
+
+        return $this->render('test/aperçu.html.twig', [
+            'testName'  => 'R.i.a.s.e.c.',
+            'test'      => $test
+        ]);
+    }
+
 }

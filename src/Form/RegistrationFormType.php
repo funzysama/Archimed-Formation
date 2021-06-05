@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,8 +51,9 @@ class RegistrationFormType extends AbstractType
                     'Mme' => 'F',
                     ],
                 'row_attr' => [
-                    'class' => 'd-flex'
+                    'class' => 'd-flex flex-md-row justify-content-around sexeContainer'
                 ],
+                'label'     => 'Sexe: ',
                 'expanded' => true,
                 'multiple' => false
             ])
@@ -72,6 +74,13 @@ class RegistrationFormType extends AbstractType
                     'class' => 'd-flex col-sm-12'
                 ],
             ])
+            ->add('dateDeNaissance', DateType::class,[
+                'label'     => 'Date de naissance: ',
+                'widget' => 'single_text',
+                'html5' => false,
+                'row_attr' => ['class' => 'dateDeNaissance'],
+                'attr' => ['class' => 'js-datepicker'],
+                ])
             ->add('email', EmailType::class, [
                 'label' => 'Email :',
                 'attr' => [
@@ -138,16 +147,6 @@ class RegistrationFormType extends AbstractType
                 'multiple'  => true,
             ])
         ;
-        $formModifier = function (FormInterface $form, Utilisateur $user = null) {
-            $role = null === $user ? [] : $user->getRoles();
-            dump($role);
-        };
-
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($formModifier) {
-            $user = $event->getForm()->getData();
-            $formModifier($event->getForm()->getParent(), $user);
-        });
-        $builder->addEventSubscriber(new renderSelectFieldSubscriber());
     }
 
 

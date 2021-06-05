@@ -90,6 +90,37 @@ class Utilisateur implements UserInterface
      */
     private $Clients;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $DateDeNaissance;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Module::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Module;
+
+    /**
+     * @ORM\OneToMany(targetEntity=IrmrResultat::class, mappedBy="Utilisateur", orphanRemoval=true)
+     */
+    private $IrmrResultats;
+
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $Qualification;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $Situation;
+
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $TrancheDage;
+
 
     public function __construct()
     {
@@ -142,6 +173,13 @@ class Utilisateur implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function hasRoles(String $role){
+        if(in_array($role, $this->roles)){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -355,6 +393,96 @@ class Utilisateur implements UserInterface
                 $client->setConsultant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateDeNaissance(): ?\DateTimeInterface
+    {
+        return $this->DateDeNaissance;
+    }
+
+    public function setDateDeNaissance(?\DateTimeInterface $DateDeNaissance): self
+    {
+        $this->DateDeNaissance = $DateDeNaissance;
+
+        return $this;
+    }
+
+    public function getModule(): ?Module
+    {
+        return $this->Module;
+    }
+
+    public function setModule(?Module $Module): self
+    {
+        $this->Module = $Module;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IrmrResultat[]
+     */
+    public function getIrmrResultats(): Collection
+    {
+        return $this->IrmrResultats;
+    }
+
+    public function addIrmrResultat(IrmrResultat $IrmrResultat): self
+    {
+        if (!$this->IrmrResultats->contains($IrmrResultat)) {
+            $this->IrmrResultats[] = $IrmrResultat;
+            $IrmrResultat->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIrmrResultat(IrmrResultat $IrmrResultat): self
+    {
+        if ($this->IrmrResultats->removeElement($IrmrResultat)) {
+            // set the owning side to null (unless already changed)
+            if ($IrmrResultat->getUtilisateur() === $this) {
+                $IrmrResultat->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getQualification(): ?string
+    {
+        return $this->Qualification;
+    }
+
+    public function setQualification(?string $Qualification): self
+    {
+        $this->Qualification = $Qualification;
+
+        return $this;
+    }
+
+    public function getSituation(): ?string
+    {
+        return $this->Situation;
+    }
+
+    public function setSituation(?string $Situation): self
+    {
+        $this->Situation = $Situation;
+
+        return $this;
+    }
+
+    public function getTrancheDage(): ?string
+    {
+        return $this->TrancheDage;
+    }
+
+    public function setTrancheDage(?string $TrancheDage): self
+    {
+        $this->TrancheDage = $TrancheDage;
 
         return $this;
     }

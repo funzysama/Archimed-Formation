@@ -1,48 +1,81 @@
 {% extends 'main-base.html.twig' %}
 
-
+{% block stylesheets %}
+    {{ parent() }}
+<style>
+</style>
+{% endblock %}
 {% block page_content %}
-    <div class="marginTop3">
-        <a href="{{ path('main_home') }}">Retour au menu</a>
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Graphique</div>
+            <div class="card-body">
+                <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+            </div>
+        </div>
     </div>
-    <h3 class="marginTop3">RIASEC Flash 2</h3>
-    <h4>TODO: Mise en forme etendu.</h4>
-    <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
-    <h2>Indice de différenciation de votre profile: {{ diff[0] }}</h2>
-    <div class="marginTop2 riasecResult-table">
-        <table style="table-layout: fixed;">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Réaliste</th>
-                    <th>Investigateur</th>
-                    <th>Artiste</th>
-                    <th>Social</th>
-                    <th>Entrepreneur</th>
-                    <th>Conventionnel</th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Score brute</td>
-                <td>{{ data[0] }}</td>
-                <td>{{ data[1] }}</td>
-                <td>{{ data[2] }}</td>
-                <td>{{ data[3] }}</td>
-                <td>{{ data[4] }}</td>
-                <td>{{ data[5] }}</td>
-            </tr>
-            <tr>
-                <td>Score étalonné</td>
-                <td>{{ etalData[0] }}</td>
-                <td>{{ etalData[1] }}</td>
-                <td>{{ etalData[2] }}</td>
-                <td>{{ etalData[3] }}</td>
-                <td>{{ etalData[4] }}</td>
-                <td>{{ etalData[5] }}</td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Resultat etendu</div>
+            <div class="card-body">
+                <div class="d-flex flex-sm-row justify-content-around marginTop2" data-controller="riasec">
+                    {% for key, value in orderedPourcent %}
+                        <div>
+                            <div class="{{ key }} Image" data-riasec="{{ value|json_encode }}">
+                                <figure></figure>
+                            </div>
+                            ( {{ value }}% )
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="marginTop2">
+                    <h6>Vos 2 pôles les plus marqués :</h6>
+                    <h6>RIASEC majeur : <strong>{{ resultat.majeur}}</strong></h6>
+                    <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
+                    <h6>Vos 2 pôles les moins marqués :</h6>
+                    <h5><b>{{ resultat.inferieur1 }}</b></h5>
+                    <h5><b>{{ resultat.inferieur2 }}</b></h5>
+                    <h6>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></h6>
+                    <h6>Valeur de consistance de votre profil : (à ajouter)</h6>
+                </div>
+                <div class="marginTop2">
+                    <table class="mb-0 table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Réaliste</th>
+                        <th>Investigateur</th>
+                        <th>Artiste</th>
+                        <th>Social</th>
+                        <th>Entrepreneur</th>
+                        <th>Conventionnel</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Score brute</td>
+                        <td>{{ resultat.realiste }}</td>
+                        <td>{{ resultat.investigateur }}</td>
+                        <td>{{ resultat.artiste }}</td>
+                        <td>{{ resultat.social }}</td>
+                        <td>{{ resultat.entrepreneur }}</td>
+                        <td>{{ resultat.conventionnel }}</td>
+                    </tr>
+                    <tr>
+                        <td>Score étalonné</td>
+                        <td>{{ resultat.realisteEtalonne }}</td>
+                        <td>{{ resultat.investigateurEtalonne }}</td>
+                        <td>{{ resultat.artisteEtalonne }}</td>
+                        <td>{{ resultat.socialEtalonne }}</td>
+                        <td>{{ resultat.entrepreneurEtalonne }}</td>
+                        <td>{{ resultat.conventionnelEtalonne }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -50,10 +83,10 @@
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         const data = {
-            labels: {{ labels|json_encode|raw }},
+            labels: ['Réaliste', 'Investigateur', 'Artiste', 'Social', 'Entrepreneur', 'Conventionnel'],
             datasets: [{
                 label: 'Resultats',
-                data: {{ data|json_encode|raw }},
+                data: ['{{ resultat.realiste }}', '{{ resultat.investigateur }}', '{{ resultat.artiste }}', '{{ resultat.social }}', '{{ resultat.entrepreneur }}', '{{ resultat.conventionnel }}' ],
                 backgroundColor: [
                     'rgba(255, 159, 64, 0.2)'
                 ],
@@ -64,12 +97,12 @@
             },
                 {
                 label: 'Resultats étalonnés',
-                data: {{ etalData|json_encode|raw }},
+                data: ['{{ resultat.realisteEtalonne }}', '{{ resultat.investigateurEtalonne }}', '{{ resultat.artisteEtalonne }}', '{{ resultat.socialEtalonne }}', '{{ resultat.entrepreneurEtalonne }}', '{{ resultat.conventionnelEtalonne }}' ],
                     backgroundColor: [
-                        'rgba(64,112,255,0.2)'
+                        'rgba(64, 112, 255, 0.2)'
                     ],
                     borderColor: [
-                        'rgba(64,112,255, 1)'
+                        'rgba(64, 112, 255, 1)'
                     ],
                     borderWidth: 1
             }]

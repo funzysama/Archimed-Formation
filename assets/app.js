@@ -10,17 +10,16 @@ import 'metismenu';
 
 import './styles/app.css';
 import './styles/main.css';
+import './styles/main.scss';
 import './styles/gestion-i3p.css';
 import './styles/index.css';
 import './styles/profile.css';
 import './styles/register.css';
 import './styles/test-I3P.css';
 import './styles/test-IRMR.css';
+import './styles/test-IRMR.scss';
 import './assets/base.scss';
 
-tippy('slider-range', {
-    content: "ta mere",
-});
 let visibilityContainer = jQuery('#visibility-container');
 if(Object.entries(visibilityContainer).length !== 0){
     let roleSelector = jQuery('#registration_form_role');
@@ -59,5 +58,10 @@ if(Object.entries(riasecFilters).length !== 0){
 let iframeContainer = jQuery('.iframe-wrapper');
 iframeContainer.css('height',$('.height-container').innerHeight());
 
-let presentationEditor = jQuery('#presentation_Presentation');
-if(Object.entries(presentationEditor).length !== 0){}
+let passChange = jQuery('#pass-change');
+if(Object.entries(passChange).length !== 0){
+    passChange.on('click', (e) => {
+        let url = new URL('http://funzystar.ddns.net/security/changePass');
+        jQuery('#iframe-changePass').attr('src', url);
+    })
+}

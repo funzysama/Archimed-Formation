@@ -11,25 +11,26 @@
                         </div>
                         <div class="widget-numbers">I3P</div>
                         <div class="widget-subheading">
-                            <strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel
+                            <strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel (Typologie de Jung)
                         </div>
                     </div></a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="{{ path('test', {name: "IRMR"}) }}">
+                    <a href="{{ path('presentation_Riasec') }}">
                     <div class="widget-chart widget-chart-hover">
                         <div class="icon-wrapper rounded-circle">
                             <div class="icon-wrapper-bg bg-info"></div>
                             <i class="lnr-graduation-hat text-info"></i>
                         </div>
-                        <div class="widget-numbers">Riasec Flash</div>
+                        <div class="widget-numbers">R.I.A.S.E.C.</div>
                         <div class="widget-subheading">
-                            Petite description
+                            Interet personnel et professionnel (Typologie de Holland)
                         </div>
                     </div>
                     </a>
                 </div>
                 <div class="col-sm-6">
+                    <a href="{{ path('presentation_savORIENT') }}">
                     <div class="widget-chart widget-chart-hover">
                         <div class="icon-wrapper rounded-circle">
                             <div class="icon-wrapper-bg bg-danger"></div>
@@ -37,26 +38,27 @@
                         </div>
                         <div class="widget-numbers">Positioning Skills</div>
                         <div class="widget-subheading">
-                            Petite description
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <a href="{{ path('main_api_pole_emploi') }}">
-                    <div class="widget-chart widget-chart-hover">
-                        <div class="icon-wrapper rounded-circle">
-                            <div class="pole-emploi-icon"></div>
-                            <div class="icon-wrapper-bg bg-warning"></div>
-                        </div>
-                        <div class="widget-numbers">API Pole-Emploi</div>
-                        <div class="widget-subheading">
-                            Petite description
+                            capacité à s'orienter
                         </div>
                     </div>
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="{{ path('file_manager', {conf: 'default'}) }}">
+                    <a href="{{ path('api_pole_emploi') }}">
+                    <div class="widget-chart widget-chart-hover">
+                        <div class="icon-wrapper rounded-circle">
+                            <div class="pole-emploi-icon"></div>
+                            <div class="icon-wrapper-bg bg-warning"></div>
+                        </div>
+                        <div class="widget-numbers">Matching Metiers/R.I.A.S.E.C.</div>
+                        <div class="widget-subheading">
+                            liaison entre r.i.a.s.e.c. et fiche ROME Pole-Emploi
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{{ path('file_manager', {conf: folderAccess}) }}">
                     <div class="widget-chart widget-chart-hover">
                         <div class="icon-wrapper rounded-circle">
                             <div class="icon-wrapper-bg bg-secondary"></div>
@@ -64,7 +66,6 @@
                         </div>
                         <div class="widget-numbers">Espace Documents</div>
                         <div class="widget-subheading">
-                            Petite description
                         </div>
                     </div>
                     </a>
@@ -78,7 +79,7 @@
                         </div>
                         <div class="widget-numbers">Espace ressources</div>
                         <div class="widget-subheading">
-                            Petite description
+                            Liens utils
                         </div>
                     </div>
                     </a>

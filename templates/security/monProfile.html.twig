@@ -1,7 +1,7 @@
 {% extends 'main-base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} Mon Profile
+    {{ parent() }} Mon Profil
 {% endblock %}
 
 {% block stylesheets %}
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="text-center d-block card-footer">
-                <button class="mr-2 text-danger btn btn-link btn-sm">Modifier mot de passe</button>
+                <a href="{{ path('security_changePass') }}"><button id="pass-change" class="mr-2 text-danger btn btn-link btn-sm">Modifier mot de passe</button></a>
                 <button class="btn-shadow-primary btn btn-primary btn-lg">Changer d'Email</button>
             </div>
         </div>

@@ -13,6 +13,9 @@ class TestController extends AbstractController
      */
     public function index($name): Response
     {
+        if($name === "Riasec"){
+            $name = 'IRMR';
+        }
         $controller = 'App\Controller\Tests\\'.$name.'Controller';
 
         if(class_exists($controller)){

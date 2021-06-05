@@ -75,8 +75,14 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
                 'options' => ['branch_class' => 'treeview']
             ])->setLabelAttribute('icon', 'lnr lnr-cog');
             $menu->getChild('listTests')->addChild('gestionI3P', [
-                'route' => 'admin_i3Pgestion',
+                'route' => 'admin_gestion_i3p',
                 'label' => 'Gestion I3P',
+                'childOptions' => $event->getChildOptions(),
+            ])
+                ->setLabelAttribute('icon', 'lnr lnr-cog');
+            $menu->getChild('listTests')->addChild('gestionRiasec', [
+                'route' => 'admin_gestion_riasec',
+                'label' => 'Gestion Riasec',
                 'childOptions' => $event->getChildOptions(),
             ])
                 ->setLabelAttribute('icon', 'lnr lnr-cog');

@@ -27,7 +27,21 @@ class MainController extends AbstractController
      */
     public function adminIndex(): Response
     {
-        return $this->render('main/index.html.twig');
+        $user = $this->getUser();
+        $module = $user->getModule();
+        dump($module);
+        if($module->getId() > 0 && $module->getId() <= 7){
+            $folderAccess = "bc";
+        }else{
+            $folderAccess = "vae";
+        }
+        if($user->hasRoles('ROLE_ADMIN')){
+            $folderAccess = "main";
+            dump($folderAccess);
+        }
+        return $this->render('main/index.html.twig', [
+            'folderAccess' => $folderAccess
+        ]);
     }
 
     /**
@@ -68,21 +82,6 @@ class MainController extends AbstractController
 
         return $this->render('main/listRessources.html.twig', [
             'ressources' => $ressources
-        ]);
-    }
-
-    /**
-     * @Route("/pole-emploi", name="api_pole_emploi")
-     */
-    public function apiPoleEmploi(MetierPERepository $repository, Request $request): Response
-    {
-        $riasecMaj = $request->get("riasecMajeur");
-        $riasecMin = $request->get("riasecMineur");
-
-        dump($riasecMaj, $riasecMin);
-        $metiers = $repository->findByRiasec($riasecMaj, $riasecMin);
-        return $this->render('main/api-pole-emploi.html.twig', [
-            'metiers' => $metiers
         ]);
     }
 

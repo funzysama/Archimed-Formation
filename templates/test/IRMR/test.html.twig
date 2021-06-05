@@ -1,0 +1,21 @@
+{% extends 'main-base.html.twig' %}
+{% block page_title%}Test {{ testName }}{% endblock %}
+{% block page_subtitle %}Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}{% endblock %}
+{% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('res/js/IRMR-rendering.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block page_content %}
+    {{ form_start(testForm, {'attr': {'onsubmit': 'return preSubmitCheck(event)', 'id': 'riasecForm'}}) }}
+    {{ form_widget(testForm) }}
+    {{ form_end(testForm) }}
+{% endblock %}
+{% block bottom_javascript %}
+    <script>
+        onInit()
+    </script>
+{% endblock %}

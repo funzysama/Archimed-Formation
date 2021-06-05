@@ -30,3 +30,12 @@
     border-bottom: 1px solid rgba(0,0,0, 0.15);
 }
 
+.datePicker-dateDeNaissance > div{
+    width: 50%;
+}
+.sexeContainer > div {
+    width: 50%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}

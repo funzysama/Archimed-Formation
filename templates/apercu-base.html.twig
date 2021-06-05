@@ -1,0 +1,59 @@
+<!DOCTYPE html{% block html_start %}{% endblock %}>
+<html lang="{{ app.request.locale }}">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {% endblock %}
+    <title>{% block title %}Archimed | {% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('res/js/site_main.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('res/css/footable.standalone.css') }}">
+        <link rel="stylesheet" href="{{ asset('res/css/FooTable.FontAwesome.css') }}">
+
+    {% endblock %}
+    {{ encore_entry_script_tags('app') }}
+    <style>
+        html, body {
+            height: 100% !important;
+        }
+    </style>
+</head>
+{#
+Apply one of the following classes for the skin:
+skin-blue, skin-black, skin-purple, skin-yellow, skin-red, skin-green
+
+Apply one or more of the following classes for the layout options:
+fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
+#}
+<body>
+<div class="wrapper-apercu">
+            {% block page_content_before %}{% endblock %}
+            <section class="{% block page_content_class %}content{% endblock %}">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% block page_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
+                        {% block page_content %}{% endblock %}
+                        {% block page_content_end %}{% endblock %}
+                    </div>
+                </div>
+
+            </section>
+            {% block page_content_after %}{% endblock %}
+</div>
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+    <script src="{{ asset('bundles/adminlte/adminlte.js') }}"></script>
+    <script src="{{ asset('res/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('res/js/footable.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
+{% block bottom_javascript %}{% endblock %}
+</body>
+</html>

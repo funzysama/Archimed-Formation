@@ -7,11 +7,9 @@ body{
     padding: 0;
     margin: 0;
     width: 100%;
-    /*box-sizing: border-box;*/
     text-align: center;
     font-family: Verdana, Lucida, sans-serif;
     color: #460B01;
-    /*background: url(/res/img/AM_BkGrnd_Brown01.png) 0 0 repeat-x #93371D;*/
 }
 @media screen and (min-width: 1200px) {
     body{
@@ -69,7 +67,6 @@ body{
     height: calc(99.7vh - 50px);
     padding: 0;
     text-align: left;
-    font-size: 1.0em;
     background: #FFFCFB;
 }
 
@@ -346,46 +343,46 @@ main {
 
 /* ----< Tableau des Utilisateurs >---- */
 
-.userTable th {
-    display: table-cell;
-    text-align: center;
+/*.userTable th {*/
+/*    display: table-cell;*/
+/*    text-align: center;*/
 
-}
+/*}*/
 
-.userTable td {
-    display: table-cell;
-}
+/*.userTable td {*/
+/*    display: table-cell;*/
+/*}*/
 
-.MainTable {
-    margin: 2em auto 0 auto;
-    width: 700px;
-    border-collapse: collapse;
-    border: 1px solid #E9572C;
-}
+/*.MainTable {*/
+/*    margin: 2em auto 0 auto;*/
+/*    width: 700px;*/
+/*    border-collapse: collapse;*/
+/*    border: 1px solid #E9572C;*/
+/*}*/
 
-.tabDelTh, .tabDel, .tabStatusTh, .tabStatus{
-    width: 50px;
-}
+/*.tabDelTh, .tabDel, .tabStatusTh, .tabStatus{*/
+/*    width: 50px;*/
+/*}*/
 
-.tabPrenom, .tabPrenomTh{
-    width: 140px;
-}
+/*.tabPrenom, .tabPrenomTh{*/
+/*    width: 140px;*/
+/*}*/
 
-.tabNom, .tabNomTh{
-    width: 180px;
-}
+/*.tabNom, .tabNomTh{*/
+/*    width: 180px;*/
+/*}*/
 
-.tabEmail, .tabEmailTh{
-    width: 190px;
-}
+/*.tabEmail, .tabEmailTh{*/
+/*    width: 190px;*/
+/*}*/
 
-.tabAgence, .tabAgenceTh{
-    width: 65px;
-}
+/*.tabAgence, .tabAgenceTh{*/
+/*    width: 65px;*/
+/*}*/
 
-.tabRoles, .tabRolesTh{
-    width: 60px;
-}
+/*.tabRoles, .tabRolesTh{*/
+/*    width: 60px;*/
+/*}*/
 
 
 /* ----< Balises Globales >---- */
@@ -421,21 +418,21 @@ input {
     font-family: Verdana,sans-serif;
 }
 
-th {
-    height: 2.4em;
-    font-size: 1.15em;
-    color: #ff0000;
-    border-bottom: 1px solid #E9572C;
-}
+/*th {*/
+/*    height: 2.4em;*/
+/*    font-size: 1.15em;*/
+/*    color: #ff0000;*/
+/*    border-bottom: 1px solid #E9572C;*/
+/*}*/
 
-td {
-    height: 2em;
-    border-top: 1px solid #F9C2B2;
-}
+/*td {*/
+/*    height: 2em;*/
+/*    border-top: 1px solid #F9C2B2;*/
+/*}*/
 
-tr:hover{
-    background-color: #ffede6;
-}
+/*tr:hover{*/
+/*    background-color: #ffede6;*/
+/*}*/
 
 
 /* ----< Section Footer >---- */

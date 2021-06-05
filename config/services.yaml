@@ -4,12 +4,24 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    ressource_image_directory: '%kernel.project_dir%/public/uploads/ressources/images'
     artgris_file_manager:
         web_dir: "../public/uploads"
         conf:
-            default:
-                dir: '../public/uploads'
+            main:
+                dir: "../public/uploads/"
                 tree: false
+            bc:
+                dir: '../public/uploads/Bilan de Competences'
+                tree: false
+            vae:
+                dir: '../public/uploads/VAE'
+                tree: false
+            private:
+                dir: "../public/private/"
+                upload:
+                    max_width: 10
+
 
 services:
     # default configuration for services in *this* file

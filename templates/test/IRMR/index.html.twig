@@ -1,21 +1,16 @@
 {% extends 'main-base.html.twig' %}
-{% block page_title%}Test {{ testName }}{% endblock %}
-{% block page_subtitle %}Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}{% endblock %}
 {% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('res/js/IRMR-rendering.js') }}"></script>
-{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}
+
+{% block page_title%}{{ testName }}{% endblock %}
+
+{% block page_subtitle %}riasec{% endblock %}
+
 {% block page_content %}
-    {{ form_start(testForm, {'attr': {'onsubmit': 'return preSubmitCheck(event)', 'id': 'riasecForm'}}) }}
-    {{ form_widget(testForm) }}
-    {{ form_end(testForm) }}
-{% endblock %}
-{% block bottom_javascript %}
-<script>
-    onInit()
-</script>
+    <div class="col-sm-12 d-flex justify-content-center">
+        <div class="col-sm-6 d-flex flex-sm-column marginTop3">
+            <h4>{{ test.presentation.titre }}</h4>
+            {{ test.presentation.presentation|raw }}
+            <a href="{{ path('test', {name: 'Riasec'}) }}"><button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-danger btn-lg">Commencer le test</button></a>
+        </div>
+    </div>
 {% endblock %}

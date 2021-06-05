@@ -22,13 +22,25 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/gestion/i3p", name="i3Pgestion")
+     * @Route("/gestion/i3p", name="gestion_i3p")
      */
     public function gestionI3P(): Response
     {
         $test = $this->testRepository->findOneBy(['Nom' => 'I3P']);
 
         return $this->render('/admin/gestioni3p.html.twig', [
+            'test' => $test,
+        ]);
+    }
+
+    /**
+     * @Route("/gestion/Riasec", name="gestion_riasec")
+     */
+    public function gestionRiasec(): Response
+    {
+        $test = $this->testRepository->findOneBy(['Nom' => 'IRMR']);
+
+        return $this->render('/admin/gestionRiasec.html.twig', [
             'test' => $test,
         ]);
     }

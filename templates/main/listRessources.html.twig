@@ -11,13 +11,37 @@
     Gestion des Ressources
 {% endblock %}
 {% block page_content %}
-    <ul>
-        {% for ressource in ressources %}
-            <li>
-                <p>{{ ressource.nom }} : <a href="{{ ressource.url }}">{{ ressource.url }}</a></p>
-                <p>{{ ressource.description }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="col-lg-6 margin-h-center">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Liste des ressources</div>
+            </div>
+            <div class="table-responsive">
+                <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                    <tbody>
+                    {% for ressource in ressources %}
+                            <tr>
+                                <td class="widget-content-left text-left">
+                                    <a href="{{ ressource.url }}" target="_blank">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper text-left">
+                                                <div class="widget-content-left mr-3">
+                                                    <img src="{{ asset('uploads/ressources/images/'~ressource.image ) }}" alt="" width="42">
+                                                </div>
+                                                <div class="widget-content-left">
+                                                    <div class="widget-heading">{{ ressource.nom }}</div>
+                                                    <div class="widget-subheading">{{ ressource.description }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

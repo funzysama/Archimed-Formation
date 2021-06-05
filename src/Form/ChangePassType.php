@@ -19,17 +19,6 @@ class ChangePassType
         $builder
             ->add('Password', RepeatedType::class, [
                 'type'              => PasswordType::class,
-                'options'           => [
-                    'row_attr'          => [
-                        'class'         => 'changePassForm-item'
-                    ],
-                    'label_attr'    => [
-                        'class' => 'changePassForm-label'
-                    ],
-                                    'attr'          => [
-                        'class' => 'changePassForm-input'
-                    ]
-                ],
                 'invalid_message'   => 'Les deux mot de passe doivent êtres identiques.',
                 'required'          => true,
                 'first_options'     =>  [
