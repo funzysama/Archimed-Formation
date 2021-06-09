@@ -41,6 +41,11 @@ class Test
      */
     private $presentation;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomVisuel;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -116,6 +121,18 @@ class Test
         }
 
         $this->presentation = $presentation;
+
+        return $this;
+    }
+
+    public function getNomVisuel(): ?string
+    {
+        return $this->nomVisuel;
+    }
+
+    public function setNomVisuel(string $nomVisuel): self
+    {
+        $this->nomVisuel = $nomVisuel;
 
         return $this;
     }

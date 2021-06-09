@@ -2,9 +2,12 @@
 
 import './bootstrap';
 import $ from "jquery";
+import jQuery from "jquery";
 import tippy from "tippy.js";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'metismenu';
+import DataTable from "datatables.net";
+
 
 // Stylesheets
 
@@ -19,6 +22,7 @@ import './styles/test-I3P.css';
 import './styles/test-IRMR.css';
 import './styles/test-IRMR.scss';
 import './assets/base.scss';
+
 
 let visibilityContainer = jQuery('#visibility-container');
 if(Object.entries(visibilityContainer).length !== 0){

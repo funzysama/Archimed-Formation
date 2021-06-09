@@ -1,0 +1,90 @@
+{% extends 'main-base.html.twig' %}
+
+{% block title %}Hello PoleEmploiController!{% endblock %}
+
+{% block page_content %}
+    <div class="col-sm-12">
+        <div class="card mb-3 col-sm-4 margin-h-center">
+            <form method="post" name="riasec-filters" id="riasec-filters" action="{{ path('api_pole_emploi') }}">
+                <div class="d-flex flex-md-column justify-content-center align-items-center riasecFilters-Container marginTop2">
+                    <div>
+                        <div class="radios-Container d-flex flex-md-row justify-content-center">
+                            <div>
+                                Majeur:
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMajeur" id="R" value="R">
+                                <label for="R">R</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMajeur" id="I" value="I">
+                                <label for="I">I</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMajeur" id="A" value="A">
+                                <label for="A">A</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMajeur" id="S" value="S">
+                                <label for="S">S</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMajeur" id="E" value="E">
+                                <label for="E">E</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMajeur" id="C" value="C">
+                                <label for="C">C</label>
+                            </div>
+                        </div>
+                        <div class="radios-Container d-flex flex-md-row justify-content-center">
+                            <div>
+                                Mineur:
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMineur" id="R" value="R">
+                                <label for="R">R</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMineur" id="I" value="I">
+                                <label for="I">I</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMineur" id="A" value="A">
+                                <label for="A">A</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMineur" id="S" value="S">
+                                <label for="S">S</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMineur" id="E" value="E">
+                                <label for="E">E</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="riasecMineur" id="C" value="C">
+                                <label for="C">C</label>
+                            </div>
+                        </div>
+                        <div class="radios-Container d-flex flex-md-row justify-content-center">
+                            <div>
+                                <input type="radio" name="type" id="metier" value="metier">
+                                <label for="metier">Fiches ROME</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="type" id="competence" value="competence">
+                                <label for="competence">Competences ROME</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="marginTop2">
+                        <button type="submit" value="search" class="btn btn-outline-dark btn-shadow btn-pill border-0 btn-hover-shine">Recherché</button>
+                        <button class="btn btn-outline-dark btn-shadow btn-pill border-0 btn-hover-shine">Annulé</button>
+                    </div>
+                    <div class="marginTop2"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

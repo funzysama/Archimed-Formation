@@ -6,77 +6,119 @@
 </style>
 {% endblock %}
 {% block page_content %}
-    <div class="col-md-6">
-        <div class="main-card mb-3 card">
-            <div class="card-header">Graphique</div>
-            <div class="card-body">
-                <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+    <div class="col-sm-12 marginTop3 marginBot3">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-header">Graphique</div>
+                    <div class="card-body">
+                        <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="main-card mb-3 card">
-            <div class="card-header">Resultat etendu</div>
-            <div class="card-body">
-                <div class="d-flex flex-sm-row justify-content-around marginTop2" data-controller="riasec">
-                    {% for key, value in orderedPourcent %}
-                        <div>
-                            <div class="{{ key }} Image" data-riasec="{{ value|json_encode }}">
-                                <figure></figure>
-                            </div>
-                            ( {{ value }}% )
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-header">Resultat etendu</div>
+                    <div class="card-body">
+                        <div class="d-flex flex-sm-row justify-content-around marginTop2" data-controller="riasec">
+                            {% for key, value in orderedPourcent %}
+                                <div>
+                                    <div class="{{ key }} Image" data-riasec="{{ value|json_encode }}">
+                                        <figure></figure>
+                                    </div>
+                                    ( {{ value }}% )
+                                </div>
+                            {% endfor %}
                         </div>
-                    {% endfor %}
+                        <div class="marginTop2">
+                            <h6>Vos 2 pôles les plus marqués :</h6>
+                            <h6>RIASEC majeur : <strong>{{ resultat.majeur }}</strong></h6>
+                            <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
+                            <h6>Vos 2 pôles les moins marqués :</h6>
+                            <h5><b>{{ resultat.inferieur1 }}</b></h5>
+                            <h5><b>{{ resultat.inferieur2 }}</b></h5>
+                            <h6>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></h6>
+                            <h6>Valeur de consistance de votre profil : (à ajouter)</h6>
+                        </div>
+                        <div class="col-sm-12">
+                            <form action="{{ path('api_pole_emploi') }}" method="post">
+                                <input type="hidden" value="metier" name="type" id="type">
+                                <input type="hidden" value="{{ resultat.majeur|initial }}" name="riasecMajeur" id="riasecMajeur">
+                                <input type="hidden" value="{{ resultat.mineur|initial }}" name="riasecMineur" id="riasecMineur">
+                                <button class="btn btn-pill border-0 btn-outline-dark btn-hover-shine btn-shadow" type="submit">Consulter les metiers associers</button>
+                            </form>
+                        </div>
+                        <div class="marginTop2">
+                            <table class="mb-0 table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Réaliste</th>
+                                    <th>Investigateur</th>
+                                    <th>Artiste</th>
+                                    <th>Social</th>
+                                    <th>Entrepreneur</th>
+                                    <th>Conventionnel</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Score brute</td>
+                                    <td>{{ resultat.realiste }}</td>
+                                    <td>{{ resultat.investigateur }}</td>
+                                    <td>{{ resultat.artiste }}</td>
+                                    <td>{{ resultat.social }}</td>
+                                    <td>{{ resultat.entrepreneur }}</td>
+                                    <td>{{ resultat.conventionnel }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Score étalonné</td>
+                                    <td>{{ resultat.realisteEtalonne }}</td>
+                                    <td>{{ resultat.investigateurEtalonne }}</td>
+                                    <td>{{ resultat.artisteEtalonne }}</td>
+                                    <td>{{ resultat.socialEtalonne }}</td>
+                                    <td>{{ resultat.entrepreneurEtalonne }}</td>
+                                    <td>{{ resultat.conventionnelEtalonne }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="marginTop2">
-                    <h6>Vos 2 pôles les plus marqués :</h6>
-                    <h6>RIASEC majeur : <strong>{{ resultat.majeur}}</strong></h6>
-                    <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
-                    <h6>Vos 2 pôles les moins marqués :</h6>
-                    <h5><b>{{ resultat.inferieur1 }}</b></h5>
-                    <h5><b>{{ resultat.inferieur2 }}</b></h5>
-                    <h6>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></h6>
-                    <h6>Valeur de consistance de votre profil : (à ajouter)</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex col-sm-12 justify-content-around">
+                <div id="majeur">
+                    <h5>Riasec Majeur</h5>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="content-card-front-{{ resultat.majeur|minimize }}"></div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="content-card-back-{{ resultat.majeur|minimize }}"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="marginTop2">
-                    <table class="mb-0 table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Réaliste</th>
-                        <th>Investigateur</th>
-                        <th>Artiste</th>
-                        <th>Social</th>
-                        <th>Entrepreneur</th>
-                        <th>Conventionnel</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Score brute</td>
-                        <td>{{ resultat.realiste }}</td>
-                        <td>{{ resultat.investigateur }}</td>
-                        <td>{{ resultat.artiste }}</td>
-                        <td>{{ resultat.social }}</td>
-                        <td>{{ resultat.entrepreneur }}</td>
-                        <td>{{ resultat.conventionnel }}</td>
-                    </tr>
-                    <tr>
-                        <td>Score étalonné</td>
-                        <td>{{ resultat.realisteEtalonne }}</td>
-                        <td>{{ resultat.investigateurEtalonne }}</td>
-                        <td>{{ resultat.artisteEtalonne }}</td>
-                        <td>{{ resultat.socialEtalonne }}</td>
-                        <td>{{ resultat.entrepreneurEtalonne }}</td>
-                        <td>{{ resultat.conventionnelEtalonne }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
+                <div id="mineur">
+                    <h5>Riasec Mineur</h5>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="content-card-front-{{ resultat.mineur|minimize }}"></div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="content-card-back-{{ resultat.mineur|minimize }}"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block bottom_javascript %}

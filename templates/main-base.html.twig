@@ -13,9 +13,9 @@
         <script src="{{ asset('res/js/site_main.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('res/css/footable.standalone.css') }}">
         <link rel="stylesheet" href="{{ asset('res/css/FooTable.FontAwesome.css') }}">
+        {{ encore_entry_script_tags('app') }}
 
     {% endblock %}
-    {{ encore_entry_script_tags('app') }}
 </head>
 {#
 Apply one of the following classes for the skin:
@@ -92,7 +92,7 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
             <section class="content-header">
                 <h1>
                     {% block page_title %}Archi-med{% endblock %}
-                    <small>{% block page_subtitle %}Plateforme de tests{% endblock %}</small>
+                    <small>{% block page_subtitle %}Plateforme ressource{% endblock %}</small>
                 </h1>
 
                 {% block breadcrumb %}

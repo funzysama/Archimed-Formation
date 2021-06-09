@@ -1,16 +1,24 @@
 {% extends 'main-base.html.twig' %}
 {% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
 
-{% block page_title%}{{ testName }}{% endblock %}
+{% block page_title%}{% endblock %}
 
-{% block page_subtitle %}riasec{% endblock %}
+{% block page_subtitle %}{% endblock %}
 
 {% block page_content %}
     <div class="col-sm-12 d-flex justify-content-center">
         <div class="col-sm-6 d-flex flex-sm-column marginTop3">
-            <h4>{{ test.presentation.titre }}</h4>
-            {{ test.presentation.presentation|raw }}
-            <a href="{{ path('test', {name: 'Riasec'}) }}"><button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-danger btn-lg">Commencer le test</button></a>
+            <div class="main-card card mb-6">
+                <div class="card-header justify-content-center">
+                    <h4>{{ test.presentation.titre }}</h4>
+                </div>
+                <div class="card-body">
+                    {{ test.presentation.presentation|raw }}
+                </div>
+                <div class="card-footer justify-content-center">
+                    <a href="{{ path('test', {name: 'Riasec'}) }}"><button class="btn-wide btn-pill btn-shadow btn-hover-shine border-0 btn btn-outline-dark btn-lg">Commencer le test</button></a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -14,7 +14,8 @@ class twigExtension extends AbstractExtension
         return [
             new TwigFilter('formatSexe', [$this, 'formatSexe']),
             new TwigFilter('formatTableData', [$this, 'formatTableData']),
-            new TwigFilter('base64', [$this, 'twig_base64_filter']),
+            new TwigFilter('initial', [$this, 'get_initial_filter']),
+            new TwigFilter('minimize', [$this, 'minimize_text']),
         ];
     }
 
@@ -34,11 +35,18 @@ class twigExtension extends AbstractExtension
         return $diff->y;
     }
 
-    function twig_base64_filter($source)
+    function get_initial_filter($source)
     {
-        dump($source);
         if($source != null) {
-            return base64_encode(stream_get_contents($source));
+            return $source[0];
+        }
+        return '';
+    }
+
+    function minimize_text($source)
+    {
+        if($source != null) {
+            return strtolower($source);
         }
         return '';
     }

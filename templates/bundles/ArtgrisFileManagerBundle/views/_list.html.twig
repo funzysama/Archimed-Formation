@@ -69,6 +69,7 @@
                 </td>
                 <td class="text-right">
                     {% block file_action %}
+                        {% if is_granted('ROLE_CONSULTANT') %}
                         <span data-toggle="tooltip" title="Supprimer">
                         <button type="button"
                                 class="btn btn-xs btn-danger js-delete-modal"
@@ -81,27 +82,28 @@
                                 data-href='{{ path('file_manager_delete', fileManager.queryParameters|merge({'delete[]':file.fileName})) }}'>
                         <span class="far fa-trash-alt"></span>
                         </button>
-                    </span>
-                        <span data-toggle="tooltip" title="Renommer">
-                        <button type="button"
-                                class="btn btn-xs btn-default js-rename-modal"
-                                data-trigger="click"
-                                data-container="body"
-                                data-toggle="modal"
-                                data-target="#js-confirm-rename"
-                                data-placement="left"
-                                data-html="true"
-                                data-name='{{ file.basename('.'~file.extension) }}'
-                                data-extension='{{ file.extension }}'
-                                data-href='{{ path('file_manager_rename', fileManager.queryParameters|merge({'fileName':file.fileName})) }}'>
-                        <span class="far fa-edit"></span>
-                        </button>
-                    </span>
+                        </span>
+                            <span data-toggle="tooltip" title="Renommer">
+                            <button type="button"
+                                    class="btn btn-xs btn-default js-rename-modal"
+                                    data-trigger="click"
+                                    data-container="body"
+                                    data-toggle="modal"
+                                    data-target="#js-confirm-rename"
+                                    data-placement="left"
+                                    data-html="true"
+                                    data-name='{{ file.basename('.'~file.extension) }}'
+                                    data-extension='{{ file.extension }}'
+                                    data-href='{{ path('file_manager_rename', fileManager.queryParameters|merge({'fileName':file.fileName})) }}'>
+                            <span class="far fa-edit"></span>
+                            </button>
+                        </span>
+                        {% endif %}
                         {% if file.type == "file" %}
                             {% if file.extension == "pdf" %}
                                 <a data-placement="left" title="Voir"
                                    class="btn btn-xs btn-default"
-                                   href="{{ path('pdf_view', { path: fileManager.queryParameters["route"], file: file.fileName }) }}">
+                                   href="{{ path('pdf_view', fileManager.queryParameters|merge({'fileName':file.fileName})) }}">
                                     <span class="far fa-eye"></span>
                                 </a>
                             {% endif %}

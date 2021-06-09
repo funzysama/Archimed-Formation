@@ -89,7 +89,7 @@
                         {% endif %}
                     {% endblock %}
                     {% block display %}
-                        <div class="btn-group pull-right">
+                        <div class="btn-group pull-right d-inline-flex">
                             <input type="search" class="form-control search"
                                    name="search" id="search" placeholder="{{ 'search.placeholder'|trans }}" aria-describedby="search">
 
@@ -110,6 +110,9 @@
                                class="btn btn-sm btn-default {{ fileManager.view == 'thumbnail' ? 'active' }}">
                                 <span class="fas fa-th"></span>
                             </a> #}
+                            <div class="d-flex align-items-center">
+                                <div><strong>{{ fileManager.baseName }}</strong></div>
+                            </div>
                         </div>
                     {% endblock %}
                 </div>

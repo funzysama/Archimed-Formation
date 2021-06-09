@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     ressource_image_directory: '%kernel.project_dir%/public/uploads/ressources/images'
+    pole_emploi_client_id: '%env(POLE_EMPLOI_CLIENT_ID)%'
+    pole_emploi_client_secret: '%env(POLE_EMPLOI_CLIENT_SECRET)%'
+    pole_emploi_scope: '%env(POLE_EMPLOI_SCOPE)%'
     artgris_file_manager:
         web_dir: "../public/uploads"
         conf:
@@ -17,10 +20,8 @@ parameters:
             vae:
                 dir: '../public/uploads/VAE'
                 tree: false
-            private:
-                dir: "../public/private/"
-                upload:
-                    max_width: 10
+            perso:
+                service: "custom_filemanager_config"
 
 
 services:
@@ -51,3 +52,6 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+    custom_filemanager_config:
+        class: App\Service\FileManagerConfService
+        public: true

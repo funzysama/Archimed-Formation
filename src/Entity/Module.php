@@ -25,9 +25,14 @@ class Module
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Test::class)
+     * @ORM\ManyToMany(targetEntity=Test::class, fetch="EAGER")
      */
     private $testsInscrits;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $dossier;
 
     public function __construct()
     {
@@ -71,6 +76,18 @@ class Module
     public function removeTestsInscrit(Test $testsInscrit): self
     {
         $this->testsInscrits->removeElement($testsInscrit);
+
+        return $this;
+    }
+
+    public function getDossier(): ?string
+    {
+        return $this->dossier;
+    }
+
+    public function setDossier(string $dossier): self
+    {
+        $this->dossier = $dossier;
 
         return $this;
     }

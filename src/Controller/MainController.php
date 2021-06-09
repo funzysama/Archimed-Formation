@@ -27,21 +27,7 @@ class MainController extends AbstractController
      */
     public function adminIndex(): Response
     {
-        $user = $this->getUser();
-        $module = $user->getModule();
-        dump($module);
-        if($module->getId() > 0 && $module->getId() <= 7){
-            $folderAccess = "bc";
-        }else{
-            $folderAccess = "vae";
-        }
-        if($user->hasRoles('ROLE_ADMIN')){
-            $folderAccess = "main";
-            dump($folderAccess);
-        }
-        return $this->render('main/index.html.twig', [
-            'folderAccess' => $folderAccess
-        ]);
+        return $this->render('main/index.html.twig');
     }
 
     /**

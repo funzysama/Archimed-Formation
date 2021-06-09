@@ -60,7 +60,7 @@ class Utilisateur implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Test::class)
+     * @ORM\ManyToMany(targetEntity=Test::class, fetch="EAGER")
      */
     private $tests;
 
@@ -70,23 +70,23 @@ class Utilisateur implements UserInterface
     private $actif;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="utilisateurs", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $agence;
 
     /**
-     * @ORM\OneToMany(targetEntity=I3PResultat::class, mappedBy="Utilisateur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=I3PResultat::class, mappedBy="Utilisateur", orphanRemoval=true, fetch="EAGER")
      */
     private $i3PResultats;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="Clients")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="Clients", fetch="EAGER")
      */
     private $Consultant;
 
     /**
-     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="Consultant")
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="Consultant", fetch="EAGER")
      */
     private $Clients;
 
@@ -96,13 +96,13 @@ class Utilisateur implements UserInterface
     private $DateDeNaissance;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Module::class)
+     * @ORM\ManyToOne(targetEntity=Module::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Module;
 
     /**
-     * @ORM\OneToMany(targetEntity=IrmrResultat::class, mappedBy="Utilisateur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=IrmrResultat::class, mappedBy="Utilisateur", orphanRemoval=true, fetch="EAGER")
      */
     private $IrmrResultats;
 

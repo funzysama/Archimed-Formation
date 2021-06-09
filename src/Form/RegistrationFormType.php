@@ -113,9 +113,6 @@ class RegistrationFormType extends AbstractType
                 'class'         => Agence::class,
                 'choice_label'  => 'nom',
                 'label' => 'Agence :',
-                'attr' => [
-
-                ],
                 'row_attr' => [
                     'class' => 'd-flex col-sm-12'
                 ],

@@ -1,10 +1,9 @@
-{% extends '3tabbed-base.html.twig' %}
+{% extends '2tabbed-base.html.twig' %}
 
 {% block title %}{{ parent() }}Gestion Riasec{% endblock %}
 
 {% block tab1_title %}Presentation{% endblock %}
 {% block tab2_title %}Questions{% endblock %}
-{% block tab3_title %}Resultats{% endblock %}
 {% block tab1_content %}
     <div class="col-sm-12 d-flex flex-md-column" data-controller="iframe">
         <div class="col-sm-12 iframe-wrapper">
@@ -57,7 +56,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-{% block tab3_content %}
-    Hello tab3
 {% endblock %}

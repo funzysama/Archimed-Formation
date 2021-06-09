@@ -50,3 +50,69 @@
     order: 1;
 }
 
+.content-card-back-realiste{
+    background: url("/assets/assets/images/riasec/cards/back-realiste.png");
+    width: 440px;
+    height: 293px;
+}
+
+.content-card-front-realiste{
+    background: url("/assets/assets/images/riasec/cards/front-realiste.png");
+    width: 440px;
+    height: 293px;
+}
+.content-card-back-investigateur{
+    background: url("/assets/assets/images/riasec/cards/back-investigateur.png");
+    width: 440px;
+    height: 293px;
+}
+
+.content-card-front-investigateur{
+    background: url("/assets/assets/images/riasec/cards/front-investigateur.png");
+    width: 440px;
+    height: 293px;
+}
+.content-card-back-artiste{
+    background: url("/assets/assets/images/riasec/cards/back-artiste.png");
+    width: 440px;
+    height: 293px;
+}
+
+.content-card-front-artiste{
+    background: url("/assets/assets/images/riasec/cards/front-artiste.png");
+    width: 440px;
+    height: 293px;
+}
+.content-card-back-social{
+    background: url("/assets/assets/images/riasec/cards/back-social.png");
+    width: 440px;
+    height: 293px;
+}
+
+.content-card-front-social{
+    background: url("/assets/assets/images/riasec/cards/front-social.png");
+    width: 440px;
+    height: 293px;
+}
+.content-card-back-entrepreneur{
+    background: url("/assets/assets/images/riasec/cards/back-entreprenant.png");
+    width: 440px;
+    height: 293px;
+}
+
+.content-card-front-entrepreneur{
+    background: url("/assets/assets/images/riasec/cards/front-entreprenant.png");
+    width: 440px;
+    height: 293px;
+}
+.content-card-back-conventionnel{
+    background: url("/assets/assets/images/riasec/cards/back-conventionnel.png");
+    width: 440px;
+    height: 293px;
+}
+
+.content-card-front-conventionnel{
+    background: url("/assets/assets/images/riasec/cards/front-conventionnel.png");
+    width: 440px;
+    height: 293px;
+}

@@ -16,7 +16,6 @@ import datepicker from '@chenfengyuan/datepicker'
 export default class extends Controller {
     connect() {
         jQuery(document).ready(function() {
-            // you may need to change this code if you are not using Bootstrap Datepicker
             jQuery('.js-datepicker').datepicker({
                 format: 'yyyy-mm-dd'
             });

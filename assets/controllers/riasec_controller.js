@@ -21,7 +21,6 @@ export default class extends Controller {
             }else{
                 images[i].style = "width:0; height:0;";
             }
-            console.log(images[i]);
 
         }
     }

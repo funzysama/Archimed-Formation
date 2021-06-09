@@ -64,11 +64,16 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
             ])->setLabelAttribute('icon', 'lnr lnr-users');
         }
         if(in_array("ROLE_ADMIN", $token->getRoleNames())){
-                $menu->addChild('listRessource', [
+            $menu->addChild('listRessource', [
                 'route' => 'ressource_index',
                 'label' => 'Gestion Resources',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-earth');
+            $menu->addChild('listModules', [
+                'route' => 'module_index',
+                'label' => 'Gestion Modules',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'pe-7s-plugin');
             $menu->addChild('listTests', [
                 'label' => 'Gestion des Tests',
                 'childOptions' => $event->getChildOptions(),

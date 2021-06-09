@@ -21,9 +21,9 @@ class ApiCallsService
         $result = $this->client->request('POST', $url, [
             'body' => [
                 'grant_type' => 'client_credentials',
-                'client_id' => 'PAR_archimed_bd9bc407b3e14c40ef357a29786a756bc5b860fb664e65760e56aa7ca56a36dc',
-                'client_secret' => '82e179f065200abed7d7477dd285dc2c73e6ae098b567b07a5f2e26f6f47624b',
-                'scope' => 'api_romev1 application_PAR_archimed_bd9bc407b3e14c40ef357a29786a756bc5b860fb664e65760e56aa7ca56a36dc nomenclatureRome'
+                'client_id' => $_SERVER['POLE_EMPLOI_CLIENT_ID'],
+                'client_secret' => $_SERVER['POLE_EMPLOI_CLIENT_SECRET'],
+                'scope' => $_SERVER['POLE_EMPLOI_SCOPE']
             ],
             'headers' => [
                 'Accept' => 'application/json',
@@ -33,9 +33,8 @@ class ApiCallsService
         return $result->toArray()['access_token'];
     }
 
-    public function getAllMetiers($token)
+    public function getAllData($token , $url)
     {
-        $url = "https://api.emploi-store.fr/partenaire/rome/v1/metier";
         $response = $this->client->request('GET', $url, [
             'auth_bearer' => $token,
         ]);
@@ -46,11 +45,11 @@ class ApiCallsService
             "riasecMajeur",
             "riasecMineur"
         ];
-        $metiersFormatted = [];
-        foreach ($result as $metier) {
-            array_push($metiersFormatted, $this->searchByKey($keyAllowed, $metier));
+        $dataFormatted = [];
+        foreach ($result as $data) {
+            array_push($dataFormatted, $this->searchByKey($keyAllowed, $data));
         }
-        return json_encode($metiersFormatted);
+        return json_encode($dataFormatted);
     }
 
     function searchByKey($keyAllowed, $array)
@@ -62,5 +61,27 @@ class ApiCallsService
             },
             ARRAY_FILTER_USE_KEY
         );
+    }
+
+    public function getAllMetiersBMO($token)
+    {
+        $url = "https://api.emploi-store.fr/partenaire/infotravail/v1";
+        $response = $this->client->request('GET', $url, [
+            'auth_bearer' => $token,
+        ]);
+        $result = $response->toArray();
+        dump($result);
+        $keyAllowed = [
+            "code",
+            "libelle",
+            "riasecMajeur",
+            "riasecMineur"
+        ];
+        $metiersFormatted = [];
+        foreach ($result as $metier) {
+            array_push($metiersFormatted, $this->searchByKey($keyAllowed, $metier));
+        }
+        return json_encode($metiersFormatted);
+
     }
 }
