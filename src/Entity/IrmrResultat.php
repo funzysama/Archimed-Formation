@@ -117,12 +117,6 @@ class IrmrResultat
     private $Differenciation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="IrmrResultats", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Utilisateur;
-
-    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
@@ -147,6 +141,11 @@ class IrmrResultat
      * @ORM\Column(type="string", length=255)
      */
     private $Inferieur2;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, mappedBy="ResultatRiasec", cascade={"persist", "remove"})
+     */
+    private $utilisateur;
 
 
     public function getId(): ?int
@@ -382,18 +381,6 @@ class IrmrResultat
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->Utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $Utilisateur): self
-    {
-        $this->Utilisateur = $Utilisateur;
-
-        return $this;
-    }
-
     public function getDateDeCreation(): ?\DateTimeInterface
     {
         return $this->DateDeCreation;
@@ -479,6 +466,28 @@ class IrmrResultat
     public function setInferieur2(string $Inferieur2): self
     {
         $this->Inferieur2 = $Inferieur2;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($utilisateur === null && $this->utilisateur !== null) {
+            $this->utilisateur->setResultatRiasec(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($utilisateur !== null && $utilisateur->getResultatRiasec() !== $this) {
+            $utilisateur->setResultatRiasec($this);
+        }
+
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

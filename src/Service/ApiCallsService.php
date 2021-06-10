@@ -52,6 +52,15 @@ class ApiCallsService
         return json_encode($dataFormatted);
     }
 
+    public function postAllData($token , $url)
+    {
+        $response = $this->client->request('POST', $url, [
+            'auth_bearer' => $token,
+        ]);
+        $result = $response->toArray();
+        return $result;
+    }
+
     function searchByKey($keyAllowed, $array)
     {
         return array_filter(

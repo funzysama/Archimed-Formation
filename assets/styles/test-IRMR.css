@@ -50,69 +50,141 @@
     order: 1;
 }
 
+
+.realiste-head:before{
+    content: 'Réaliste';
+}
+
+
+.investigateur-head:before{
+    content: 'Investigateur';
+}
+
+
+.artiste-head:before{
+    content: 'Artiste';
+}
+
+
+.social-head:before{
+    content: 'Social';
+}
+
+
+.entrepreneur-head:before{
+    content: 'Entrepreneur';
+}
+
+
+.conventionnel-head:before{
+    content: 'Conventionnel';
+}
+
+@media screen and (max-width: 765px){
+    .riasec-figures {
+        display: flex;
+        flex-flow: row wrap;
+        flex-basis: 100%;
+    }
+    .riasec-figure{
+        display: flex;
+        flex-flow: column;
+        flex-basis: 50%;
+        align-items: center;
+    }
+    .realiste-head:before{
+        content: 'R';
+    }
+
+
+    .investigateur-head:before{
+        content: 'I';
+    }
+
+
+    .artiste-head:before{
+        content: 'A';
+    }
+
+
+    .social-head:before{
+        content: 'S';
+    }
+
+
+    .entrepreneur-head:before{
+        content: 'E';
+    }
+
+
+    .conventionnel-head:before{
+        content: 'C';
+    }
+
+}
+
 .content-card-back-realiste{
     background: url("/assets/assets/images/riasec/cards/back-realiste.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: auto;
 }
-
 .content-card-front-realiste{
     background: url("/assets/assets/images/riasec/cards/front-realiste.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: auto;
 }
+
 .content-card-back-investigateur{
     background: url("/assets/assets/images/riasec/cards/back-investigateur.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: auto;
 }
-
 .content-card-front-investigateur{
     background: url("/assets/assets/images/riasec/cards/front-investigateur.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
+
 .content-card-back-artiste{
     background: url("/assets/assets/images/riasec/cards/back-artiste.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
-
 .content-card-front-artiste{
     background: url("/assets/assets/images/riasec/cards/front-artiste.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
+
 .content-card-back-social{
     background: url("/assets/assets/images/riasec/cards/back-social.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
-
 .content-card-front-social{
     background: url("/assets/assets/images/riasec/cards/front-social.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
+
 .content-card-back-entrepreneur{
     background: url("/assets/assets/images/riasec/cards/back-entreprenant.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
-
 .content-card-front-entrepreneur{
     background: url("/assets/assets/images/riasec/cards/front-entreprenant.png");
-    width: 440px;
-    height: 293px;
-}
-.content-card-back-conventionnel{
-    background: url("/assets/assets/images/riasec/cards/back-conventionnel.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }
 
+.content-card-back-conventionnel{
+    background: url("/assets/assets/images/riasec/cards/back-conventionnel.png");
+    background-size: cover;
+    height: inherit;
+}
 .content-card-front-conventionnel{
     background: url("/assets/assets/images/riasec/cards/front-conventionnel.png");
-    width: 440px;
-    height: 293px;
+    background-size: cover;
+    height: inherit;
 }

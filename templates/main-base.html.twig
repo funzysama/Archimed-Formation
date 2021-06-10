@@ -9,21 +9,10 @@
     <title>{% block title %}Archimed | {% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-        <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('res/js/site_main.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('res/css/footable.standalone.css') }}">
-        <link rel="stylesheet" href="{{ asset('res/css/FooTable.FontAwesome.css') }}">
         {{ encore_entry_script_tags('app') }}
 
     {% endblock %}
 </head>
-{#
-Apply one of the following classes for the skin:
-skin-blue, skin-black, skin-purple, skin-yellow, skin-red, skin-green
-
-Apply one or more of the following classes for the layout options:
-fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
-#}
 <body{% block body_start %}{% endblock %} class="hold-transition {{ admin_lte_context.skin|default("")|body_class }}">
 {% block after_body_start %}{% endblock %}
 <div class="wrapper">
@@ -133,13 +122,8 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
 </div>
 
 {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
     <script src="{{ asset('bundles/adminlte/adminlte.js') }}"></script>
-    <script src="{{ asset('res/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('bundles/artgrisfilemanager/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('res/js/footable.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}
 {% block bottom_javascript %}{% endblock %}

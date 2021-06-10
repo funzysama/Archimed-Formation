@@ -21,9 +21,9 @@ class PoleEmploiController extends AbstractController
         return $this->render('pole_emploi/index.html.twig');
     }
     /**
-     * @Route("/pole-emploi", name="api_pole_emploi")
+     * @Route("/pole-emploi/ROME", name="api_pole_emploi")
      */
-    public function apiPoleEmploi(Request $request, ApiCallsService $client): Response
+    public function apiPoleEmploiROME(Request $request, ApiCallsService $client): Response
     {
         $riasecMaj = $request->get("riasecMajeur");
         $riasecMin = $request->get("riasecMineur");
@@ -48,6 +48,21 @@ class PoleEmploiController extends AbstractController
             'riasecMajeur'  => $riasecMaj,
             'riasecMineur'  => $riasecMin
         ]);
+    }
+
+    /**
+     * @Route("/pole-emploi/SoftSkills", name="soft_skills_pole_emploi")
+     */
+    public function apiPoleEmploiSoftSkills(Request $request, ApiCallsService $client): Response
+    {
+        $code = $request->get('code');
+        $url = 'https://api.emploi-store.fr/partenaire/matchviasoftskills/v1/professions/job_skills?code='.$code;
+        $token = $client->getBearerToken();
+        $data = $client->postAllData($token, $url);
+        return $this->render('pole_emploi/soft-skills-pole-emploi.html.twig', [
+            'data'          => json_encode(array_values($data["skills"])),
+        ]);
+//        return $this->json(json_decode($data));
     }
 
 }

@@ -6,8 +6,9 @@ import jQuery from "jquery";
 import tippy from "tippy.js";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'metismenu';
-import DataTable from "datatables.net";
-
+import chart from 'chart.js';
+require("datatables.net");
+require('datatables.net-responsive');
 
 // Stylesheets
 
@@ -22,7 +23,16 @@ import './styles/test-I3P.css';
 import './styles/test-IRMR.css';
 import './styles/test-IRMR.scss';
 import './assets/base.scss';
+import './styles/editor.dataTables.css';
+import './styles/editor.jqueryui.css';
+import './styles/editor.semanticui.css';
+import './styles/dataTables.jqueryui.css';
+import './styles/dataTables.semanticui.css';
+import './styles/jquery.dataTables.css';
+import './styles/responsive.jqueryui.min.css';
+import './styles/pe-icon-7-stroke.css';
 
+document.addEventListener("touchstart", function() {}, true);
 
 let visibilityContainer = jQuery('#visibility-container');
 if(Object.entries(visibilityContainer).length !== 0){

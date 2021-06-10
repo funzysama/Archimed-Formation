@@ -23,21 +23,33 @@ class SecurityController extends AbstractController
              return $this->redirectToRoute('main_home');
          }
 
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
-     * @Route("/profile/{id}", name="monProfile")
+     * @Route("/profil/{id}", name="monProfile")
      */
     public function monProfile(Utilisateur $user): Response
     {
+        $i3pResultat = $user->getResultatI3P();
+        $riasecResultat = $user->getResultatRiasec();
+        $resultat = [];
+        $resultat["i3P"] = null;
+        $resultat["riasec"] = null;
+        $resultat["positioning"] = null;
+        if($i3pResultat){
+            $resultat["i3P"] = $i3pResultat;
+            dump($i3pResultat);
+        }
+        if($riasecResultat){
+            $resultat["riasec"] = $riasecResultat;
+        }
         return $this->render('security/monProfile.html.twig', [
-            'user' => $user
+            'user'      => $user,
+            'resultats'  => $resultat
         ]);
     }
 

@@ -7,16 +7,9 @@
     <b>I</b>ndicateur de <b>P</b>rofil <b>P</b>ersonnel et <b>P</b>rofessionnel
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('res/css/test-i3P.css') }}">
-{% endblock %}
 
 {% block page_content %}
     <div class="col-sm-10 d-flex flex-sm-column justify-content-center margin-h-center">
-        {% if (app.user != resultat.utilisateur) %}
-            resultat d'un autre
-        {% endif %}
         <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>
         <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>
             <table class="tableDescription" style="width: 528px">

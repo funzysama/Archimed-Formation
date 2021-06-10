@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\I3PResultatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -74,17 +76,15 @@ class I3PResultat
     private $DateDeCreation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="i3PResultats", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Utilisateur;
-
-    /**
      * @ORM\ManyToOne(targetEntity=I3pProfils::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $profil;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, mappedBy="ResultatI3P", cascade={"persist", "remove"})
+     */
+    private $utilisateur;
 
     public function getId(): ?int
     {
@@ -192,18 +192,6 @@ class I3PResultat
         return $this->DateDeCreation;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->Utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $Utilisateur): self
-    {
-        $this->Utilisateur = $Utilisateur;
-
-        return $this;
-    }
-
     public function getProfil(): ?I3pProfils
     {
         return $this->profil;
@@ -216,4 +204,25 @@ class I3PResultat
         return $this;
     }
 
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($utilisateur === null && $this->utilisateur !== null) {
+            $this->utilisateur->setResultatI3P(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($utilisateur !== null && $utilisateur->getResultatI3P() !== $this) {
+            $utilisateur->setResultatI3P($this);
+        }
+
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
 }

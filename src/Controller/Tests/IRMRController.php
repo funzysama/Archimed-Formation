@@ -37,17 +37,11 @@ class IRMRController extends AbstractController
             $data = $form->getData();
             $calculator = new IRMRCalculator($data, $user);
             $resultat = $calculator->calculate();
-            $orderedPourcent = [];
-            $orderedPourcent["Realiste"] = $resultat->getRealistePourcent();
-            $orderedPourcent["Investigateur"] = $resultat->getInvestigateurPourcent();
-            $orderedPourcent["Artiste"] = $resultat->getArtistePourcent();
-            $orderedPourcent["Social"] = $resultat->getSocialPourcent();
-            $orderedPourcent["Entrepreneur"] = $resultat->getEntrepreneurPourcent();
-            $orderedPourcent["Conventionnel"] = $resultat->getConventionnelPourcent();
-            arsort($orderedPourcent);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($resultat);
+            $em->flush();
             return $this->forward('App\Controller\Tests\IRMRController::resultatIRMR', [
                 'resultat'              => $resultat,
-                'orderedPourcent'       => $orderedPourcent
             ]);
         }
         return $this->render('test/IRMR/test.html.twig', [
@@ -60,8 +54,16 @@ class IRMRController extends AbstractController
      * @param $resultat
      * @return Response
      */
-    public function resultatIRMR($resultat, $orderedPourcent): Response
+    public function resultatIRMR($resultat): Response
     {
+        $orderedPourcent = [];
+        $orderedPourcent["Realiste"] = $resultat->getRealistePourcent();
+        $orderedPourcent["Investigateur"] = $resultat->getInvestigateurPourcent();
+        $orderedPourcent["Artiste"] = $resultat->getArtistePourcent();
+        $orderedPourcent["Social"] = $resultat->getSocialPourcent();
+        $orderedPourcent["Entrepreneur"] = $resultat->getEntrepreneurPourcent();
+        $orderedPourcent["Conventionnel"] = $resultat->getConventionnelPourcent();
+        arsort($orderedPourcent);
         return $this->render('test/IRMR/resultat.html.twig', [
             'resultat'              => $resultat,
             'orderedPourcent'       => $orderedPourcent

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,51 +61,9 @@ class Utilisateur implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Test::class, fetch="EAGER")
-     */
-    private $tests;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $actif;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="utilisateurs", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $agence;
-
-    /**
-     * @ORM\OneToMany(targetEntity=I3PResultat::class, mappedBy="Utilisateur", orphanRemoval=true, fetch="EAGER")
-     */
-    private $i3PResultats;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="Clients", fetch="EAGER")
-     */
-    private $Consultant;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="Consultant", fetch="EAGER")
-     */
-    private $Clients;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $DateDeNaissance;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Module::class, fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Module;
-
-    /**
-     * @ORM\OneToMany(targetEntity=IrmrResultat::class, mappedBy="Utilisateur", orphanRemoval=true, fetch="EAGER")
-     */
-    private $IrmrResultats;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
@@ -121,11 +80,66 @@ class Utilisateur implements UserInterface
      */
     private $TrancheDage;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Module::class, fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Module;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="utilisateurs", fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $agence;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="Clients", fetch="EAGER")
+     */
+    private $Consultant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="Consultant", orphanRemoval=true, fetch="EAGER")
+     */
+    private $Clients;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Test::class, fetch="EAGER")
+     */
+    private $tests;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $authResultI3P;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $authResultRiasec;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $authResultPositioning;
+
+    /**
+     * @ORM\OneToOne(targetEntity=I3PResultat::class, inversedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $ResultatI3P;
+
+    /**
+     * @ORM\OneToOne(targetEntity=IrmrResultat::class, inversedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $ResultatRiasec;
 
     public function __construct()
     {
         $this->tests = new ArrayCollection();
-        $this->i3PResultats = new ArrayCollection();
         $this->Clients = new ArrayCollection();
     }
 
@@ -162,7 +176,6 @@ class Utilisateur implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -315,44 +328,23 @@ class Utilisateur implements UserInterface
 
     public function toArray(): array
     {
+        if($this->Consultant){
+            $consultantName = ($this->Consultant->sexe === 'M' ? 'Mr ' : 'Mme ').$this->Consultant->getNom().' '.$this->Consultant->getPrenom();
+        }else{
+            if($this->hasRoles('ROLE_ADMIN')){
+                $consultantName = 'Administrateur';
+            }else if($this->hasRoles('ROLE_CONSULTANT')){
+                $consultantName = 'Consultant';
+            }
+        }
         return [
             'actif' => $this->actif,
             'nom' =>$this->nom,
             'prenom' => $this->prenom,
             'email' => $this->email,
             'agence' => $this->agence->getNom(),
-            'verified' =>$this->isVerified()
+            'consultant'=> $consultantName,
         ];
-    }
-
-    /**
-     * @return Collection|I3PResultat[]
-     */
-    public function getI3PResultats(): Collection
-    {
-        return $this->i3PResultats;
-    }
-
-    public function addI3PResultat(I3PResultat $i3PResultat): self
-    {
-        if (!$this->i3PResultats->contains($i3PResultat)) {
-            $this->i3PResultats[] = $i3PResultat;
-            $i3PResultat->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeI3PResultat(I3PResultat $i3PResultat): self
-    {
-        if ($this->i3PResultats->removeElement($i3PResultat)) {
-            // set the owning side to null (unless already changed)
-            if ($i3PResultat->getUtilisateur() === $this) {
-                $i3PResultat->setUtilisateur(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getConsultant(): ?self
@@ -397,12 +389,12 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getDateDeNaissance(): ?\DateTimeInterface
+    public function getDateDeNaissance(): ?DateTimeInterface
     {
         return $this->DateDeNaissance;
     }
 
-    public function setDateDeNaissance(?\DateTimeInterface $DateDeNaissance): self
+    public function setDateDeNaissance(?DateTimeInterface $DateDeNaissance): self
     {
         $this->DateDeNaissance = $DateDeNaissance;
 
@@ -417,36 +409,6 @@ class Utilisateur implements UserInterface
     public function setModule(?Module $Module): self
     {
         $this->Module = $Module;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|IrmrResultat[]
-     */
-    public function getIrmrResultats(): Collection
-    {
-        return $this->IrmrResultats;
-    }
-
-    public function addIrmrResultat(IrmrResultat $IrmrResultat): self
-    {
-        if (!$this->IrmrResultats->contains($IrmrResultat)) {
-            $this->IrmrResultats[] = $IrmrResultat;
-            $IrmrResultat->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIrmrResultat(IrmrResultat $IrmrResultat): self
-    {
-        if ($this->IrmrResultats->removeElement($IrmrResultat)) {
-            // set the owning side to null (unless already changed)
-            if ($IrmrResultat->getUtilisateur() === $this) {
-                $IrmrResultat->setUtilisateur(null);
-            }
-        }
 
         return $this;
     }
@@ -483,6 +445,66 @@ class Utilisateur implements UserInterface
     public function setTrancheDage(?string $TrancheDage): self
     {
         $this->TrancheDage = $TrancheDage;
+
+        return $this;
+    }
+
+    public function getAuthResultI3P(): ?bool
+    {
+        return $this->authResultI3P;
+    }
+
+    public function setAuthResultI3P(bool $authResultI3P): self
+    {
+        $this->authResultI3P = $authResultI3P;
+
+        return $this;
+    }
+
+    public function getAuthResultRiasec(): ?bool
+    {
+        return $this->authResultRiasec;
+    }
+
+    public function setAuthResultRiasec(bool $authResultRiasec): self
+    {
+        $this->authResultRiasec = $authResultRiasec;
+
+        return $this;
+    }
+
+    public function getAuthResultPositioning(): ?bool
+    {
+        return $this->authResultPositioning;
+    }
+
+    public function setAuthResultPositioning(bool $authResultPositioning): self
+    {
+        $this->authResultPositioning = $authResultPositioning;
+
+        return $this;
+    }
+
+    public function getResultatI3P(): ?I3PResultat
+    {
+        return $this->ResultatI3P;
+    }
+
+    public function setResultatI3P(?I3PResultat $ResultatI3P): self
+    {
+        $this->ResultatI3P = $ResultatI3P;
+
+        return $this;
+    }
+
+    public function getResultatRiasec(): ?IrmrResultat
+    {
+        return $this->ResultatRiasec;
+    }
+
+    public function setResultatRiasec(?IrmrResultat $ResultatRiasec): self
+    {
+        $this->ResultatRiasec = $ResultatRiasec;
 
         return $this;
     }

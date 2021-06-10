@@ -1,48 +1,57 @@
 <div class="col-xl-6 middle-half">
     <div class="main-card mb-3 card">
-        <div class="grid-menu grid-menu-2col">
+        <div class="grid-menu grid-menu-2col grid-switch-magic">
             <div class="no-gutters row">
-                <div class="col-sm-6">
-                    <a href="{{ path('presentation_I3P') }}">
-                    <div class="widget-chart widget-chart-hover">
-                        <div class="icon-wrapper rounded-circle">
-                            <div class="icon-wrapper-bg bg-success"></div>
-                            <i class="lnr-graduation-hat text-success"></i>
+                {% for test in app.user.tests %}
+                    {% if(test.nom == 'I3P') %}
+                        <div class="col-sm-6">
+                            <a href="{{ path('presentation_I3P') }}">
+                                <div class="widget-chart widget-chart-hover">
+                                    <div class="icon-wrapper rounded-circle">
+                                        <div class="icon-wrapper-bg bg-success"></div>
+                                        <i class="lnr-graduation-hat text-success"></i>
+                                    </div>
+                                    <div class="widget-numbers">I3P</div>
+                                    <div class="widget-subheading">
+                                        <strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel (Typologie de Jung)
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                        <div class="widget-numbers">I3P</div>
-                        <div class="widget-subheading">
-                            <strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel (Typologie de Jung)
+                    {% endif %}
+                    {% if(test.nom == 'IRMR') %}
+                        <div class="col-sm-6">
+                            <a href="{{ path('presentation_Riasec') }}">
+                                <div class="widget-chart widget-chart-hover">
+                                    <div class="icon-wrapper rounded-circle">
+                                        <div class="icon-wrapper-bg bg-info"></div>
+                                        <i class="lnr-graduation-hat text-info"></i>
+                                    </div>
+                                    <div class="widget-numbers">R.I.A.S.E.C.</div>
+                                    <div class="widget-subheading">
+                                        Interet personnel et professionnel (Typologie de Holland)
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div></a>
-                </div>
-                <div class="col-sm-6">
-                    <a href="{{ path('presentation_Riasec') }}">
-                    <div class="widget-chart widget-chart-hover">
-                        <div class="icon-wrapper rounded-circle">
-                            <div class="icon-wrapper-bg bg-info"></div>
-                            <i class="lnr-graduation-hat text-info"></i>
+                    {% endif %}
+                    {% if(test.nom == 'savORIENT') %}
+                        <div class="col-sm-6">
+                            <a href="{{ path('presentation_savORIENT') }}">
+                                <div class="widget-chart widget-chart-hover">
+                                    <div class="icon-wrapper rounded-circle">
+                                        <div class="icon-wrapper-bg bg-danger"></div>
+                                        <i class="lnr-graduation-hat text-danger"></i>
+                                    </div>
+                                    <div class="widget-numbers">Positioning Skills</div>
+                                    <div class="widget-subheading">
+                                        capacité à s'orienter
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                        <div class="widget-numbers">R.I.A.S.E.C.</div>
-                        <div class="widget-subheading">
-                            Interet personnel et professionnel (Typologie de Holland)
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <a href="{{ path('presentation_savORIENT') }}">
-                    <div class="widget-chart widget-chart-hover">
-                        <div class="icon-wrapper rounded-circle">
-                            <div class="icon-wrapper-bg bg-danger"></div>
-                            <i class="lnr-graduation-hat text-danger"></i>
-                        </div>
-                        <div class="widget-numbers">Positioning Skills</div>
-                        <div class="widget-subheading">
-                            capacité à s'orienter
-                        </div>
-                    </div>
-                    </a>
-                </div>
+                    {% endif %}
+                {% endfor %}
                 <div class="col-sm-6">
                     <a href="{{ path('index_pole_emploi') }}">
                     <div class="widget-chart widget-chart-hover">

@@ -3086,11 +3086,6 @@ strong{
     background-color: #ecf0f5;
 }
 
-.list-group-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
 
 .flip-card {
     background-color: transparent;
@@ -3111,7 +3106,7 @@ strong{
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner{
     transform: rotateY(180deg);
 }
 

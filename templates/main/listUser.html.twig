@@ -1,38 +1,21 @@
 {% extends 'main-base.html.twig' %}
 {% block title %}{{ parent() }}Administration{% endblock %}
 {% block page_subtitle %}Gestion utilisateurs{% endblock %}
-{% block page_content %}
-    <div class="marginTop3">
-        <p>il y a actuellement {{ users|length }} utilisateurs enregistrés </p>
-        <a href="{{ path('app_register') }}"><button class="marginTop1">Ajouter un utilisateur</button></a>
-    </div>
-    <div class="marginTop2">
-        {% embed '@AdminLTE/Widgets/box-widget.html.twig' %}
-            {% block box_title %}
-                <h3 class="txtcnt">Gestion des utilisateurs</h3>
-            {% endblock %}
-            {% block box_body %}
-                <table class="userTable"></table>
-            {% endblock %}
-        {% endembed %}
-    </div>
-{% endblock %}
-{% block bottom_javascript %}
-    <script>
-        let jsonData = {{ jsonUsers|json_encode|raw }};
-        jQuery(function($){
-            $('.userTable').footable({
-                "columns": [
-                    {"name": "actif", "title": "Actif", "breakpoints": "xs" },
-                    {"name": "prenom", "title": "Prenom"},
-                    {"name": "nom", "title": "Nom"},
-                    {"name": "email", "title": "E-mail"},
-                    {"name": "agence", "title": "Agence", "breakpoints": "xs"},
-                    {"name": "verified", "title": "Vérifier", "breakpoints": "xs"},
-                ],
-                "rows": {{ jsonUsers|json_encode|raw }},
-            });
-        });
-    </script>
+{% block javascripts %}
+{{ parent() }}
 
+{% endblock %}
+{% block page_content %}
+    <div class="col-sm-12" data-controller="users">
+        <div class="marginTop3">
+            <a href="{{ path('app_register') }}"><button class="marginTop1">Ajouter un utilisateur</button></a>
+        </div>
+        <div class="col-sm-8 margin-h-center marginTop2">
+            <div class="card">
+                <div class="card-body">
+                    <table id="dataTable" class="ui celled table nowrap" data-users="{{ jsonUsers|json_encode }}" style="max-width: calc(100vw - 30px);"></table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

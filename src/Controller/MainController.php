@@ -2,19 +2,12 @@
 
 namespace App\Controller;
 
-use App\Repository\MetierPERepository;
 use App\Repository\RessourceRepository;
 use App\Repository\TestRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/", name="main_")
@@ -35,7 +28,12 @@ class MainController extends AbstractController
      */
     public function listerUtilisateurs(UtilisateurRepository $utilisateurRepository): Response
     {
-        $users = $utilisateurRepository->findAll();
+        $user = $this->getUser();
+        if($user->hasRoles('ROLE_ADMIN')){
+            $users = $utilisateurRepository->findAll();
+        }else{
+            $users = $this->getUser()->getClients()->getSnapshot();
+        }
         $jsonUsers = [];
         foreach($users as $user) {
             array_push($jsonUsers, $user->toArray());
