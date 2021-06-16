@@ -6,7 +6,10 @@ namespace App\Controller\Tests;
 
 use App\Entity\I3pProfils;
 use App\Entity\I3PResultat;
+use App\Entity\Question;
+use App\Entity\SavOrientFormResult;
 use App\Form\I3PType;
+use App\Form\savORIENTFlowType;
 use App\Repository\I3pProfilsRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\TestRepository;
@@ -23,35 +26,42 @@ class savORIENTController extends AbstractController
      * @param Request $request
      * @param TestRepository $testRepository
      * @param QuestionRepository $questionRepository
+     * @param savORIENTFlowType $flow
      * @return Response
      */
-    public function testsavORIENT(Request $request, TestRepository $testRepository, QuestionRepository $questionRepository, I3pProfilsRepository $repository): Response
+    public function testsavORIENT(Request $request, TestRepository $testRepository, QuestionRepository $questionRepository, savORIENTFlowType $flow): Response
     {
         $questions = $questionRepository->findBy([
             'test' => $testRepository->findOneBy(['Nom' => 'savORIENT'])
         ]);
         $user = $this->getUser();
         $sexe = $user->getSexe();
-        /*$form = $this->createForm(I3PType::class, null, [
-            'questions' => $questions,
-            'sexe'      => $sexe,
-        ]);
-        $form->handleRequest($request);
-        if($form->isSubmitted()){
-            $data = $form->getData();
-            $calculator = new I3PCalculator($data, $repository);
-            $resultat = $calculator->calculate();
-            $i3presultat = $calculator->createResultat($resultat);
-            $i3presultat->setUtilisateur($user);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($i3presultat);
-            $em->flush();
+        $formData = [];
+        $flow->bind($formData);
 
-            return $this->redirectToRoute('resultat', ['name' => 'I3P', 'id' => $i3presultat->getId()]);
-        }*/
+        $flow->setGenericFormOptions(['questions' => $questions, 'sexe' => $sexe]);
+        $form = $flow->createForm();
+        $dm = $flow->getDataManager();
+
+        if ($flow->isValid($form)) {
+            $flow->saveCurrentStepData($form);
+
+            if ($flow->nextStep()) {
+                $form = $flow->createForm();
+            } else {
+                $data = $dm->load($flow);
+                dump($data);
+
+                $flow->reset(); // remove step data from the session
+
+//                return $this->redirect($this->generateUrl('home')); // redirect when done
+            }
+        }
+
         return $this->render('test/savORIENT/test.html.twig', [
-            'testName' => 'Positioning Skills',
-            //'testForm' => $form->createView()
+            'testName'  => 'Positioning Skills',
+            'testForm'  => $form->createView(),
+            'flow'      => $flow
         ]);
     }
 

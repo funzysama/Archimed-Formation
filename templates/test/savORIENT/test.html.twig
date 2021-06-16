@@ -1,1 +1,21 @@
 {% extends 'main-base.html.twig' %}
+
+{% block page_content %}
+    {{ form_start(testForm) }}
+    {{ form_errors(testForm) }}
+
+    {% if flow.getCurrentStepNumber() == 1 %}
+        <div>
+            {{ form_row(testForm) }}
+        </div>
+    {% endif %}
+    {% if flow.getCurrentStepNumber() == 2 %}
+        <div>
+            {{ form_row(testForm) }}
+        </div>
+    {% endif %}
+
+    {{ form_rest(testForm) }}
+
+    {% include '@CraueFormFlow/FormFlow/buttons.html.twig' %}
+    {{ form_end(testForm) }}{% endblock %}

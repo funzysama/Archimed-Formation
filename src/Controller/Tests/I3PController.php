@@ -12,6 +12,8 @@ use App\Repository\QuestionRepository;
 use App\Repository\TestRepository;
 use App\Service\I3PCalculator;
 use App\Service\pdfDataFormatter;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,7 +61,7 @@ class I3PController extends AbstractController
      * @param $resultat
      * @return Response
      */
-    public function resultatI3P(I3PResultat $resultat, pdfDataFormatter $dataFormatter): Response
+    public function resultatI3P(I3PResultat $resultat, pdfDataFormatter $dataFormatter)
     {
 
         $profil = $resultat->getProfil();
@@ -70,6 +72,34 @@ class I3PController extends AbstractController
             'jsonResultat' => $jsonResult
         ]);
     }
+
+    /**
+     * @Route("/result/{id}/pdf", name="resultat_i3p_pdf")
+     */
+    public function resultatI3PPDF(I3PResultat $resultat, pdfDataFormatter $dataFormatter)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set([
+            'isHtml5ParserEnabled' => true
+        ]);
+        $dompdf = new Dompdf($pdfOptions);
+
+        $profil = $resultat->getProfil();
+        $valeurs = preg_split('/\s\|\s/', $profil->getValeurs());
+        $html = $this->renderView('test/I3P/resultat_pdf.html.twig', [
+            'resultat' => $resultat,
+            'valeurs' => $valeurs
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->outputHtml();
+        $dompdf->stream('mon-profil-I3P.pdf', [
+            "Attachement"   => false
+        ]);
+
+    }
+
 
     /**
      * @return Response
@@ -84,6 +114,7 @@ class I3PController extends AbstractController
             'test'      => $test
         ]);
     }
+
     /**
      * @return Response
      * @Route("/i3P/apercu", name="apercu_I3P")

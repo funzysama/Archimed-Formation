@@ -17,7 +17,7 @@
 {% block after_body_start %}{% endblock %}
 <div class="wrapper">
 
-    <header class="main-header">
+    <header class="main-header no-print">
         <a href="{% block logo_path %}{{ path('adminlte_welcome'|route_alias) }}{% endblock %}" class="logo">
             <span class="logo-mini">
                 {% block logo_mini %}<img src="{{ asset('res/img/Archi-Med_Logo_2020_354p.png') }}" alt="logo"> {% endblock %}
@@ -61,7 +61,7 @@
         </nav>
     </header>
 
-    <aside class="main-sidebar">
+    <aside class="main-sidebar no-print">
         <section class="sidebar">
             {% block sidebar_search %}
                 {#  {% include '@AdminLTE/Sidebar/search-form.html.twig' with {'adminlte_direct_include': true} %} #}
@@ -78,7 +78,7 @@
 
     <div class="content-wrapper">
         {% block full_page_content %}
-            <section class="content-header">
+            <section class="content-header no-print">
                 <h1>
                     {% block page_title %}Archi-med{% endblock %}
                     <small>{% block page_subtitle %}Plateforme ressource{% endblock %}</small>

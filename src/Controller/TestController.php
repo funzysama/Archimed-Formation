@@ -16,6 +16,9 @@ class TestController extends AbstractController
         if($name === "Riasec"){
             $name = 'IRMR';
         }
+        if($name === "Positioning Skills"){
+            $name = 'savORIENT';
+        }
         $controller = 'App\Controller\Tests\\'.$name.'Controller';
 
         if(class_exists($controller)){

@@ -10,9 +10,6 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('res/js/site_main.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('res/css/footable.standalone.css') }}">
-        <link rel="stylesheet" href="{{ asset('res/css/FooTable.FontAwesome.css') }}">
 
     {% endblock %}
     {{ encore_entry_script_tags('app') }}
@@ -51,7 +48,6 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
     <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
     <script src="{{ asset('bundles/adminlte/adminlte.js') }}"></script>
     <script src="{{ asset('res/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('res/js/footable.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}
 {% block bottom_javascript %}{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New I3pProfils{% endblock %}
+
+{% block body %}
+    <h1>Create new I3pProfils</h1>
+
+    {{ include('i3p_profils/_form.html.twig') }}
+
+    <a href="{{ path('i3p_profils_index') }}">back to list</a>
+{% endblock %}

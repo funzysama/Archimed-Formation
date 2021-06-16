@@ -1,15 +1,6 @@
 {% extends 'main-base.html.twig' %}
-
-{% block page_title %}
-    I3P(Typologie de Jung)
-{% endblock %}
-{% block page_subtitle %}
-    <b>I</b>ndicateur de <b>P</b>rofil <b>P</b>ersonnel et <b>P</b>rofessionnel
-{% endblock %}
-
-
 {% block page_content %}
-    <div class="col-sm-10 d-flex flex-sm-column justify-content-center margin-h-center">
+    <div class="col-sm-10 d-flex flex-sm-column justify-content-center margin-h-center" style="margin: auto 0">
         <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>
         <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>
             <table class="tableDescription" style="width: 528px">
@@ -50,14 +41,12 @@
         <div class="profilPro marginTop3">
             <h3>Profil Professionnel</h3>
             <div class="marginTop2">
-                {{ resultat.profil.profilPro }}
+                {{ resultat.profil.profilPro|raw }}
             </div>
         </div>
         <div id="pdf-data" style="display: none"></div>
         <div class="col-sm-3 margin-h-center">
-            <button class="btn btn-shadow btn-danger btn-lg btn-hover-shine" id="pdf-button" data-controller="pdf" data-pdf-data="{{ resultat.id }}">Click Pdf!</button>
+            <a href="{{ path('resultat_i3p_pdf', { id: resultat.id }) }}"><button class="btn btn-pill btn-shadow btn-outline-danger btn-lg btn-hover-shine" id="pdf-button2">Click Pdf!</button></a>
         </div>
     </div>
-{% endblock %}
-{% block bottom_javascript %}
 {% endblock %}

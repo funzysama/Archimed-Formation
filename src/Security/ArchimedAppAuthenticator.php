@@ -68,7 +68,6 @@ class ArchimedAppAuthenticator extends AbstractFormLoginAuthenticator implements
         }
 
         $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $credentials['email']]);
-
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Cette e-mail n\'existe pas.');

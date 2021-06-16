@@ -6,6 +6,10 @@ body{
     background-color: #222d32;
 }
 
+.text-small{
+    font-size: 12px;
+}
+
 #registration_form_sexe{
     display: flex;
     flex-flow: row nowrap;
@@ -3134,4 +3138,8 @@ strong{
 
 .sidebar i{
     font-size: 20px;
+}
+
+.pdf-viewer{
+    min-height: calc(100vh - 185px);
 }

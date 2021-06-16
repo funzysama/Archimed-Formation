@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/main/register", name="app_register")
+     * @Route("/admin/register", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, PasswordGenerator $passwordGenerator, TestRepository $testRepository): Response
     {
@@ -51,16 +51,21 @@ class RegistrationController extends AbstractController
             }else{
                 $role = ["ROLE_USER"];
             }
-            $testData = array($form->get('testsInscris')->getData());
-            if(!empty($testData[0])){
-                for ($i = 0; $i < count($testData[0]);$i++){
-                    $test = $testRepository->findOneBy(['Nom' => $testData[0][$i]]);
-                    $user->addTest($test);
-                }
-            }
+//            $testData = array($form->get('testsInscris')->getData());
+//            if(!empty($testData[0])){
+//                for ($i = 0; $i < count($testData[0]);$i++){
+//                    $test = $testRepository->findOneBy(['Nom' => $testData[0][$i]]);
+//                    $user->addTest($test);
+//                }
+//            }
             $user->setRoles($role);
+            if($role === ["ROLE_USER"]){
+                $consultant->addClient($user);
+                $module = $form->get('module')->getData();
+                $user->setConsultant($consultant);
+                $user->setModule($module);
+            }
             $entityManager = $this->getDoctrine()->getManager();
-            $consultant->addClient($user);
             $entityManager->persist($user);
             $entityManager->persist($consultant);
             $entityManager->flush();
@@ -69,7 +74,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('no-reply@archi-med.fr', 'Archi-Med'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Merci de confirmer votre e-mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
                     ->context(['password' => $randomPass])
             );

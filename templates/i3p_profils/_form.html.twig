@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+<div class="col-sm-12 d-flex flex-sm-column" data-controller="wysiwyg">
+    <div class="col-sm-12 text-left i3pProfilLabel-container">
+        {{ form_label(form.ProfilPerso) }}
+    </div>
+    <div class="col-sm-12">
+        {{ form_widget(form.ProfilPerso) }}
+    </div>
+</div>
+<div class="col-sm-12 d-flex flex-sm-column marginTop2">
+    <div class="col-sm-12 text-left i3pProfilLabel-container">
+        {{ form_label(form.ProfilPro) }}
+    </div>
+    <div class="col-sm-12">
+        {{ form_widget(form.ProfilPro) }}
+    </div>
+</div>
+<div class="col-sm-12 marginTop3">
+    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-success btn-lg">{{ button_label|default('Enregistrer') }}</button>
+</div>
+{{ form_end(form) }}

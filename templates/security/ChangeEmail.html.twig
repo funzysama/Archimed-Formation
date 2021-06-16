@@ -1,0 +1,27 @@
+{% extends 'main-base.html.twig' %}
+{% block page_content %}
+    <div class="col-sm-6 marginTop3 margin-h-center">
+        {{ form_start(changeEmailForm) }}
+        <div class="col-sm-12">
+            {{ form_errors(changeEmailForm.Email.first) }}
+        </div>
+        <div class="col-xl-12 d-flex flex-xl-row marginTop2">
+            <div class="col-xl-3">
+                {{ form_label(changeEmailForm.Email.first) }}
+            </div>
+            <div class="col-xl-9">
+                {{ form_widget(changeEmailForm.Email.first) }}
+            </div>
+        </div>
+        <div class="col-sm-12 d-flex flex-xl-row marginTop2">
+            <div class="col-sm-3">
+                {{ form_label(changeEmailForm.Email.second) }}
+            </div>
+            <div class="col-sm-9">
+                {{ form_widget(changeEmailForm.Email.second) }}
+            </div>
+        </div>
+        <button class="btn btn-success btn-hover-shine btn-pill marginTop2">Sauvegarder</button>
+        {{ form_end(changeEmailForm) }}
+    </div>
+{% endblock %}

@@ -16,9 +16,10 @@ class PdfController extends ManagerController
     {
         $fileName = $request->get('fileName');
         $fileManager = $this->newFileManager($request->query->all());
+        $path = $fileManager->getQueryParameter('route');
         $basePath = $fileManager->getConfigurationParameter('dir');
         $basePath = str_replace('../public/', '/', $basePath);
-        $chemin = $basePath."/".$fileName;
+        $chemin = str_replace('//','/', $basePath.urldecode($path)."/".$fileName);
 
         return $this->render('pdf/index.html.twig', [
             'chemin' => $chemin

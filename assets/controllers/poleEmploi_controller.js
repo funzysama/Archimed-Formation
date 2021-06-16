@@ -22,7 +22,11 @@ export default class extends Controller
                         data: 'libelle',
                         defaultContent: "libelle",
                         searchable: false,
-                        responsivePriority: 1
+                        responsivePriority: 1,
+                        render: ( data, type, row, meta ) => {
+                            return '<div class="pointer btn border-0 btn-hover-shine btn-outline-dark btn-pill" data-code="'+row.code+'">'+data+'</div>';
+                        }
+
                     },
                     {
                         title: 'Riasec Majeur',
@@ -50,14 +54,25 @@ export default class extends Controller
                         defaultContent: "Offre d'emploi",
                         searchable: false,
                         sortable: false,
-                        responsivePriority: 300
+                        responsivePriority: 300,
+                        render: ( data, type, row, meta ) => {
+                            return '<button class="btn btn-outline-dark btn-shadow border-0 btn-pill btn-hover-shine" id="pole_emploi" data-code="'+row.code+'">Offre d\'emploi</button>';
+                        }
+
                     },
                     {
                         title: '',
                         defaultContent: "Soft Skills",
                         searchable: false,
                         sortable: false,
-                        responsivePriority: 400
+                        responsivePriority: 400,
+                        render: ( data, type, row, meta ) => {
+                            return '<button ' +
+                                'class="btn btn-outline-dark btn-shadow border-0 btn-pill btn-hover-shine" ' +
+                                'id="soft_skills" ' +
+                                'data-code="'+row.code+'">Soft Skills</button>';
+                        }
+
                     },
 
                 ],
@@ -67,35 +82,6 @@ export default class extends Controller
                 },
                 dom: '<"top d-flex flex-md-row justify-content-between"li>rtp',
                 order: [[ 0, "asc"]],
-                columnDefs:[
-                    {
-                        "responsivePriority": 1,
-                        "targets": 0,
-                        "data": "libelle",
-                        "render": ( data, type, row, meta ) => {
-                            return '<div class="pointer btn border-0 btn-hover-shine btn-outline-dark btn-pill" data-code="'+row.code+'">'+data+'</div>';
-                        }
-                    },
-                    {
-                        "responsivePriority": 2,
-                        "targets": 4,
-                        "data": "lien_offredemploi",
-                        "render": ( data, type, row, meta ) => {
-                            return '<button class="btn btn-outline-dark btn-shadow border-0 btn-pill btn-hover-shine" id="pole_emploi" data-code="'+row.code+'">Offre d\'emploi</button>';
-                        }
-                    },
-                    {
-                        "responsivePriority": 3,
-                        "targets": 5,
-                        "data": "lien_softskills",
-                        "render": ( data, type, row, meta ) => {
-                            return '<button ' +
-                                'class="btn btn-outline-dark btn-shadow border-0 btn-pill btn-hover-shine" ' +
-                                'id="soft_skills" ' +
-                                'data-code="'+row.code+'">Soft Skills</button>';
-                        }
-                    }
-                ],
                 searchCols: [
                     null,
                     { "search": riasecMajeur },

@@ -39,9 +39,11 @@
                                     </div>
                                 {% endif %}
                                 <div class="is-hidden col-sm-12 marginTop1" id="visibility-container">
-                                    <div class="testSelect-container d-flex justify-content-around col-sm-12" id="testResultatContainer">
-                                        {{ form_row(registrationForm.testsInscris) }}
-                                        {{ form_row(registrationForm.resultatInscris) }}
+                                    {{ form_widget(registrationForm.module) }}
+                                    <div class="d-flex flex-column justify-content-around marginTop1 full-width" id="testResultatContainer">
+                                        {{ form_row(registrationForm.authResultI3P) }}
+                                        {{ form_row(registrationForm.authResultRiasec) }}
+                                        {{ form_row(registrationForm.authResultPositioning) }}
                                     </div>
                                 </div>
                             </div>

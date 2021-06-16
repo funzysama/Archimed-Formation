@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}I3pProfils{% endblock %}
+
+{% block body %}
+    <h1>I3pProfils</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ i3p_profil.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ i3p_profil.nom }}</td>
+            </tr>
+            <tr>
+                <th>Famille</th>
+                <td>{{ i3p_profil.Famille }}</td>
+            </tr>
+            <tr>
+                <th>Energie</th>
+                <td>{{ i3p_profil.Energie }}</td>
+            </tr>
+            <tr>
+                <th>EnergieLetter</th>
+                <td>{{ i3p_profil.EnergieLetter }}</td>
+            </tr>
+            <tr>
+                <th>Information</th>
+                <td>{{ i3p_profil.Information }}</td>
+            </tr>
+            <tr>
+                <th>InformationLetter</th>
+                <td>{{ i3p_profil.InformationLetter }}</td>
+            </tr>
+            <tr>
+                <th>Descision</th>
+                <td>{{ i3p_profil.Descision }}</td>
+            </tr>
+            <tr>
+                <th>DescisionLetter</th>
+                <td>{{ i3p_profil.DescisionLetter }}</td>
+            </tr>
+            <tr>
+                <th>Organisation</th>
+                <td>{{ i3p_profil.Organisation }}</td>
+            </tr>
+            <tr>
+                <th>OrganisationLetter</th>
+                <td>{{ i3p_profil.OrganisationLetter }}</td>
+            </tr>
+            <tr>
+                <th>Dominant</th>
+                <td>{{ i3p_profil.Dominant }}</td>
+            </tr>
+            <tr>
+                <th>Auxiliaire</th>
+                <td>{{ i3p_profil.Auxiliaire }}</td>
+            </tr>
+            <tr>
+                <th>Tertiaire</th>
+                <td>{{ i3p_profil.Tertiaire }}</td>
+            </tr>
+            <tr>
+                <th>Infeur</th>
+                <td>{{ i3p_profil.Infeur }}</td>
+            </tr>
+            <tr>
+                <th>ProfilPerso</th>
+                <td>{{ i3p_profil.ProfilPerso }}</td>
+            </tr>
+            <tr>
+                <th>ProfilPro</th>
+                <td>{{ i3p_profil.ProfilPro }}</td>
+            </tr>
+            <tr>
+                <th>Valeurs</th>
+                <td>{{ i3p_profil.Valeurs }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('i3p_profils_index') }}">back to list</a>
+
+    <a href="{{ path('i3p_profils_edit', {'id': i3p_profil.id}) }}">edit</a>
+
+    {{ include('i3p_profils/_delete_form.html.twig') }}
+{% endblock %}

@@ -19,6 +19,8 @@ class RessourceController extends AbstractController
 {
     /**
      * @Route("/", name="ressource_index", methods={"GET"})
+     * @param RessourceRepository $ressourceRepository
+     * @return Response
      */
     public function index(RessourceRepository $ressourceRepository): Response
     {
@@ -29,6 +31,9 @@ class RessourceController extends AbstractController
 
     /**
      * @Route("/new", name="ressource_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param SluggerInterface $slugger
+     * @return Response
      */
     public function new(Request $request, SluggerInterface $slugger): Response
     {
@@ -72,6 +77,8 @@ class RessourceController extends AbstractController
 
     /**
      * @Route("/{id}", name="ressource_show", methods={"GET"})
+     * @param Ressource $ressource
+     * @return Response
      */
     public function show(Ressource $ressource): Response
     {
@@ -82,6 +89,9 @@ class RessourceController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="ressource_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Ressource $ressource
+     * @return Response
      */
     public function edit(Request $request, Ressource $ressource): Response
     {

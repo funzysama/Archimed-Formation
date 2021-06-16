@@ -58,7 +58,6 @@ export default class extends Controller {
                             ProfilPro: data.ProfilPro
                         },
                     ];
-                    console.log('ouech')
                     const pdf = await labelmake({ template, inputs });
                     const blob = new Blob([pdf.buffer], { type: "application/pdf" });
                     window.location = URL.createObjectURL(blob);

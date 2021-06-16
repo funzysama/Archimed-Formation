@@ -6,19 +6,15 @@
 {% block tab2_title %}Questions{% endblock %}
 {% block tab3_title %}Resultats{% endblock %}
 {% block tab1_content %}
-    <div class="col-sm-12 d-flex flex-md-column" data-controller="iframe">
+    <div class="col-sm-12 d-flex flex-md-column">
         <div class="col-sm-12 iframe-wrapper">
             <h4>Modifier</h4>
-            <iframe id="iframeEdit" src="{{ path('presentation_edit', { id: test.presentation.id }) }}" frameborder="0">iframe2</iframe>
-        </div>
-        <div class="col-sm-12 iframe-wrapper marginTop3">
-            <h4>Aperçu</h4>
-            <iframe id="iframeApercu" width="100%" height="100%" src="{{ path('apercu_I3P') }}" frameborder="0"></iframe>
+            <iframe id="iframeEdit" src="{{ path('presentation_edit', { id: test.presentation.id }) }}">iframe2</iframe>
         </div>
     </div>
 {% endblock %}
 {% block tab2_content %}
-    <div class="col-sm-12 d-flex flex-md-row" data-controller="iframe" id="question-container">
+    <div class="col-sm-12 d-flex flex-md-row" data-controller="iframeQuestion" id="question-container">
         <div class="col-sm-6">
             <div class="main-card mb-3 card">
                 <div class="card-body">
@@ -61,5 +57,67 @@
     </div>
 {% endblock %}
 {% block tab3_content %}
-    Hello tab3
+    <div class="col-sm-12 d-flex flex-md-column" data-controller="iframeResult">
+        <div class="col-sm-12 iframe-wrapper">
+            <select name="i3pProfil" id="i3pProfil" class="mb-2 form-control col-sm-3 margin-h-center">
+                <option value="0" disabled selected>Veuillez séléctionner un profil a modifier...</option>
+                <option value="1">ENFO</option>
+                <option value="2">ENFR</option>
+                <option value="3">ENTO</option>
+                <option value="4">ENTR</option>
+                <option value="5">ESFO</option>
+                <option value="6">ESFR</option>
+                <option value="7">ESTO</option>
+                <option value="8">ESTR</option>
+                <option value="9">INFO</option>
+                <option value="10">INFR</option>
+                <option value="11">INTO</option>
+                <option value="12">INTR</option>
+                <option value="13">ISFO</option>
+                <option value="14">ISFR</option>
+                <option value="15">ISTO</option>
+                <option value="16">ISTR</option>
+            </select>
+            <iframe id="iframeEditProfils" src="">iframe2</iframe>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom_javascript %}
+    <script src="{{ asset('res/js/jquery.ba-resize.js') }}"></script>
+    <script>
+        $(function(){
+            let iframeEditProfils = $('#iframeEditProfils');
+            iframeEditProfils.on('load', function(){
+                var iframe_content = iframeEditProfils.contents().find('body');
+                iframe_content.on('resize', function(){
+                    var elem = $(this);
+                    iframeEditProfils.css({ height: elem.outerHeight( true ) });
+                    $('#iframeEditProfils').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
+                });
+                iframe_content.resize();
+            });
+            iframeEditProfils.on('load', (e) => {
+                let path = e.target.contentWindow.location.pathname;
+                if(path === '/i3p/profils/'){
+                    iframeEditProfils.attr('src', '');
+                    $('.content').scrollTop(0);
+                    $('#i3pProfil')[0].value = 0;
+                }
+            })
+        });
+        $(function(){
+            let iframePresentation = $('#iframeEdit');
+            iframePresentation.on('load', function(){
+                var iframe_content = iframePresentation.contents().find('body');
+                iframe_content.on('resize', function(){
+                    var elem = $(this);
+                    iframePresentation.css({ height: elem.outerHeight( true ) });
+                    $('#iframeEdit').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
+                });
+                iframe_content.resize();
+            });
+        });
+    </script>
+
 {% endblock %}

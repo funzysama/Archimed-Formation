@@ -1,14 +1,10 @@
 {% extends 'main-base.html.twig' %}
 {% block title %}{{ parent() }}Administration{% endblock %}
 {% block page_subtitle %}Gestion utilisateurs{% endblock %}
-{% block javascripts %}
-{{ parent() }}
-
-{% endblock %}
 {% block page_content %}
     <div class="col-sm-12" data-controller="users">
         <div class="marginTop3">
-            <a href="{{ path('app_register') }}"><button class="marginTop1">Ajouter un utilisateur</button></a>
+            <a href="{{ path('app_register') }}"><button class="marginTop1 btn btn-outline-dark btn-shadow btn-icon btn-pill btn-hover-shine"><i class="btn-icon-wrapper fa fa-plus"></i>Ajouter un utilisateur</button></a>
         </div>
         <div class="col-sm-8 margin-h-center marginTop2">
             <div class="card">

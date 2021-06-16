@@ -14,9 +14,9 @@ import jQuery from 'jquery';
 
 export default class extends Controller {
     connect() {
-        jQuery('#iframeEdit').on('load', (e) => {
-            jQuery('#iframeApercu')[0].contentWindow.location.reload(true);
-        });
+        // jQuery('#iframeEdit').on('load', (e) => {
+        //     jQuery('#iframeApercu')[0].contentWindow.location.reload(true);
+        // });
 
 
         jQuery('#questions').on('click', (e) => {
@@ -31,6 +31,10 @@ export default class extends Controller {
         jQuery('#editingIframe').on('load', (e) => {
             jQuery('#viewingIframe')[0].contentWindow.location.reload(true);
         });
+
+        jQuery('#i3pProfil').on('change', (e) => {
+            console.log(e.target);
+        })
 
     }
 }

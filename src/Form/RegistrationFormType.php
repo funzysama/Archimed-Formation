@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Agence;
+use App\Entity\Module;
 use App\Entity\Utilisateur;
 use App\EventSubscriber\renderSelectFieldSubscriber;
 use App\Repository\AgenceRepository;
@@ -10,6 +11,7 @@ use App\Repository\TestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -57,18 +59,18 @@ class RegistrationFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => false
             ])
-            ->add('nom', TextType::class, [
+            ->add('prenom', TextType::class, [
+                'label' => 'Prénom :',
                 'attr' => [
-                    'placeholder' => 'Nom...',
+                    'placeholder' => 'Prénom...',
                 ],
                 'row_attr' => [
                     'class' => 'd-flex col-sm-12'
                 ],
             ])
-            ->add('prenom', TextType::class, [
-                'label' => 'Prénom :',
+            ->add('nom', TextType::class, [
                 'attr' => [
-                    'placeholder' => 'Prénom...',
+                    'placeholder' => 'Nom...',
                 ],
                 'row_attr' => [
                     'class' => 'd-flex col-sm-12'
@@ -109,39 +111,28 @@ class RegistrationFormType extends AbstractType
             ]);
         }
         $builder->add('agence', EntityType::class, [
-                'placeholder' => 'Sélectionner une agence...',
+                'placeholder'   => 'Sélectionner une agence...',
                 'class'         => Agence::class,
                 'choice_label'  => 'nom',
-                'label' => 'Agence :',
-                'row_attr' => [
-                    'class' => 'd-flex col-sm-12'
+                'label'         => 'Agence :',
+                'row_attr'      => [
+                    'class'     => 'd-flex col-sm-12'
                 ],
             ])
-            ->add('testsInscris', ChoiceType::class, [
+            ->add('module', EntityType::class, [
                 'mapped'    => false,
-                'choices'   => [
-                    'i3P' =>  'I3P',
-                    'Riasec Flash 2' =>  'IRMR',
-                    'Positioning Skills' =>  'savORIENT',
-                    ],
-                'row_attr' => [
-                    'id'    =>  'testsInscris'
-                ],
-                'expanded'  => true,
-                'multiple'  => true,
+                'class'     => Module::class,
+                'choice_label'  => 'Nom',
+                'placeholder'   => 'Selectionner un module...'
             ])
-            ->add('resultatInscris', ChoiceType::class, [
-                'mapped'    => false,
-                'choices'   => [
-                    'i3P' =>  'I3P',
-                    'Riasec Flash 2' =>  'IRMR',
-                    'Positioning Skills' =>  'savORIENT',
-                    ],
-                'row_attr' => [
-                    'id'    =>  'resultatInscris'
-                ],
-                'expanded'  => true,
-                'multiple'  => true,
+            ->add('authResultI3P', CheckboxType::class, [
+                'label' => 'Resultat I3P'
+            ])
+            ->add('authResultRiasec', CheckboxType::class, [
+                'label' => 'Resultat Riasec'
+            ])
+            ->add('authResultPositioning', CheckboxType::class, [
+                'label' => 'Resultat Positioning Skills'
             ])
         ;
     }

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}I3pProfils index{% endblock %}
+
+{% block body %}
+    <h1>I3pProfils index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Famille</th>
+                <th>Energie</th>
+                <th>EnergieLetter</th>
+                <th>Information</th>
+                <th>InformationLetter</th>
+                <th>Descision</th>
+                <th>DescisionLetter</th>
+                <th>Organisation</th>
+                <th>OrganisationLetter</th>
+                <th>Dominant</th>
+                <th>Auxiliaire</th>
+                <th>Tertiaire</th>
+                <th>Infeur</th>
+                <th>ProfilPerso</th>
+                <th>ProfilPro</th>
+                <th>Valeurs</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i3p_profil in i3p_profils %}
+            <tr>
+                <td>{{ i3p_profil.id }}</td>
+                <td>{{ i3p_profil.nom }}</td>
+                <td>{{ i3p_profil.Famille }}</td>
+                <td>{{ i3p_profil.Energie }}</td>
+                <td>{{ i3p_profil.EnergieLetter }}</td>
+                <td>{{ i3p_profil.Information }}</td>
+                <td>{{ i3p_profil.InformationLetter }}</td>
+                <td>{{ i3p_profil.Descision }}</td>
+                <td>{{ i3p_profil.DescisionLetter }}</td>
+                <td>{{ i3p_profil.Organisation }}</td>
+                <td>{{ i3p_profil.OrganisationLetter }}</td>
+                <td>{{ i3p_profil.Dominant }}</td>
+                <td>{{ i3p_profil.Auxiliaire }}</td>
+                <td>{{ i3p_profil.Tertiaire }}</td>
+                <td>{{ i3p_profil.Infeur }}</td>
+                <td>{{ i3p_profil.ProfilPerso }}</td>
+                <td>{{ i3p_profil.ProfilPro }}</td>
+                <td>{{ i3p_profil.Valeurs }}</td>
+                <td>
+                    <a href="{{ path('i3p_profils_show', {'id': i3p_profil.id}) }}">show</a>
+                    <a href="{{ path('i3p_profils_edit', {'id': i3p_profil.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="19">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('i3p_profils_new') }}">Create new</a>
+{% endblock %}

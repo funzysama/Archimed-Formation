@@ -9,7 +9,7 @@ import 'metismenu';
 import chart from 'chart.js';
 require("datatables.net");
 require('datatables.net-responsive');
-
+import './scripts-init/form-components/toggle-switch';
 // Stylesheets
 
 import './styles/app.css';

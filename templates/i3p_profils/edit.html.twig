@@ -1,0 +1,63 @@
+<html lang="fr">
+<head>
+    <title></title>
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+</head>
+<body>
+<div class="col-sm-12">
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            {{ include('i3p_profils/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        </div>
+    </div>
+
+</div>
+<script src="{{ asset('res/js/ckeditor.js') }}"></script>
+<script src="{{ asset('res/js/jquery-3.6.0.min.js') }}"></script>
+<script>
+    jQuery(document).ready(() => {
+        let textarea = jQuery('textarea');
+        let options = {
+            toolbar: [
+                'fontFamily',
+                'fontSize',
+                'fontColor',
+                'fontBackgroundColor',
+                '|',
+                'alignment',
+                'bold',
+                'italic',
+                'underline',
+                'link',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'undo',
+                'redo'
+            ]
+        }
+        ClassicEditor.create(textarea[0], options).then( editor => {
+                window.editor = editor;
+            }).catch( error => {
+                console.error( 'Oops, something went wrong!' );
+                console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+                console.warn( 'Build id: 5s2s2h89bq06-p1tf4q6taw6e' );
+                console.error( error );
+            });
+        if(1 in textarea){
+            ClassicEditor.create(textarea[1], options).then( editor => {
+                window.editor = editor;
+            }).catch( error => {
+                console.error( 'Oops, something went wrong!' );
+                console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+                console.warn( 'Build id: 5s2s2h89bq06-p1tf4q6taw6e' );
+                console.error( error );
+            });        }
+        //Liste des plugins present dans ckEditor
+        //let plugins = ClassicEditor.builtinPlugins.map( plugin => plugin.pluginName );
+    })
+</script>
+
+</body>
+</html>

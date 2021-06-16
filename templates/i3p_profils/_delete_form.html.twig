@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('i3p_profils_delete', {'id': i3p_profil.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ i3p_profil.id) }}">
+    <button class="btn">Delete</button>
+</form>

@@ -242,6 +242,18 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+    public function isActif(): bool
+    {
+        return $this->actif;
+    }
+
+    public function setIsActif(bool $actif): self
+    {
+        $this->actif = $actif;
+
+        return $this;
+    }
+
     public function getSexe(): ?string
     {
         return $this->sexe;

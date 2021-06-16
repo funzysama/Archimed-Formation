@@ -1,30 +1,264 @@
 <!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="Description" content="ARCHI-MED Plateforme de Test">
-        <meta name="robots" content="no-index, no-follow">
-        <meta name="revisit-after" content="7 days">
-        <meta name="copyright" content="ARCHI-MED">
-        <meta name="Date-Creation-yyyymmdd" content="20210506">
-        <title>{% block title %}Archi-med | {% endblock %}</title>
-        <script src="https://kit.fontawesome.com/9ff3c10aa7.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('res/js/site_main.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('res/css/main.css') }}">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="{{ app.request.locale }}">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title></title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        <div class="pdf-container">
-            {% block body %}{% endblock %}
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js" integrity="sha256-uVEHWRIr846/vAdLJeybWxjPNStREzOlqLMXjW/Saeo=" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-        <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-        {% block bottom_javascript %}{% endblock %}
-    </body>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .margin-h-center {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        /*.col-xl, .col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg, .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md, .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm, .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col, .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {*/
+        /*    position: relative;*/
+        /*    width: 100%;*/
+        /*    padding-right: 15px;*/
+        /*    padding-left: 15px;*/
+        /*}*/
+        *, ::before, ::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Roboto", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #52575C;
+            text-align: center;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .container-fluid {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .content {
+            min-height: 250px;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 15px;
+            display: block;
+        }
+        .content-wrapper {
+            min-height: calc(100vh - 101px);
+            background-color: #ecf0f5;
+        }
+        .marginTop3 {
+            margin-top: 3em;
+        }
+
+        h3{
+            break-before: avoid;
+        }
+
+        .pdf-header{
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+
+        .pdf-header-title{
+            flex-basis: 80%;
+            justify-content: space-around;
+        }
+
+        .pdf-header-image{
+            position: relative;
+            top: 0;
+            left: 0;
+            float: left;
+            width: 20%;
+        }
+
+        .tableDescription{
+            width: 528px;
+            border-collapse: collapse;
+            margin: 3em auto 0 auto;
+        }
+
+        .tableDescription th {
+            border: 1px solid black;
+            text-align: left;
+        }
+
+        .tableDescription td {
+            border:1px solid black;
+            text-align: center;
+        }
+
+        .background-color-pink{
+            background-color: #ffd7c1;
+        }
+
+        .tableProfil{
+            border-collapse: collapse;
+            margin: 3em auto 0 auto;
+
+        }
+
+        .tableProfil th, .tableProfil td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .table-pole{
+            width: 500px;
+            border-collapse: collapse;
+            margin: 5em auto 0 auto;
+            break-after: page;
+        }
+
+        .titre-pole-left{
+            width: 184.5px;
+            text-align: right;
+        }
+
+        .titre-pole-right{
+            width: 184.5px;
+            text-align: left;
+        }
+
+        .table-pole th {
+            width: 53.5px;
+            margin: 5px 15px;
+        }
+
+        .table-pole th, .table-pole td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .table-pole-middle{
+            width: 32px;
+            border: none !important;
+        }
+        .table-row-middle{
+            height: 25px;
+        }
+
+        .table-row-middle td th{
+            height: 25px;
+            content: ' '
+        }
+
+
+        .table-row-middle td, .table-row-middle th{
+            border: none !important;
+        }
+
+        .table-fonctionnement{
+            width: 250px;
+            border-collapse: collapse;
+            margin: 5em auto 0 auto;
+            break-after: page;
+        }
+
+        .table-fonctionnement th {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .table-fonctionnement td {
+            border:1px solid black;
+            text-align: left;
+            padding: 5px;
+        }
+
+        .text-small{
+            font-size: 12px;
+            /*line-height: 1;*/
+        }
+        .text-tiny{
+            font-size: 10px;
+            /*line-height: 1;*/
+        }
+        .title-valeurs{
+            text-align: left;
+            margin-top: 3em;
+            margin-bottom: 1em;
+        }
+
+        .title-valeurs span{
+            width: 25px;
+        }
+
+        .table-valeurs-container{
+            padding: 2px;
+            border: 3px solid #ffd7c1
+        }
+        .table-valeurs{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-valeurs th, .table-valeurs td{
+            border: 1px solid black;
+            padding: 5px 0;
+        }
+
+        .table-valeurs th {
+            width: 50px;
+            border-right: none !important;
+            content: '';
+        }
+
+        .table-valeurs td {
+            border-left: none !important;
+        }
+
+        .profilPerso{
+            page-break-after: always;
+        }
+
+        footer {
+            position: fixed;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            width: 100%;
+            color: #aaaaaa;
+            text-align: center;
+            line-height: 35px;
+        }
+
+        footer img {
+            position: fixed;
+            left: -15px;
+            bottom: 40px;
+        }
+
+    </style>
+</head>
+<body class="hold-transition">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    {% block page_content %}{% endblock %}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
 </html>

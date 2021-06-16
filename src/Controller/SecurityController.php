@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Form\ChangeEmailType;
 use App\Form\ChangePassType;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,6 @@ class SecurityController extends AbstractController
         $resultat["positioning"] = null;
         if($i3pResultat){
             $resultat["i3P"] = $i3pResultat;
-            dump($i3pResultat);
         }
         if($riasecResultat){
             $resultat["riasec"] = $riasecResultat;
@@ -50,28 +50,6 @@ class SecurityController extends AbstractController
         return $this->render('security/monProfile.html.twig', [
             'user'      => $user,
             'resultats'  => $resultat
-        ]);
-    }
-
-    /**
-     * @Route("/profile/{id}/tests", name="mesTests")
-     */
-    public function mesTests(Utilisateur $user): Response
-    {
-        return $this->render('security/mesTests.html.twig', [
-            'user' => $user
-        ]);
-    }
-
-    /**
-     * @Route("/profile/{id}/resultats", name="mesResultat")
-     */
-    public function mesResultats(Utilisateur $user): Response
-    {
-        $resultat = $user->getI3PResultats();
-        return $this->render('security/mesResultats.html.twig', [
-            'user' => $user,
-            'resultat'  => $resultat
         ]);
     }
 
@@ -111,6 +89,38 @@ class SecurityController extends AbstractController
             'changePassForm'    => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/security/changeEmail", name="security_changeEmail")
+     */
+    public function changeEmail(Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangeEmailType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+
+            if($form->isValid()){
+                $email = $form->get('Email')->getData();
+                $user->setEmail($email);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('succes', 'c\'est goood !');
+
+                return $this->RedirectToRoute('app_logout');
+
+            }
+        }
+
+        return $this->render('security/ChangeEmail.html.twig', [
+            'user'              => $user,
+            'changeEmailForm'    => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/PasswordUpdate/{id}", name="security_firstChangePass")
      */
@@ -155,6 +165,24 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        return $this->redirectToRoute('app_login');
+    }
+
+    /**
+     * @Route("/switchActif", methods="POST")
+     */
+    public function switchActif(Request $request, UtilisateurRepository $repository)
+    {
+        $email = $request->get('email');
+        $user = $repository->findOneBy(["email" => $email]);
+        if($user->getActif() === false){
+            $user->setActif(true);
+        }else{
+            $user->setActif(false);
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->json('Ok');
     }
 }

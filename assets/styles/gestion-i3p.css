@@ -5,9 +5,8 @@
 
 .iframe-wrapper iframe {
     display:block;
-    height: 100%;
     width: 100%;
-    border: 1px solid black;
+    border: 0 solid black;
 }
 
 .presentationLabel-container > label {
