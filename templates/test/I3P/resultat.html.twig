@@ -1,50 +1,9 @@
 {% extends 'main-base.html.twig' %}
 {% block page_content %}
-    <div class="col-sm-10 d-flex flex-sm-column justify-content-center margin-h-center" style="margin: auto 0">
-{#        <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>#}
-{#        <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>#}
-{#            <table class="tableDescription" style="width: 528px">#}
-{#            <colgroup>#}
-{#                <col style="width: 250px">#}
-{#                <col style="width: 150px">#}
-{#                <col style="width: 100px">#}
-{#            </colgroup>#}
-{#            <tbody>#}
-{#            <tr>#}
-{#                <td>Source d’énergie :</td>#}
-{#                <td> {{ resultat.profil.energie }}</td>#}
-{#                <td>{{ resultat.profil.energieLetter }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td>Traitement de l’information :</td>#}
-{#                <td>{{ resultat.profil.information }}</td>#}
-{#                <td>{{ resultat.profil.informationLetter }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td>Prise de décision :</td>#}
-{#                <td>{{ resultat.profil.descision }}</td>#}
-{#                <td>{{ resultat.profil.descisionLetter }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td>Mode d’organisation :</td>#}
-{#                <td>{{ resultat.profil.organisation }}</td>#}
-{#                <td>{{ resultat.profil.organisationLetter }}</td>#}
-{#            </tr>#}
-{#            </tbody>#}
-{#        </table>#}
-{#        <div class="profilPerso marginTop3">#}
-{#            <h3>Profile Personnel</h3>#}
-{#            <div class="marginTop2">#}
-{#                {{ resultat.profil.profilPerso|raw }}#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="profilPro marginTop3">#}
-{#            <h3>Profil Professionnel</h3>#}
-{#            <div class="marginTop2">#}
-{#                {{ resultat.profil.profilPro|raw }}#}
-{#            </div>#}
-{#        </div>#}
-{#        <div id="pdf-data" style="display: none"></div>#}
+    <div class="col-sm-3 margin-h-center marginTop1 marginBot2">
+        <a href="{{ path('resultat_i3p_pdf', { id: resultat.id }) }}"><button class="btn btn-pill btn-shadow btn-outline-danger btn-lg btn-hover-shine btn-icon" id="pdf-button2"><i class="btn-icon-wrapper fa fa-file-pdf"></i>Télécharger le Pdf</button></a>
+    </div>
+    <div class="col-sm-10 card d-flex flex-sm-column justify-content-center margin-h-center" style="margin: auto 0;padding:25px;">
         <div id="page1">
             <div class="pdf-header">
                 <div class="pdf-header-image">
@@ -160,9 +119,6 @@
                     <tr><th></th><td>{{ valeur }}</td></tr>
                 {% endfor %}
             </table>
-        </div>
-        <div class="col-sm-3 margin-h-center">
-            <a href="{{ path('resultat_i3p_pdf', { id: resultat.id }) }}"><button class="btn btn-pill btn-shadow btn-outline-danger btn-lg btn-hover-shine" id="pdf-button2">Click Pdf!</button></a>
         </div>
     </div>
 
