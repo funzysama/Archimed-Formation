@@ -1,41 +1,150 @@
 {% extends 'main-base.html.twig' %}
 {% block page_content %}
     <div class="col-sm-10 d-flex flex-sm-column justify-content-center margin-h-center" style="margin: auto 0">
-        <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>
-        <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>
-            <table class="tableDescription" style="width: 528px">
-            <colgroup>
-                <col style="width: 250px">
-                <col style="width: 150px">
-                <col style="width: 100px">
-            </colgroup>
-            <tbody>
-            <tr>
-                <td>Source d’énergie :</td>
-                <td> {{ resultat.profil.energie }}</td>
-                <td>{{ resultat.profil.energieLetter }}</td>
-            </tr>
-            <tr>
-                <td>Traitement de l’information :</td>
-                <td>{{ resultat.profil.information }}</td>
-                <td>{{ resultat.profil.informationLetter }}</td>
-            </tr>
-            <tr>
-                <td>Prise de décision :</td>
-                <td>{{ resultat.profil.descision }}</td>
-                <td>{{ resultat.profil.descisionLetter }}</td>
-            </tr>
-            <tr>
-                <td>Mode d’organisation :</td>
-                <td>{{ resultat.profil.organisation }}</td>
-                <td>{{ resultat.profil.organisationLetter }}</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="profilPerso marginTop3">
-            <h3>Profile Personnel</h3>
-            <div class="marginTop2">
-                {{ resultat.profil.profilPerso|raw }}
+{#        <h3 class="marginTop3">Bon travail, {{ resultat.utilisateur.prenom }} {{ resultat.utilisateur.nom }}</h3>#}
+{#        <h3>votre profile i3p est: {{ resultat.profil.nom }}</h3>#}
+{#            <table class="tableDescription" style="width: 528px">#}
+{#            <colgroup>#}
+{#                <col style="width: 250px">#}
+{#                <col style="width: 150px">#}
+{#                <col style="width: 100px">#}
+{#            </colgroup>#}
+{#            <tbody>#}
+{#            <tr>#}
+{#                <td>Source d’énergie :</td>#}
+{#                <td> {{ resultat.profil.energie }}</td>#}
+{#                <td>{{ resultat.profil.energieLetter }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Traitement de l’information :</td>#}
+{#                <td>{{ resultat.profil.information }}</td>#}
+{#                <td>{{ resultat.profil.informationLetter }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Prise de décision :</td>#}
+{#                <td>{{ resultat.profil.descision }}</td>#}
+{#                <td>{{ resultat.profil.descisionLetter }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Mode d’organisation :</td>#}
+{#                <td>{{ resultat.profil.organisation }}</td>#}
+{#                <td>{{ resultat.profil.organisationLetter }}</td>#}
+{#            </tr>#}
+{#            </tbody>#}
+{#        </table>#}
+{#        <div class="profilPerso marginTop3">#}
+{#            <h3>Profile Personnel</h3>#}
+{#            <div class="marginTop2">#}
+{#                {{ resultat.profil.profilPerso|raw }}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="profilPro marginTop3">#}
+{#            <h3>Profil Professionnel</h3>#}
+{#            <div class="marginTop2">#}
+{#                {{ resultat.profil.profilPro|raw }}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div id="pdf-data" style="display: none"></div>#}
+        <div id="page1">
+            <div class="pdf-header">
+                <div class="pdf-header-image">
+                    <img src="data:image/png;base64,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" alt="" />
+                </div>
+                <div class="pdf-header-title">
+                    <div>
+                        <div class="pdf-header-title1"><h1>I3P</h1>(TYPOLOGIE DE JUNG)</div>
+                        <strong>I</strong>NDICATEUR DE <strong>P</strong>ROFIL <strong>P</strong>ERSONNEL ET <strong>P</strong>ROFESSIONNEL
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <h4>Nom : <strong>{{ resultat.utilisateur.nom }}</strong></h4>
+            <h4>Prenom : <strong>{{ resultat.utilisateur.prenom }}</strong></h4>
+            <table class="tableProfil">
+                <tr>
+                    <th>VOTRE PROFIL</th>
+                    <td class="background-color-pink"><strong>{{ resultat.profil.nom }}</strong></td>
+                </tr>
+            </table>
+            <table class="tableDescription">
+                <colgroup>
+                    <col style="width: 250px">
+                    <col style="width: 150px">
+                    <col style="width: 100px">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>Source d’énergie :</th>
+                    <td class="background-color-pink"> {{ resultat.profil.energie }}</td>
+                    <td>{{ resultat.profil.energieLetter }}</td>
+                </tr>
+                <tr>
+                    <th>Traitement de l’information :</th>
+                    <td class="background-color-pink">{{ resultat.profil.information }}</td>
+                    <td>{{ resultat.profil.informationLetter }}</td>
+                </tr>
+                <tr>
+                    <th>Prise de décision :</th>
+                    <td class="background-color-pink">{{ resultat.profil.descision }}</td>
+                    <td>{{ resultat.profil.descisionLetter }}</td>
+                </tr>
+                <tr>
+                    <th>Mode d’organisation :</th>
+                    <td class="background-color-pink">{{ resultat.profil.organisation }}</td>
+                    <td>{{ resultat.profil.organisationLetter }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table-pole">
+                <tr>
+                    <td class="titre-pole-left"><strong>E</strong>xtraversion</td>
+                    <th class="background-color-pink">{{ resultat.extraversion }}</th>
+                    <td class="table-pole-middle"></td>
+                    <th class="background-color-pink">{{ resultat.introversion }}</th>
+                    <td class="titre-pole-right"><strong>I</strong>ntroversion</td>
+                </tr>
+                <tr class="table-row-middle"><td></td><th></th><td></td><th></th><td></td></tr>
+                <tr>
+                    <td class="titre-pole-left"><strong>S</strong>ensation</td>
+                    <th class="background-color-pink">{{ resultat.sensation }}</th>
+                    <td class="table-pole-middle"></td>
+                    <th class="background-color-pink">{{ resultat.introversion }}</th>
+                    <td class="titre-pole-right">i<strong>N</strong>tuition</td>
+                </tr>
+                <tr class="table-row-middle"><td></td><th></th><td></td><th></th><td></td></tr>
+                <tr>
+                    <td class="titre-pole-left">pensée (<strong>T</strong>hinking)</td>
+                    <th class="background-color-pink">{{ resultat.thinking }}</th>
+                    <td class="table-pole-middle"></td>
+                    <th class="background-color-pink">{{ resultat.feeling }}</th>
+                    <td class="titre-pole-right">sentiment (<strong>F</strong>eeling)</td>
+                </tr>
+                <tr class="table-row-middle"><td></td><th></th><td></td><th></th><td></td></tr>
+                <tr>
+                    <td class="titre-pole-left">structuration (<strong>R</strong>ightness)</td>
+                    <th class="background-color-pink">{{ resultat.rightness }}</th>
+                    <td class="table-pole-middle"></td>
+                    <th class="background-color-pink">{{ resultat.opening }}</th>
+                    <td class="titre-pole-right">flexibilité (<strong>O</strong>pening)</td>
+                </tr>
+            </table>
+            <table class="table-fonctionnement">
+                <tr><td>Dominant :</td><th class="background-color-pink">{{ resultat.profil.dominant }}</th></tr>
+                <tr class="table-row-middle"><td></td><th></th></tr>
+                <tr><td>Auxiliaire :</td><th class="background-color-pink">{{ resultat.profil.auxiliaire }}</th></tr>
+                <tr class="table-row-middle"><td></td><th></th></tr>
+                <tr><td>Tertiaire :</td><th class="background-color-pink">{{ resultat.profil.tertiaire }}</th></tr>
+                <tr class="table-row-middle"><td></td><th></th></tr>
+                <tr><td>Inférieur :</td><th class="background-color-pink">{{ resultat.profil.infeur }}</th></tr>
+            </table>
+        </div>
+        <div id="page2">
+            <div class="profilPerso marginTop3">
+                <h3>Profile Personnel</h3>
+                <div class="marginTop2">
+                    {{ resultat.profil.profilPerso|raw }}
+                </div>
             </div>
         </div>
         <div class="profilPro marginTop3">
@@ -44,9 +153,17 @@
                 {{ resultat.profil.profilPro|raw }}
             </div>
         </div>
-        <div id="pdf-data" style="display: none"></div>
+        <div class="title-valeurs background-color-pink"><span></span><strong>VOS VALEURS :</strong></div>
+        <div class="table-valeurs-container">
+            <table class="table-valeurs">
+                {% for valeur in valeurs %}
+                    <tr><th></th><td>{{ valeur }}</td></tr>
+                {% endfor %}
+            </table>
+        </div>
         <div class="col-sm-3 margin-h-center">
             <a href="{{ path('resultat_i3p_pdf', { id: resultat.id }) }}"><button class="btn btn-pill btn-shadow btn-outline-danger btn-lg btn-hover-shine" id="pdf-button2">Click Pdf!</button></a>
         </div>
     </div>
+
 {% endblock %}

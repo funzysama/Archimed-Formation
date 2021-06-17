@@ -72,6 +72,165 @@
     flex-basis: 100%;
 }
 
+.pdf-header{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.pdf-header-title{
+    flex-basis: 80%;
+    justify-content: space-around;
+}
+
+.pdf-header-image{
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    width: 20%;
+}
+
 .tableDescription{
+    width: 528px;
+    border-collapse: collapse;
     margin: 3em auto 0 auto;
+}
+
+.tableDescription th {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: left;
+    padding: 5px;
+}
+
+.tableDescription td {
+    border:1px solid rgba(0, 0, 0, 0.125);
+    text-align: center;
+    padding: 5px;
+}
+
+.background-color-pink{
+    background-color: #ffd7c1;
+}
+
+.tableProfil{
+    border-collapse: collapse;
+    margin: 3em auto 0 auto;
+
+}
+
+.tableProfil th, .tableProfil td {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 5px;
+}
+
+.table-pole{
+    width: 500px;
+    border-collapse: collapse;
+    margin: 5em auto 0 auto;
+    break-after: page;
+}
+
+.titre-pole-left{
+    width: 184.5px;
+    text-align: right;
+}
+
+.titre-pole-right{
+    width: 184.5px;
+    text-align: left;
+}
+
+.table-pole th {
+    width: 53.5px;
+    margin: 5px 15px;
+}
+
+.table-pole th, .table-pole td {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 5px;
+}
+
+.table-pole-middle{
+    width: 32px;
+    border: none !important;
+}
+.table-row-middle{
+    height: 25px;
+}
+
+.table-row-middle td th{
+    height: 25px;
+    content: ' '
+}
+
+
+.table-row-middle td, .table-row-middle th{
+    border: none !important;
+}
+
+.table-fonctionnement{
+    width: 250px;
+    border-collapse: collapse;
+    margin: 5em auto 0 auto;
+    break-after: page;
+}
+
+.table-fonctionnement th {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: center;
+    padding: 5px;
+}
+
+.table-fonctionnement td {
+    border:1px solid rgba(0, 0, 0, 0.125);
+    text-align: left;
+    padding: 5px;
+}
+
+.text-small{
+    font-size: 12px;
+    /*line-height: 1;*/
+}
+.text-tiny{
+    font-size: 10px;
+    /*line-height: 1;*/
+}
+.title-valeurs{
+    text-align: left;
+    margin-top: 3em;
+    margin-bottom: 1em;
+}
+
+.title-valeurs span{
+    width: 25px;
+}
+
+.table-valeurs-container{
+    padding: 2px;
+    border: 3px solid #ffd7c1
+}
+.table-valeurs{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-valeurs th, .table-valeurs td{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 5px 0;
+}
+
+.table-valeurs th {
+    width: 50px;
+    border-right: none !important;
+    content: '';
+}
+
+.table-valeurs td {
+    border-left: none !important;
+}
+
+.profilPerso{
+    page-break-after: always;
 }

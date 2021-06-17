@@ -67,9 +67,12 @@ class I3PController extends AbstractController
         $profil = $resultat->getProfil();
         $resultatArrayForPdf = $dataFormatter->convertI3PResultat($resultat, $profil);
         $jsonResult = json_encode($resultatArrayForPdf, JSON_UNESCAPED_SLASHES);
+        $valeurs = preg_split('/\s\|\s/', $profil->getValeurs());
+
         return $this->render('test/I3P/resultat.html.twig', [
             'resultat' => $resultat,
-            'jsonResultat' => $jsonResult
+            'jsonResultat' => $jsonResult,
+            'valeurs' => $valeurs
         ]);
     }
 
