@@ -45,19 +45,11 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setActif(true);
-            dump($consultant);
             if($form->has('role')){
                 $role = array($form->get('role')->getData());
             }else{
                 $role = ["ROLE_USER"];
             }
-//            $testData = array($form->get('testsInscris')->getData());
-//            if(!empty($testData[0])){
-//                for ($i = 0; $i < count($testData[0]);$i++){
-//                    $test = $testRepository->findOneBy(['Nom' => $testData[0][$i]]);
-//                    $user->addTest($test);
-//                }
-//            }
             $user->setRoles($role);
             if($role === ["ROLE_USER"]){
                 $consultant->addClient($user);

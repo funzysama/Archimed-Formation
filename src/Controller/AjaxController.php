@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
 use App\Repository\I3PResultatRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +16,10 @@ class AjaxController extends AbstractController
 {
     /**
      * @Route("/ajax", name="ajax")
+     * @param Request $request
+     * @param I3PResultatRepository $resultatRepository
+     * @param SerializerInterface $serializer
+     * @return Response
      */
     public function index(Request $request, I3PResultatRepository $resultatRepository, SerializerInterface $serializer): Response
     {
@@ -32,8 +38,7 @@ class AjaxController extends AbstractController
         $json = json_encode($jsonData);
 
         $response = JsonResponse::fromJsonString($json);
-        //$resultatArrayForPdf = $dataFormatter->convertI3PResultat($resultat, $profil);
-        //dump($resultatArrayForPdf);
         return $response;
     }
+
 }

@@ -9,11 +9,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il existe déja un compte avec cette adresse e-mail.")
  */
 class Utilisateur implements UserInterface
 {
@@ -26,13 +27,17 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user_formated"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user_formated"})
      */
     private $roles = [];
+
+    private $role = '';
 
     /**
      * @var string The hashed password
@@ -47,21 +52,25 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=1)
+     * @Groups({"user_formated"})
      */
     private $sexe;
 
     /**
      * @ORM\Column(type="string", length=75)
+     * @Groups({"user_formated"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=75)
+     * @Groups({"user_formated"})
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"user_formated"})
      */
     private $DateDeNaissance;
 
@@ -114,16 +123,19 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"user_formated"})
      */
     private $authResultI3P;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"user_formated"})
      */
     private $authResultRiasec;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"user_formated"})
      */
     private $authResultPositioning;
 
@@ -179,6 +191,27 @@ class Utilisateur implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRole(): string
+    {
+        $roles = $this->roles;
+        if(isset($roles[0])){
+            return $roles[0];
+        }else{
+            return '';
+        }
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+        $this->roles[0] = $role;
+
+        return $this;
     }
 
     public function setRoles(array $roles): self
@@ -356,6 +389,7 @@ class Utilisateur implements UserInterface
             'email' => $this->email,
             'agence' => $this->agence->getNom(),
             'consultant'=> $consultantName,
+            'id' => $this->id
         ];
     }
 

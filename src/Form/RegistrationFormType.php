@@ -96,7 +96,6 @@ class RegistrationFormType extends AbstractType
         if(in_array('ROLE_ADMIN', $user->getRoles())){
             $builder->add('role', ChoiceType::class, [
                 'placeholder' => 'Selectionner un role...',
-                'mapped'    => false,
                 'choices'   => [
                     'Client'            => 'ROLE_USER',
                     'Consultant'        => 'ROLE_CONSULTANT',
@@ -120,7 +119,6 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('module', EntityType::class, [
-                'mapped'    => false,
                 'class'     => Module::class,
                 'choice_label'  => 'Nom',
                 'placeholder'   => 'Selectionner un module...'

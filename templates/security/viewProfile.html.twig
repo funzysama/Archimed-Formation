@@ -1,0 +1,189 @@
+{% extends 'apercu-base.html.twig' %}
+
+{% block page_content %}
+        <div class="profile-responsive card-border card">
+            <div class="dropdown-menu-header">
+                <div class="dropdown-menu-header-inner bg-global">
+                    <div class="menu-header-content">
+                        <div><h5 class="menu-header-title"></h5>
+                            <h6 class="menu-header-subtitle">Vous consulter le profil de {{ user.sexe|formatSexe }} {{ user.nom }} {{ user.prenom }}.</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-0 card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="tab-2-eg1">
+                        <div class="col-xl-12">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-left">
+                                                        E-mail
+                                                    </div>
+                                                    <div class="widget-subheading opacity-10 text-left">
+                                                        <span class="pr-2">{{ user.email }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-left">
+                                                        Module
+                                                    </div>
+                                                    <div class="widget-subheading opacity-10 text-left">
+                                                        <span class="pr-2">{{ user.module.nom }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-left">
+                                                        Date de naissance
+                                                    </div>
+                                                    <div class="widget-subheading opacity-10 text-left">
+                                                        <span class="pr-2">{{ user.dateDeNaissance|date('d-m-Y') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% if user.consultant %}
+                                    <li class="list-group-item">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-3">
+                                                    <div class="widget-content-left flex2">
+                                                        <div class="widget-heading text-left">
+                                                            Consultant
+                                                        </div>
+                                                        <div class="widget-subheading opacity-10 text-left">
+                                                            <span class="pr-2">{{ user.consultant.nom }} {{ user.consultant.prenom }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                                {% if resultats %}
+                                    {% if resultats.i3P %}
+                                        <a href="{{ path('resultat', { id: resultats.i3P.id, name: 'I3P' }) }}">
+                                        <li class="list-group-item">
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-3">
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading text-left">
+                                                                I3P Resultat
+                                                            </div>
+                                                            <div class="widget-subheading opacity-10 text-left">
+                                                                <span class="pr-2">Consulter les resultats</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        </a>
+                                    {% endif %}
+                                    {% if resultats.riasec %}
+                                       <a href="{{ path('resultat', { id: resultats.riasec.id, name: 'IRMR' }) }}">
+                                        <li class="list-group-item">
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-3">
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading text-left">
+                                                                Riasec Resultat
+                                                            </div>
+                                                            <div class="widget-subheading opacity-10 text-left">
+                                                                <span class="pr-2">Consulter les resultats</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        </a>
+                                    {% endif %}
+                                    {% if resultats.positioning %}
+                                        <li class="list-group-item{% if user.authResultPositioning %} widget-chart widget-chart-hover{% else %}{% endif %}">
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-3">
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading text-left">
+                                                                Positioning Skills Resultat
+                                                            </div>
+                                                            <div class="widget-subheading opacity-10 text-left">
+                                                                {% if user.authResultPositioning %}
+                                                                    <span class="pr-2">Vos resultats ne sont pas consultable</span>
+                                                                {% else %}
+                                                                    <span class="pr-2">Consulter les resultats</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li class="list-group-item">
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-3">
+                                                    <div class="widget-content-left flex2">
+                                                        <div class="widget-heading text-left">
+                                                            Aucun resultat
+                                                        </div>
+                                                        <div class="widget-subheading opacity-10 text-left">
+                                                            <span class="pr-2">Vous n'avez passé aucun test.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+{#                    <div class="tab-pane" id="tab-2-eg2">#}
+{#                        <div class="col-xl-12">#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+            <div class="text-center d-block card-footer">
+                <button id="profil-close" class="mr-2 btn btn-outline-danger btn-pill btn-hover-shine border-0 btn-shadow">Fermer</button>
+            </div>
+        </div>
+{% endblock %}
+{% block bottom_javascript %}
+    <script>
+        tippy('#buttonPass', {
+            content: 'Modifier votre mot de passe',
+        });
+        tippy('#buttonEmail', {
+            content: 'Modifier votre email',
+        });
+    </script>
+{% endblock %}

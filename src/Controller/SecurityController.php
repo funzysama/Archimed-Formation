@@ -5,13 +5,16 @@ namespace App\Controller;
 use App\Entity\Utilisateur;
 use App\Form\ChangeEmailType;
 use App\Form\ChangePassType;
+use App\Form\RegistrationFormType;
 use App\Repository\UtilisateurRepository;
+use http\Exception\BadQueryStringException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class SecurityController extends AbstractController
 {
@@ -53,6 +56,57 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/profil/view/{id}", name="viewProfile")
+     * @param Utilisateur $user
+     * @return Response
+     */
+    public function viewProfile(Utilisateur $user): Response
+    {
+        $i3pResultat = $user->getResultatI3P();
+        $riasecResultat = $user->getResultatRiasec();
+        $resultat = [];
+        $resultat["i3P"] = null;
+        $resultat["riasec"] = null;
+        $resultat["positioning"] = null;
+        if($i3pResultat){
+            $resultat["i3P"] = $i3pResultat;
+        }
+        if($riasecResultat){
+            $resultat["riasec"] = $riasecResultat;
+        }
+        return $this->render('security/viewProfile.html.twig', [
+            'user'      => $user,
+            'resultats'  => $resultat
+        ]);
+    }
+
+    /**
+     * @Route("/user/edit/{id}")
+     */
+    public function editUser(Request $request, Utilisateur $user)
+    {
+        if($user){
+            $form = $this->createForm(RegistrationFormType::class, $user);
+
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute('main_users');
+            }
+
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(),
+                'user'             => $user
+            ]);
+        }else{
+            throw new NotFoundResourceException("Cet utilisateur n'existe pas.", 404);
+        }
+    }
 
     /**
      * @Route("/security/changePass", name="security_changePass")
@@ -185,4 +239,5 @@ class SecurityController extends AbstractController
         $em->flush();
         return $this->json('Ok');
     }
+
 }

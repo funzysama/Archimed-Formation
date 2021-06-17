@@ -7,6 +7,11 @@
     {{ parent() }}
 {% endblock %}
 {% block page_content %}
+    {% if user is defined and user.role == "ROLE_USER" %}
+        {% set class = "is-block col-sm-12 marginTop1" %}
+    {% else %}
+        {% set class = "is-hidden col-sm-12 marginTop1" %}
+    {% endif %}
     <div class="col-md-12" data-controller="datePicker">
         {{ form_start(registrationForm) }}
             <div class="mx-auto app-login-box col-md-12">
@@ -38,7 +43,7 @@
                                         {{ form_widget(registrationForm.role) }}
                                     </div>
                                 {% endif %}
-                                <div class="is-hidden col-sm-12 marginTop1" id="visibility-container">
+                                <div class="{{ class }}" id="visibility-container">
                                     {{ form_widget(registrationForm.module) }}
                                     <div class="d-flex flex-column justify-content-around marginTop1 full-width" id="testResultatContainer">
                                         {{ form_row(registrationForm.authResultI3P) }}
@@ -48,7 +53,11 @@
                                 </div>
                             </div>
                             <div class="modal-footer d-block text-center">
-                                <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Ajouter utilisateur</button>
+                                {% if user is defined %}
+                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Enregistrer</button>
+                                {% else %}
+                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Ajouter utilisateur</button>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
