@@ -122,6 +122,7 @@
     "jquery-sparkline": "^2.4.0",
     "jquery-validation": "^1.19.0",
     "jquery.fancytree": "^2.30.2",
+    "jquery-ui": "^1.12.1",
     "jszip": "^3.6.0",
     "jvectormap-next": "^3.0.0",
     "labelmake": "^2.0.17",

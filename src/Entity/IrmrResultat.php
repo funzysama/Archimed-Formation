@@ -147,6 +147,11 @@ class IrmrResultat
      */
     private $utilisateur;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Consistance;
+
 
     public function getId(): ?int
     {
@@ -488,6 +493,18 @@ class IrmrResultat
         }
 
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getConsistance(): ?string
+    {
+        return $this->Consistance;
+    }
+
+    public function setConsistance(?string $Consistance): self
+    {
+        $this->Consistance = $Consistance;
 
         return $this;
     }

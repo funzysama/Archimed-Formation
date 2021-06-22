@@ -33,9 +33,6 @@ export default class extends Controller
                         title: 'Email',
                         data: 'email',
                         searchable: false,
-                        // render: (d, t, r, m) => {
-                        //     return '<button id="show-profil" class="btn border-0 btn-hover-shine btn-outline-dark btn-pill" data-email="'+d+'">'+d+'</button>'
-                        // }
                     },
                     {
                         title: 'Agence',
@@ -102,9 +99,6 @@ export default class extends Controller
                     } );
                 },
             });
-            // $('input').each(() => {
-            //     $('input#chkToggle').bootstrapToggle()
-            // })
             $(() => {
                 $('input#chkToggle').change((e) => {
                     let data = {
@@ -138,6 +132,17 @@ export default class extends Controller
                         let basepath = window.location.origin
                         let url = new URL(basepath+'/user/edit/'+e.target.dataset.id);
                         window.location.replace(url);
+                    }
+                    if(e.target.id === "delete-profil"){
+                        if ( confirm( "Etes-vous sûr de vouloir supprimer cet utilisateur?" ) ) {
+                            $.ajax({
+                                url: '/user/delete/'+e.target.dataset.id,
+                                success: () =>{
+                                    window.location.reload();
+                                }
+                            })
+                        } else {
+                        }
                     }
 
                 })

@@ -9,6 +9,7 @@ use App\EventSubscriber\renderSelectFieldSubscriber;
 use App\Repository\AgenceRepository;
 use App\Repository\TestRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,6 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -107,7 +109,24 @@ class RegistrationFormType extends AbstractType
                 'row_attr' => [
                     'class' => 'd-flex col-sm-12'
                 ],
-            ]);
+            ])
+                ->add('consultant', EntityType::class, [
+                    'placeholder'       => 'Choisissez un consultant...',
+                    'class'             => Utilisateur::class,
+                    'choice_label'      => function (Utilisateur $utilisateur) {
+                        return $utilisateur->getNom() . ' ' . $utilisateur->getPrenom();
+                    },
+                    'query_builder' => function (EntityRepository $er) {
+                            return $er->createQueryBuilder('u')
+                                ->orWhere('u.roles = :role1')
+                                ->orWhere('u.roles = :role2')
+                                ->setParameters([
+                                    'role1' => '["ROLE_ADMIN"]',
+                                    'role2' => '["ROLE_CONSULTANT"]'
+                                ]);
+                    }
+                ])
+            ;
         }
         $builder->add('agence', EntityType::class, [
                 'placeholder'   => 'Sélectionner une agence...',
@@ -141,5 +160,6 @@ class RegistrationFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Utilisateur::class,
         ]);
+
     }
 }

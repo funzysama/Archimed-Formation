@@ -5,12 +5,11 @@ namespace App\Controller;
 use App\Entity\Ressource;
 use App\Form\RessourceType;
 use App\Repository\RessourceRepository;
+use App\Service\UploadService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @Route("/admin/ressource")
@@ -32,41 +31,33 @@ class RessourceController extends AbstractController
     /**
      * @Route("/new", name="ressource_new", methods={"GET","POST"})
      * @param Request $request
-     * @param SluggerInterface $slugger
+     * @param UploadService $uploadService
      * @return Response
      */
-    public function new(Request $request, SluggerInterface $slugger): Response
+    public function new(Request $request, UploadService $uploadService): Response
     {
         $ressource = new Ressource();
+
         $form = $this->createForm(RessourceType::class, $ressource);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
             if($image){
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $image->move(
-                        $this->getParameter('ressource_image_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                $ressource->setImage($newFilename);
+                $uploadDir = $this->getParameter('ressource_image_directory');
+                $filename = $uploadService->upload($image, $uploadDir);
+                $ressource->setImage($filename);
 
             }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($ressource);
-            $entityManager->flush();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ressource);
+            $em->flush();
 
             return $this->redirectToRoute('ressource_index');
+
         }
 
         return $this->render('ressource/new.html.twig', [
@@ -91,15 +82,29 @@ class RessourceController extends AbstractController
      * @Route("/{id}/edit", name="ressource_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Ressource $ressource
+     * @param UploadService $uploadService
      * @return Response
      */
-    public function edit(Request $request, Ressource $ressource): Response
+    public function edit(Request $request, Ressource $ressource, UploadService $uploadService): Response
     {
         $form = $this->createForm(RessourceType::class, $ressource);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $image = $form->get('image')->getData();
+
+            if($image){
+
+                $uploadDir = $this->getParameter('ressource_image_directory');
+                $filename = $uploadService->upload($image, $uploadDir);
+                $ressource->setImage($filename);
+
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ressource);
+            $entityManager->flush();
 
             return $this->redirectToRoute('ressource_index');
         }
@@ -112,6 +117,9 @@ class RessourceController extends AbstractController
 
     /**
      * @Route("/delete/{id}", name="ressource_delete", methods={"POST"})
+     * @param Request $request
+     * @param Ressource $ressource
+     * @return Response
      */
     public function delete(Request $request, Ressource $ressource): Response
     {
@@ -122,5 +130,21 @@ class RessourceController extends AbstractController
         }
 
         return $this->redirectToRoute('ressource_index');
+    }
+
+    /**
+     * @Route("/delete/image/{id}", methods={"POST"})
+     * @param Request $request
+     * @param Ressource $ressource
+     * @return Response
+     */
+    public function deleteImage(Request $request, Ressource $ressource): Response
+    {
+        $ressource->setImage('');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($ressource);
+        $entityManager->flush();
+
+        return $this->json('Ok');
     }
 }

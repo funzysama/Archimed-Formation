@@ -13,9 +13,13 @@ class ResultatController extends AbstractController
     /**
      * @Route("/resultat/{name}/{id}", name="resultat")
      */
-    public function index($name, $id, pdfDataFormatter $dataFormatter): Response
+    public function index($name, $id): Response
     {
-        $repository = $this->getDoctrine()->getRepository('App\Entity\\'.$name.'Resultat');
+        if($name === 'IRMR'){
+            $repository = $this->getDoctrine()->getRepository('App\Entity\IrmrResultat');
+        }else{
+            $repository = $this->getDoctrine()->getRepository('App\Entity\\'.$name.'Resultat');
+        }
 
         $resultat = $repository->find($id);
         $controller = 'App\Controller\Tests\\'.$name.'Controller';

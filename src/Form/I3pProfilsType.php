@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\I3pProfils;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,10 @@ class I3pProfilsType extends AbstractType
         $builder
             ->add('ProfilPerso')
             ->add('ProfilPro')
-            ->add('Valeurs')
+            ->add('Valeurs', TextType::class, [
+                'mapped'    => false,
+                'required'  => false,
+            ])
         ;
     }
 

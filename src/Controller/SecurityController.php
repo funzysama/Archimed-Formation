@@ -109,6 +109,23 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/user/delete/{id}")
+     */
+    public function deleteUser(Utilisateur $user)
+    {
+        if($user){
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+
+            return $this->json('ok !');
+        }else{
+            throw new NotFoundResourceException("Cet utilisateur n'existe pas.", 404);
+        }
+    }
+
+    /**
      * @Route("/security/changePass", name="security_changePass")
      */
     public function changePassword(UserPasswordEncoderInterface $passwordEncoder, Request $request): Response

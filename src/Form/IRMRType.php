@@ -29,7 +29,7 @@ class IRMRType extends AbstractType
                             'class'     => 'inputsContainer marginTop1 col-sm-12'
                         ],
                         'row_attr'      => [
-                            'class'     => 'question-row marginTop1',
+                            'class'     => 'question-row marginTop1 card',
                             'id'        => 'question'.$j
                         ],
                         'label'         => $intitule,

@@ -34,13 +34,15 @@
                             <h6>Vos 2 pôles les plus marqués :</h6>
                             <h6>RIASEC majeur : <strong>{{ resultat.majeur }}</strong></h6>
                             <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
+                            <hr>
                             <h6>Vos 2 pôles les moins marqués :</h6>
                             <h5><b>{{ resultat.inferieur1 }}</b></h5>
                             <h5><b>{{ resultat.inferieur2 }}</b></h5>
-                            <h6>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></h6>
-                            <h6>Valeur de consistance de votre profil : (à ajouter)</h6>
+                            <hr>
+                            <h6 class="text-danger"><strong>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></strong></h6>
+                            <h5>Valeur de consistance de votre profil : {{ resultat.consistance }}</h5>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 marginTop1">
                             <form action="{{ path('api_pole_emploi') }}" method="post">
                                 <input type="hidden" value="metier" name="type" id="type">
                                 <input type="hidden" value="{{ resultat.majeur|initial }}" name="riasecMajeur" id="riasecMajeur">
@@ -88,7 +90,7 @@
             </div>
         </div>
         <div class="row full-width">
-            <div class="d-flex col-sm-12 justify-content-around flex-row flex-wrap">
+            <div class="d-flex col-sm-12 justify-content-around flex-row flex-nowrap">
                 <div id="majeur" class="riasec-card">
                     <h5>Riasec Majeur</h5>
                     <div class="flip-card">
@@ -102,19 +104,48 @@
                         </div>
                     </div>
                 </div>
-                <div id="mineur" class="riasec-card">
-                    <h5>Riasec Mineur</h5>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="content-card-front-{{ resultat.mineur|minimize }}"></div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="content-card-back-{{ resultat.mineur|minimize }}"></div>
+                {% if twoMineur == true %}
+                    <div id="mineur" class="riasec-card">
+                        <h5>Premier Riasec Mineur</h5>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="content-card-front-{{ minor1|minimize }}"></div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div class="content-card-back-{{ minor1|minimize }}"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div id="mineur" class="riasec-card">
+                        <h5>Deuxieme Riasec Mineur</h5>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="content-card-front-{{ minor2|minimize }}"></div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div class="content-card-back-{{ minor2|minimize }}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="mineur" class="riasec-card">
+                        <h5>Riasec Mineur</h5>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="content-card-front-{{ resultat.mineur|minimize }}"></div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div class="content-card-back-{{ resultat.mineur|minimize }}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

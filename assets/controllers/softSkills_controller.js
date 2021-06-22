@@ -3,6 +3,16 @@ import { Controller } from 'stimulus';
 export default class extends Controller
 {
     connect(){
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var min = 0.5;
+                var max = 1;
+                var score = parseFloat(data[0]);
+
+                return min <= score && score <= max;
+
+            }
+        );
         let table = $('#dataTable');
 
         let dataSet = JSON.parse(table[0].dataset.tabledata);
@@ -34,15 +44,6 @@ export default class extends Controller
                             searchable: false
                         },
                     ],
-                    // columnDefs:[
-                    //     {
-                    //         "targets": 2,
-                    //         "data": "libelle",
-                    //         "render": ( data, type, row, meta ) => {
-                    //             return '<div class="pointer btn border-0 btn-hover-shine btn-outline-dark btn-pill" data-code="'+row.code+'">'+data+'</div>';
-                    //         }
-                    //     },
-                    // ],
                 };
             table.DataTable(options);
         });

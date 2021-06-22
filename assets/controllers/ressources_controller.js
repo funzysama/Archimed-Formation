@@ -19,7 +19,6 @@ export default class extends Controller {
         var filename = jQuery('.js-open-modal')[0].dataset.filename
 
         function previewFile(filename) {
-            console.log(filename)
             var href = '/manager/file/'+filename+'?conf=main&route=/ressources/images';
             $displayModal.find('img').attr('src', href);
         }
@@ -27,6 +26,16 @@ export default class extends Controller {
         jQuery(document).on('click', '.js-open-modal', () => {
             previewFile(filename);
             $displayModal.modal("show");
+        });
+        $(document).ready(() => {
+            let table = $('#dataTable');
+            table.DataTable({
+                dom: 'ft',
+                responsive: true,
+                paginate: false,
+            });
+            $('#searchBox')[0].appendChild($('#dataTable_filter')[0]);
+
         });
     }
 }

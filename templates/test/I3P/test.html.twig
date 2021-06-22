@@ -18,9 +18,14 @@
         {% elseif question.vars.name == 'Question0' %}
             {{ form_row(question) }}
         {% else %}
-            <div class="card i3p-control">
-                <div class="i3p-intitule">
-                    {{ form_label(question) }}
+            <div class="card i3p-control card-shadow-dark">
+                <div class="i3p-intitule d-flex">
+                    <div>
+                        {{ question.vars.name|questionNum }}.
+                    </div>
+                    <div class="text-center">
+                        {{ form_label(question) }}
+                    </div>
                 </div>
                 <div class="i3p-inputs">
                     {{ form_widget(question) }}

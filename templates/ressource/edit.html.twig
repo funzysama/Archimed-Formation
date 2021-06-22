@@ -3,11 +3,70 @@
 {% block title %}Edit Ressource{% endblock %}
 
 {% block page_content %}
-    <h1>Edit Ressource</h1>
+    <div class="card col-sm-6 margin-h-center" data-controller="imageRess">
+        <div class="card-header text-center">
+            <h4>Edit Ressource</h4>
+        </div>
+        {{ form_start(form) }}
+        <div class="card-body">
+            {{ form_row(form.nom) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.url) }}
+            {% if ressource.image %}
+                <div class="is-hidden">
+                    {{ form_row(form.image) }}
+                </div>
+                <div class="card">
+                    <div class="card-header d-flex justify-content-center">
+                        <div>
+                            Image d'origine:
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ asset('/uploads/ressources/images/'~ressource.image) }}" alt="Image originale">
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <div>
+                            <button
+                                    type="button"
+                                    id="delete_image"
+                                    data-id="{{ ressource.id }}"
+                                    class="btn btn-icon btn-outline-danger border-0 btn-shadow btn-pill"
+                                    data-trigger="click"
+                                    data-container="body"
+                                    data-toggle="modal"
+                                    data-target="#js-display-image"
+                                    data-placement="left"
+                            >
+                                <i class="btn-icon-wrapper fa fa-trash"></i>
+                                supprimer l'image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                {{ form_row(form.image) }}
+            {% endif %}
 
-    {{ include('ressource/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn">Enregistrer</button>
+            <a href="{{ path('ressource_index') }}">back to list</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="modal fade" id="js-display-image" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Etes-vous sûr de vouloir supprimer l'image de cette ressource ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Oui</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('ressource_index') }}">back to list</a>
-
-    {{ include('ressource/_delete_form.html.twig') }}
 {% endblock %}

@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Ressource;
-use App\Form\Type\RessourceImageType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -20,9 +20,9 @@ class RessourceType extends AbstractType
             ->add('nom')
             ->add('url')
             ->add('description')
-            ->add('image', RessourceImageType::class, [
+            ->add('image', FileType::class, [
                 'label' => 'Image associer',
-
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new Image([

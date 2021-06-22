@@ -37,19 +37,22 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $randomPass = $passwordGenerator->generateRandomStrongPassword();
-            $consultant = $this->getUser();
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $randomPass
                 )
             );
-            $user->setActif(true);
-            if($form->has('role')){
+            if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
                 $role = array($form->get('role')->getData());
+                $consultant = $form->get('consultant')->getData();
+                dump($consultant);
             }else{
                 $role = ["ROLE_USER"];
+                $consultant = $this->getUser();
+
             }
+            $user->setActif(true);
             $user->setRoles($role);
             if($role === ["ROLE_USER"]){
                 $consultant->addClient($user);

@@ -4,9 +4,23 @@
 
 {% block page_content %}
 <div class="card main-card col-md-12" data-controller="ressources">
-    <div class="card-header">Gestion Ressources</div>
+    <div class="card-header">
+        <div class="col-sm-12 d-flex flex-row justify-content-between align-items-center">
+            <div class="col-sm-4">
+                <a href="{{ path('ressource_new') }}"><button class="btn btn-pill border-0 btn-transition btn-shadow btn-hover-shine btn-outline-dark btn-icon"><i class="fa fa-plus btn-icon-wrapper"></i>Ajouter une ressource</button></a>
+            </div>
+            <div class="col-sm-4">
+                Gestion Ressources
+            </div>
+            <div class="col-sm-4">
+                <div class="dataTables_wrapper no-footer d-flex justify-content-center">
+                    <div id="searchBox"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card-body">
-        <table class="table">
+        <table class="table" id="dataTable">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -39,8 +53,10 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('ressource_edit', {'id': ressource.id}) }}">Modifier</a>
-                        {{ include('ressource/_delete_form.html.twig') }}
+                        <div class="d-flex flex-column flex-nowrap justify-content-between">
+                            <a href="{{ path('ressource_edit', {'id': ressource.id}) }}"><button class="btn btn-outline-dark border-0 btn-shadow btn-pill marginBot1">Modifier</button></a>
+                            {{ include('ressource/_delete_form.html.twig') }}
+                        </div>
                     </td>
                 </tr>
             {% else %}
@@ -52,7 +68,6 @@
         </table>
     </div>
     <div class="card-footer">
-        <a href="{{ path('ressource_new') }}"><button class="btn btn-pill border-0 btn-transition btn-shadow btn-hover-shine btn-outline-dark btn-icon"><i class="fa fa-plus btn-icon-wrapper"></i>Ajouter une ressource</button></a>
     </div>
 </div>
     <div class="modal fade" id="js-display-image" tabindex="-1" style="display: none;" aria-hidden="true">

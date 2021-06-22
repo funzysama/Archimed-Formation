@@ -435,42 +435,32 @@ class IRMRCalculator
             }
             return null;
         });
-
-        $twoLowest = array_filter($baseValueArray, function ($value) use ($baseValueArray) {
-            if($value == min($baseValueArray)){
-                return $value;
-            }
-            if($value == $this->twoLowest($baseValueArray)){
-                return $value;
-            }
-            if($value == min($baseValueArray) || $value == 0){
-                $data = [];
-                dump($data);
-                array_push($data, $value);
-                return $data;
-            }
-            return null;
-        });
-
         arsort($twoBest);
         $majMin = array_flip($twoBest);
-        dump($twoLowest);
-        arsort($twoLowest);
-        $inferieurs = array_flip($twoLowest);
-        if(in_array(0, $baseValueArray)){
-            $flippedArray = array_flip($baseValueArray);
-            ksort($flippedArray);
-            $firstLowest = array_shift($flippedArray);
-        }else{
-            $firstLowest = $inferieurs[min($baseValueArray)];
-        }
-        $secondLowest = $inferieurs[$this->twoLowest($baseValueArray)];
         $firstBest = $majMin[max($baseValueArray)];
         $secondBest = $majMin[$this->twoHighest($baseValueArray)];
+        $checkDoubleMajeur = array_keys($baseValueArray, $baseValueArray[$firstBest]);
+        if(count($checkDoubleMajeur) === 2){
+            unset($baseValueArray[$firstBest]);
+            $secondBest = array_search(max($baseValueArray), $baseValueArray);
+        }elseif(count($checkDoubleMajeur) === 3){
+            unset($baseValueArray[$firstBest]);
+            $secondBest = max($baseValueArray);
+            $doubleMineur = array_keys($baseValueArray, $secondBest);
+            $secondBest = $doubleMineur[0].' - '.$doubleMineur[1];
+
+        }elseif(count($checkDoubleMajeur) < 2){
+            $checkDoubleMineur = array_keys($baseValueArray, $baseValueArray[$secondBest]);
+            if(count($checkDoubleMineur) > 1){
+                $secondBest = $checkDoubleMineur[0].' - '.$checkDoubleMineur[1];
+            }
+        }
         $IrmrResultat->setMajeur($firstBest);
         $IrmrResultat->setMineur($secondBest);
-        $IrmrResultat->setInferieur1($firstLowest);
-        $IrmrResultat->setInferieur2($secondLowest);
+        $lowest = $this->getTwoLowest($baseValueArray);
+        $IrmrResultat->setInferieur1($lowest[0]);
+        $IrmrResultat->setInferieur2($lowest[1]);
+        $IrmrResultat = $this->getConsistance($IrmrResultat);
 
         return $IrmrResultat;
     }
@@ -497,6 +487,84 @@ class IRMRCalculator
         $keys[ array_search( $old_key, $keys ) ] = $new_key;
 
         return array_combine( $keys, $array );
+    }
+
+    private function getTwoLowest($baseValueArray)
+    {
+        $lowest = [];
+        if(in_array(0, $baseValueArray)){
+            $twoLowest = array_keys($baseValueArray, 0);
+            if(count($twoLowest) == 2){
+                $lowest[0] = $twoLowest[0];
+                $lowest[1] = $twoLowest[1];
+            }else{
+                $flippedArray = array_flip($baseValueArray);
+                unset($flippedArray[0]);
+                $unflippedArray = array_flip($flippedArray);
+                $lowest[0] = array_keys($unflippedArray, min($unflippedArray))[0];
+                $lowest[1] = $twoLowest[0];
+            }
+        }else{
+            $twoLowest = array_filter($baseValueArray, function ($value) use ($baseValueArray) {
+                if($value == min($baseValueArray)){
+                    return $value;
+                }
+                if($value == $this->twoLowest($baseValueArray)){
+                    return $value;
+                }
+                if($value == min($baseValueArray) || $value == 0){
+                    $data = [];
+                    array_push($data, $value);
+                    return $data;
+                }
+                return null;
+            });
+            arsort($twoLowest);
+            $inferieurs = array_flip($twoLowest);
+            if(in_array(0, $baseValueArray)){
+                $flippedArray = array_flip($baseValueArray);
+                ksort($flippedArray);
+                $secondLowest = array_shift($flippedArray);
+            }else{
+                $secondLowest = $inferieurs[min($baseValueArray)];
+            }
+            $firstLowest = $inferieurs[$this->twoLowest($baseValueArray)];
+            if($firstLowest === $secondLowest){
+                unset($baseValueArray[$firstLowest]);
+                $secondLowest = array_search(min($baseValueArray), $baseValueArray);
+            }
+            $lowest[0] = $firstLowest;
+            $lowest[1] = $secondLowest;
+        }
+        return $lowest;
+
+    }
+
+    public function getConsistance($IrmrResultat)
+    {
+
+        $Majeur = $IrmrResultat->getMajeur()[0];
+        $Mineur = $IrmrResultat->getMineur()[0];
+
+        $riasec = 'RIASEC';
+        $posMajeur = strpos($riasec, $Majeur)+1;
+        $posMineur = strpos($riasec, $Mineur)+1;
+        $indice = ($posMajeur - $posMineur);
+        if($indice < 0){
+            $indice = 1 * abs($indice);
+        }
+        if($indice === 1 || $indice === 5){
+            $consistance = 'Fort';
+        }
+        if($indice === 2 || $indice === 4){
+            $consistance = 'Moyen';
+        }
+        if($indice === 3){
+            $consistance = 'Faible';
+        }
+        $IrmrResultat->setConsistance($consistance);
+
+        return $IrmrResultat;
     }
 
 }

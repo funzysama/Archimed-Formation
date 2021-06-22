@@ -16,11 +16,6 @@
     max-height: calc(100vh - 25%);
 }
 
-.skin-black .left-side, .skin-black .main-sidebar, .skin-black .wrapper {
-    background-color: #222d32;
-    overflow: -moz-hidden-unscrollable;
-}
-
 .testI3P-formGroup{
     width: 30%;
     min-height: 130px;

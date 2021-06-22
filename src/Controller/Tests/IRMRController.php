@@ -64,9 +64,24 @@ class IRMRController extends AbstractController
         $orderedPourcent["Entrepreneur"] = $resultat->getEntrepreneurPourcent();
         $orderedPourcent["Conventionnel"] = $resultat->getConventionnelPourcent();
         arsort($orderedPourcent);
+        $minor1 = '';
+        $minor2 = '';
+        if(strlen($resultat->getMineur()) > 14){
+            $twoMineur = true;
+            $minors = preg_split('/ - /', $resultat->getMineur());
+            $minor1 = $minors[0];
+            $minor2 = $minors[1];
+        }else{
+            $twoMineur = false;
+        }
+        $calculator = new IRMRCalculator($resultat, $this->getUser());
+        $resultat = $calculator->getConsistance($resultat);
         return $this->render('test/IRMR/resultat.html.twig', [
             'resultat'              => $resultat,
-            'orderedPourcent'       => $orderedPourcent
+            'orderedPourcent'       => $orderedPourcent,
+            'twoMineur'             => $twoMineur,
+            'minor1'                => $minor1,
+            'minor2'                => $minor2
         ]);
     }
 

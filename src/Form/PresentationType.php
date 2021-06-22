@@ -15,7 +15,7 @@ class PresentationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
+            ->add('titre', TextareaType::class)
             ->add('Presentation', TextareaType::class)
         ;
     }

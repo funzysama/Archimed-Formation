@@ -14,7 +14,6 @@ import './scripts-init/form-components/toggle-switch';
 
 import './styles/app.css';
 import './styles/main.css';
-import './styles/main.scss';
 import './styles/gestion-i3p.css';
 import './styles/index.css';
 import './styles/profile.css';
@@ -31,6 +30,8 @@ import './styles/dataTables.semanticui.css';
 import './styles/jquery.dataTables.css';
 import './styles/responsive.jqueryui.min.css';
 import './styles/pe-icon-7-stroke.css';
+
+import jquery_ui from "jquery-ui";
 
 document.addEventListener("touchstart", function() {}, true);
 

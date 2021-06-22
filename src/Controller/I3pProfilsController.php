@@ -65,16 +65,26 @@ class I3pProfilsController extends AbstractController
     {
         $form = $this->createForm(I3pProfilsType::class, $i3pProfil);
         $form->handleRequest($request);
+        $valeurs = $i3pProfil->getValeurs();
+        if($valeurs !== ""){
+            $valeursArray = explode(' | ', $valeurs);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            $valeursJson = $request->get('valeursJson');
+            $valeurs = json_decode($valeursJson);
+            $stringValeur = implode(' | ' ,$valeurs);
+            $i3pProfil->setValeurs($stringValeur);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($i3pProfil);
+            $em->flush();
             return $this->redirectToRoute('i3p_profils_index');
         }
 
         return $this->render('i3p_profils/edit.html.twig', [
             'i3p_profil' => $i3pProfil,
             'form' => $form->createView(),
+            'valeurs' => $valeursArray
         ]);
     }
 

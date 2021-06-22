@@ -16,15 +16,16 @@ class twigExtension extends AbstractExtension
             new TwigFilter('formatTableData', [$this, 'formatTableData']),
             new TwigFilter('initial', [$this, 'get_initial_filter']),
             new TwigFilter('minimize', [$this, 'minimize_text']),
+            new TwigFilter('questionNum', [$this, 'question_number']),
         ];
     }
 
-    public function formatSexe(string $text)
+    public function formatSexe(string $text): string
     {
         return $text == 'M' ? 'Mr.' : 'Mme.';
     }
 
-    public function formatAge($date)
+    public function formatAge($date): ?int
     {
         if (!$date instanceof \DateTime) {
             return null;
@@ -35,7 +36,7 @@ class twigExtension extends AbstractExtension
         return $diff->y;
     }
 
-    function get_initial_filter($source)
+    function get_initial_filter($source): string
     {
         if($source != null) {
             return $source[0];
@@ -43,10 +44,18 @@ class twigExtension extends AbstractExtension
         return '';
     }
 
-    function minimize_text($source)
+    function minimize_text($source): string
     {
         if($source != null) {
             return strtolower($source);
+        }
+        return '';
+    }
+
+    function question_number($source): string
+    {
+        if($source != null){
+            return preg_replace('/[^0-9]/', '', $source);;
         }
         return '';
     }
