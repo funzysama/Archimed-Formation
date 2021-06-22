@@ -47,13 +47,13 @@ export default class extends Controller {
             let formData = form.serializeArray();
             let counter = 0;
             $(formData).each((id, data)=>{
-                console.log(data);
-                if(data.value === "0"){
+                if(data.name !== "irmr[Question0]" && data.value === "0"){
                     counter++;
                 }
             })
             if(counter > 4){
                 alert("Vous n'avez le droit qu'as 4 zero maximum.");
+                counter = 0;
             }else{
                 form[0].submit();
             }

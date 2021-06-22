@@ -113,6 +113,7 @@ class RegistrationFormType extends AbstractType
                 ->add('consultant', EntityType::class, [
                     'placeholder'       => 'Choisissez un consultant...',
                     'class'             => Utilisateur::class,
+                    'required'      => false,
                     'choice_label'      => function (Utilisateur $utilisateur) {
                         return $utilisateur->getNom() . ' ' . $utilisateur->getPrenom();
                     },
@@ -143,13 +144,17 @@ class RegistrationFormType extends AbstractType
                 'placeholder'   => 'Selectionner un module...'
             ])
             ->add('authResultI3P', CheckboxType::class, [
-                'label' => 'Resultat I3P'
+                'label' => 'Resultat I3P',
+                'required'      => false
             ])
             ->add('authResultRiasec', CheckboxType::class, [
-                'label' => 'Resultat Riasec'
+                'label' => 'Resultat Riasec',
+                'required'      => false
             ])
             ->add('authResultPositioning', CheckboxType::class, [
-                'label' => 'Resultat Positioning Skills'
+                'label' => 'Resultat Positioning Skills',
+                'required'      => false
+
             ])
         ;
     }

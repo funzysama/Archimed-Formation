@@ -11,28 +11,40 @@
 {% endblock %}
 
 {% block page_content %}
-    {{ form_start(testForm, { 'attr': {'class': 'form-i3p'} }) }}
-    {% for question in testForm.children %}
-        {% if question.vars.name == '_token' %}
-            {{ form_row(question) }}
-        {% elseif question.vars.name == 'Question0' %}
-            {{ form_row(question) }}
-        {% else %}
-            <div class="card i3p-control card-shadow-dark">
-                <div class="i3p-intitule d-flex">
-                    <div>
-                        {{ question.vars.name|questionNum }}.
+    <div class="col-sm-12">
+        <div class="col-sm-9 margin-h-center card marginTop2 marginBot2">
+            //TODO: text d'introduction et instruction pour le passage du test a définir.
+        </div>
+        <div>
+            {{ form_start(testForm, { 'attr': {'class': 'form-i3p'} }) }}
+            {% for question in testForm.children %}
+                {% if question.vars.name == '_token' %}
+                    {{ form_row(question) }}
+                {% elseif question.vars.name == 'Question0' %}
+                    {{ form_row(question) }}
+                {% else %}
+                    <div class="card i3p-control card-shadow-dark">
+                        <div class="i3p-intitule d-flex">
+                            <div>
+                                {{ question.vars.name|questionNum }}.
+                            </div>
+                            <div class="text-center">
+                                {{ form_label(question) }}
+                            </div>
+                        </div>
+                        <div class="i3p-inputs">
+                            {{ form_widget(question) }}
+                        </div>
                     </div>
-                    <div class="text-center">
-                        {{ form_label(question) }}
-                    </div>
-                </div>
-                <div class="i3p-inputs">
-                    {{ form_widget(question) }}
+                {% endif %}
+            {% endfor %}
+            <div class="col-sm-12">
+                <div class="i3p-submit col-sm-3 no-border d-flex flex-column margin-h-center marginTop2 marginBot2">
+                    <button class="btn btn-pill btn-outline-success btn-shadow btn-hover-shine btn-lg btn-wide">Valider</button>
                 </div>
             </div>
-        {% endif %}
-    {% endfor %}
-    <div class="i3p-submit"><button>Valider</button></div>
-    {{ form_end(testForm) }}
+            {{ form_end(testForm) }}
+        </div>
+    </div>
+
 {% endblock %}

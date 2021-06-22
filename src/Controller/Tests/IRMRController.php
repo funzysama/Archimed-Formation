@@ -40,9 +40,15 @@ class IRMRController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($resultat);
             $em->flush();
-            return $this->forward('App\Controller\Tests\IRMRController::resultatIRMR', [
-                'resultat'              => $resultat,
-            ]);
+            if($user->getAuthResultRiasec()){
+                return $this->forward('App\Controller\Tests\IRMRController::resultatIRMR', [
+                    'resultat'              => $resultat,
+                ]);
+            }else{
+                $this->addFlash('success', 'Vos résultats ont bien été enregistrer, votre consultant reviendras vers vous pour vous les communiquer');
+                return $this->redirectToRoute('main_home');
+
+            }
         }
         return $this->render('test/IRMR/test.html.twig', [
             'testName' => 'R.i.a.s.e.c.',
@@ -56,6 +62,7 @@ class IRMRController extends AbstractController
      */
     public function resultatIRMR($resultat): Response
     {
+
         $orderedPourcent = [];
         $orderedPourcent["Realiste"] = $resultat->getRealistePourcent();
         $orderedPourcent["Investigateur"] = $resultat->getInvestigateurPourcent();

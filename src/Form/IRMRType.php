@@ -41,7 +41,6 @@ class IRMRType extends AbstractType
                 }
                 if($sexe === "M"){ $form->add('Question0', HiddenType::class, ['attr'  => ['value' => 0]]); }
                 else{ $form->add('Question0', HiddenType::class, ['attr'  => ['value' => 1]]); }
-                $form->add('Valider', SubmitType::class);
             }
         });
     }

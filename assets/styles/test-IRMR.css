@@ -126,18 +126,18 @@
 .content-card-back-realiste{
     background: url("/assets/assets/images/riasec/cards/back-realiste.png");
     background-size: cover;
-    height: auto;
+    height: inherit;
 }
 .content-card-front-realiste{
     background: url("/assets/assets/images/riasec/cards/front-realiste.png");
     background-size: cover;
-    height: auto;
+    height: inherit;
 }
 
 .content-card-back-investigateur{
     background: url("/assets/assets/images/riasec/cards/back-investigateur.png");
     background-size: cover;
-    height: auto;
+    height: inherit;
 }
 .content-card-front-investigateur{
     background: url("/assets/assets/images/riasec/cards/front-investigateur.png");

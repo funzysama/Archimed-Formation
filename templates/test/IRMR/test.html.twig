@@ -1,5 +1,5 @@
 {% extends 'main-base.html.twig' %}
-{% block page_title%}Test {{ testName }}{% endblock %}
+{% block page_title%}{{ testName }}{% endblock %}
 {% block page_subtitle %}Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}{% endblock %}
 {% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
 {% block javascripts %}
@@ -11,9 +11,20 @@
 {% endblock %}
 {% block body_start %} data-controller="irmr"{% endblock %}
 {% block page_content %}
+<div class="col-sm-10">
+    <div class="col-sm-9 margin-h-center card marginTop2 marginBot2">
+        //TODO: text d'introduction et instruction pour le passage du test a définir.
+    </div>
     <div>
         {{ form_start(testForm, {'attr': {'id': 'riasecForm'}}) }}
         {{ form_widget(testForm) }}
+        <div class="col-sm-12">
+            <div class="i3p-submit col-sm-3 no-border d-flex flex-column margin-h-center marginTop3 marginBot3">
+                <button class="btn btn-pill btn-outline-success btn-shadow btn-hover-shine btn-lg btn-wide">Valider</button>
+            </div>
+        </div>
+
         {{ form_end(testForm) }}
     </div>
+</div>
 {% endblock %}

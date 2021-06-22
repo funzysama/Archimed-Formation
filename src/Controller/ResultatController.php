@@ -15,6 +15,11 @@ class ResultatController extends AbstractController
      */
     public function index($name, $id): Response
     {
+        if(!$this->getUser()->getAuthResultRiasec()){
+            $this->addFlash('success', 'Vos résultats ont bien été enregistrer, votre consultant reviendras vers vous pour vous les communiquer');
+            return $this->redirectToRoute('main_home');
+        }
+
         if($name === 'IRMR'){
             $repository = $this->getDoctrine()->getRepository('App\Entity\IrmrResultat');
         }else{
