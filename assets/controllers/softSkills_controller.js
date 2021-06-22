@@ -31,6 +31,9 @@ export default class extends Controller
                             title: 'Score',
                             data: "score",
                             defaultContent: "n/a",
+                            render: ( data, type, row, meta ) => {
+                                return parseFloat(data).toFixed(2);
+                            }
                         },
                         {
                             title: 'Résumé',

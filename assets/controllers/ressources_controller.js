@@ -14,20 +14,20 @@ import jQuery from 'jquery';
 export default class extends Controller {
     connect() {
 
-        var $displayModal = jQuery('#js-display-image');
-
-        var filename = jQuery('.js-open-modal')[0].dataset.filename
-
-        function previewFile(filename) {
-            var href = '/manager/file/'+filename+'?conf=main&route=/ressources/images';
-            $displayModal.find('img').attr('src', href);
-        }
-
-        jQuery(document).on('click', '.js-open-modal', () => {
-            previewFile(filename);
-            $displayModal.modal("show");
-        });
         $(document).ready(() => {
+            var $displayModal = jQuery('#js-display-image');
+
+            var filename = jQuery('.js-open-modal')[0].dataset.filename
+
+            function previewFile(filename) {
+                var href = '/manager/file/'+filename+'?conf=main&route=/ressources/images';
+                $displayModal.find('img').attr('src', href);
+            }
+
+            jQuery(document).on('click', '.js-open-modal', () => {
+                previewFile(filename);
+                $displayModal.modal("show");
+            });
             let table = $('#dataTable');
             table.DataTable({
                 dom: 'ft',

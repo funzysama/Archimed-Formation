@@ -1328,6 +1328,12 @@ strong{
     padding-right: 20px; /* adds space inside the tags for the 'x' button */
 }
 
+.full-width{
+    max-width: 100%;
+    min-width: 100%;
+    padding: 0;
+}
+
 .dashfolio-tag:hover{
     opacity:0.7;
 }

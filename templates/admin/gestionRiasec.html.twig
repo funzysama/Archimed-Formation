@@ -10,10 +10,10 @@
             <h4>Modifier</h4>
             <iframe id="iframeEdit" src="{{ path('presentation_edit', { id: test.presentation.id }) }}" frameborder="0">iframe2</iframe>
         </div>
-        <div class="col-sm-12 iframe-wrapper marginTop3">
-            <h4>Aperçu</h4>
-            <iframe id="iframeApercu" width="100%" height="100%" src="{{ path('apercu_Riasec') }}" frameborder="0"></iframe>
-        </div>
+{#        <div class="col-sm-12 iframe-wrapper marginTop3">#}
+{#            <h4>Aperçu</h4>#}
+{#            <iframe id="iframeApercu" width="100%" height="100%" src="{{ path('apercu_Riasec') }}" frameborder="0"></iframe>#}
+{#        </div>#}
     </div>
 {% endblock %}
 {% block tab2_content %}
@@ -57,3 +57,43 @@
         </div>
     </div>
 {% endblock %}
+
+{% block bottom_javascript %}
+    <script src="{{ asset('res/js/jquery.ba-resize.js') }}"></script>
+    <script>
+        $(function(){
+            let iframeEditProfils = $('#iframeEditProfils');
+            iframeEditProfils.on('load', function(){
+                var iframe_content = iframeEditProfils.contents().find('body');
+                iframe_content.on('resize', function(){
+                    var elem = $(this);
+                    iframeEditProfils.css({ height: elem.outerHeight( true ) });
+                    $('#iframeEditProfils').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
+                });
+                iframe_content.resize();
+            });
+            iframeEditProfils.on('load', (e) => {
+                let path = e.target.contentWindow.location.pathname;
+                if(path === '/i3p/profils/'){
+                    iframeEditProfils.attr('src', '');
+                    $('.content').scrollTop(0);
+                    $('#i3pProfil')[0].value = 0;
+                }
+            })
+        });
+        $(function(){
+            let iframePresentation = $('#iframeEdit');
+            iframePresentation.on('load', function(){
+                var iframe_content = iframePresentation.contents().find('body');
+                iframe_content.on('resize', function(){
+                    var elem = $(this);
+                    iframePresentation.css({ height: elem.outerHeight( true ) });
+                    $('#iframeEdit').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
+                });
+                iframe_content.resize();
+            });
+        });
+    </script>
+
+{% endblock %}
+

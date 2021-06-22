@@ -140,7 +140,10 @@
 }
 
 .dropdown-menu-header {
-  color: $white;
+  color: inherit;
+  overflow: hidden;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
   margin-top: -$dropdown-padding-y;
   margin-bottom: $dropdown-padding-y;
   position: relative;
@@ -150,6 +153,7 @@
     margin: -1px -1px 0;
     padding: ($spacer * 1.5) ($spacer / 2);
     position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   .menu-header-image {

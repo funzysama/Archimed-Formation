@@ -9,13 +9,11 @@
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
+{% block body_start %} data-controller="irmr"{% endblock %}
 {% block page_content %}
-    {{ form_start(testForm, {'attr': {'onsubmit': 'return preSubmitCheck(event)', 'id': 'riasecForm'}}) }}
-    {{ form_widget(testForm) }}
-    {{ form_end(testForm) }}
-{% endblock %}
-{% block bottom_javascript %}
-    <script>
-        onInit()
-    </script>
+    <div>
+        {{ form_start(testForm, {'attr': {'id': 'riasecForm'}}) }}
+        {{ form_widget(testForm) }}
+        {{ form_end(testForm) }}
+    </div>
 {% endblock %}
