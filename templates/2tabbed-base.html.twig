@@ -53,7 +53,7 @@ fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini
         </section>
     </aside>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper{% block loading %}{% endblock %}">
         {% block full_page_content %}
             <section class="content-header">
                 <h1>

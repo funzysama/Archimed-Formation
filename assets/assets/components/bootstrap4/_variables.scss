@@ -74,6 +74,7 @@ $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
+$orange:        $orange !default;
 $light-orange:  #fff7ee !default;
 $very-light-orange: #fffcf9 !default;
 
@@ -88,8 +89,12 @@ $theme-colors: map-merge(
     "warning":    $warning,
     "danger":     $danger,
     "light":      $light,
-    "dark":       $dark
-  ),
+    "dark":       $dark,
+    "orange":     $orange,
+    "light-orange":  $light-orange,
+    "very-light-orange": $very-light-orange
+
+),
   $theme-colors
 );
 

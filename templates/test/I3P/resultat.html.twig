@@ -1,9 +1,17 @@
 {% extends 'main-base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .text-align-unset{
+            text-align: unset;
+        }
+    </style>
+{% endblock %}
 {% block page_content %}
     <div class="col-sm-3 margin-h-center marginTop1 marginBot2">
         <a href="{{ path('resultat_i3p_pdf', { id: resultat.id }) }}"><button class="btn btn-pill btn-shadow btn-outline-danger btn-lg btn-hover-shine btn-icon" id="pdf-button2"><i class="btn-icon-wrapper fa fa-file-pdf"></i>Télécharger le Pdf</button></a>
     </div>
-    <div class="col-sm-10 card d-flex flex-sm-column justify-content-center margin-h-center" style="margin: auto 0;padding:25px;">
+    <div class="col-sm-10 card d-flex flex-sm-column justify-content-center margin-h-center text-align-unset" style="margin: auto 0;padding:25px;">
         <div id="page1">
             <div class="pdf-header">
                 <div class="pdf-header-image">
@@ -19,7 +27,7 @@
             <br>
             <br>
             <h4>Nom : <strong>{{ resultat.utilisateur.nom }}</strong></h4>
-            <h4>Prenom : <strong>{{ resultat.utilisateur.prenom }}</strong></h4>
+            <h4>Prénom : <strong>{{ resultat.utilisateur.prenom }}</strong></h4>
             <table class="tableProfil">
                 <tr>
                     <th>VOTRE PROFIL</th>

@@ -51,7 +51,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('sexe', ChoiceType::class, [
                 'choices' => [
-                    'Mr' => 'M',
+                    'M.' => 'M',
                     'Mme' => 'F',
                     ],
                 'row_attr' => [
@@ -82,6 +82,7 @@ class RegistrationFormType extends AbstractType
                 'label'     => 'Date de naissance: ',
                 'widget' => 'single_text',
                 'html5' => false,
+                'required' => false,
                 'row_attr' => ['class' => 'dateDeNaissance'],
                 'attr' => ['class' => 'js-datepicker'],
                 ])
@@ -89,7 +90,6 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Email :',
                 'attr' => [
                     'placeholder' => 'Email...',
-                    'class'       => 'dsq'
                 ],
                 'row_attr' => [
                     'class' => 'd-flex col-sm-12'
@@ -133,28 +133,45 @@ class RegistrationFormType extends AbstractType
                 'placeholder'   => 'Sélectionner une agence...',
                 'class'         => Agence::class,
                 'choice_label'  => 'nom',
-                'label'         => 'Agence :',
                 'row_attr'      => [
                     'class'     => 'd-flex col-sm-12'
                 ],
             ])
+            ->add('profession', TextType::class, [
+                'required'  => false,
+                'attr'  => [
+                    'placeholder'   => 'Profession...'
+                ]
+            ])
+            ->add('qualification', ChoiceType::class, [
+                'placeholder' => 'Qualification...',
+                'required'  => false,
+                'choices'   => [
+                    'Sans qualification'    => 'aucune',
+                    'CAP/BEP'               => 'CAP/BEP',
+                    'BAC'                   => 'BAC',
+                    'BAC+2'                 => 'BAC+2',
+                    'BAC+3'                 => 'BAC+3',
+                    'BAC+5 et +'            => 'BAC+5',
+                ],
+            ])
             ->add('module', EntityType::class, [
                 'class'     => Module::class,
+                'required' => false,
                 'choice_label'  => 'Nom',
                 'placeholder'   => 'Selectionner un module...'
             ])
             ->add('authResultI3P', CheckboxType::class, [
                 'label' => 'Resultat I3P',
-                'required'      => false
+                'required'      => false,
             ])
             ->add('authResultRiasec', CheckboxType::class, [
                 'label' => 'Resultat Riasec',
-                'required'      => false
-            ])
+                'required'      => false,
+           ])
             ->add('authResultPositioning', CheckboxType::class, [
                 'label' => 'Resultat Positioning Skills',
-                'required'      => false
-
+                'required'      => false,
             ])
         ;
     }

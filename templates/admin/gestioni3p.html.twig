@@ -1,15 +1,18 @@
 {% extends '3tabbed-base.html.twig' %}
 
-{% block title %}{{ parent() }}Gestion I3P{% endblock %}
+{% block page_subtitle %}Gestion I3P{% endblock %}
 
 {% block tab1_title %}Presentation{% endblock %}
 {% block tab2_title %}Questions{% endblock %}
 {% block tab3_title %}Resultats{% endblock %}
+{% block loading %} hasLoading{% endblock %}
 {% block tab1_content %}
     <div class="col-sm-12 d-flex flex-md-column">
         <div class="col-sm-12 iframe-wrapper">
             <h4>Modifier</h4>
-            <iframe id="iframeEdit" src="{{ path('presentation_edit', { id: test.presentation.id }) }}">iframe2</iframe>
+            <div id="editPrez-container">
+                {% include '/presentation/edit.html.twig' %}
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -78,7 +81,9 @@
                 <option value="15">ISTO</option>
                 <option value="16">ISTR</option>
             </select>
-            <iframe id="iframeEditProfils" src="">iframe2</iframe>
+            <div id="editor-container" class="hasLoading">
+                <iframe id="iframeEditProfils" src="" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -86,38 +91,25 @@
 {% block bottom_javascript %}
     <script src="{{ asset('res/js/jquery.ba-resize.js') }}"></script>
     <script>
-        $(function(){
-            let iframeEditProfils = $('#iframeEditProfils');
-            iframeEditProfils.on('load', function(){
-                var iframe_content = iframeEditProfils.contents().find('body');
-                iframe_content.on('resize', function(){
-                    var elem = $(this);
-                    iframeEditProfils.css({ height: elem.outerHeight( true ) });
-                    $('#iframeEditProfils').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
-                });
-                iframe_content.resize();
+        let iframeEditProfils = $('#iframeEditProfils');
+        iframeEditProfils.on('load', function(){
+            var iframe_content = iframeEditProfils.contents().find('body');
+            iframe_content.on('resize', function(){
+                var elem = $(this);
+                iframeEditProfils.css({ height: elem.outerHeight( true ) });
+                $('#iframeEditProfils').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
             });
-            iframeEditProfils.on('load', (e) => {
-                let path = e.target.contentWindow.location.pathname;
-                if(path === '/i3p/profils/'){
-                    iframeEditProfils.attr('src', '');
-                    $('.content').scrollTop(0);
-                    $('#i3pProfil')[0].value = 0;
-                }
-            })
+            iframe_content.resize();
         });
-        $(function(){
-            let iframePresentation = $('#iframeEdit');
-            iframePresentation.on('load', function(){
-                var iframe_content = iframePresentation.contents().find('body');
-                iframe_content.on('resize', function(){
-                    var elem = $(this);
-                    iframePresentation.css({ height: elem.outerHeight( true ) });
-                    $('#iframeEdit').text( 'IFRAME width: ' + elem.width() + ', height: ' + elem.height() );
-                });
-                iframe_content.resize();
-            });
-        });
+        iframeEditProfils.on('load', (e) => {
+            let path = e.target.contentWindow.location.pathname;
+            if(path === '/i3p/profils/'){
+                iframeEditProfils.attr('src', '');
+                $('.content').scrollTop(0);
+                $('#i3pProfil')[0].value = 0;
+            }
+        })
+
     </script>
 
 {% endblock %}

@@ -1,10 +1,6 @@
 {% extends 'main-base.html.twig' %}
-{% block page_title %}
-{% endblock %}
 {% block page_subtitle %}
-{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
+    Ajout utilisateur
 {% endblock %}
 {% block page_content %}
     {% if user is defined and user.role == "ROLE_USER" %}
@@ -17,6 +13,16 @@
             {{ message }}
         </div>
     {% endfor %}
+    {% if error is defined and error == true %}
+        <div class="row col-sm-12">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <div class="alert alert-danger fade in  alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    L'adresse e-mail est déjà utilisé.
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="col-md-12" data-controller="datePicker">
         {{ form_start(registrationForm) }}
             <div class="mx-auto app-login-box col-md-12">
@@ -30,10 +36,6 @@
                         </div>
                         <div class="col-md-12 marginTop1">
                             {{ form_widget(registrationForm.prenom) }}
-                        </div>
-                        <div class="col-md-12 marginTop1 d-flex flex-md-row justify-content-between datePicker-dateDeNaissance">
-                            {{ form_label(registrationForm.dateDeNaissance) }}
-                            {{ form_widget(registrationForm.dateDeNaissance) }}
                         </div>
                         <div class="col-md-12 marginTop1">
                             {{ form_widget(registrationForm.email) }}
@@ -52,8 +54,18 @@
                                     {{ form_widget(registrationForm.consultant) }}
                                 </div>
                             {% endif %}
+                            <div class="col-md-12 marginTop1 d-flex flex-md-row justify-content-between datePicker-dateDeNaissance">
+                                {{ form_label(registrationForm.dateDeNaissance) }}
+                                {{ form_widget(registrationForm.dateDeNaissance) }}
+                            </div>
                             <div class="marginTop1">
                                 {{ form_widget(registrationForm.module) }}
+                            </div>
+                            <div class="marginTop1">
+                                {{ form_widget(registrationForm.profession) }}
+                            </div>
+                            <div class="marginTop1">
+                                {{ form_widget(registrationForm.qualification) }}
                             </div>
                             <div class="d-flex flex-column justify-content-around marginTop1 full-width" id="testResultatContainer">
                                 {{ form_row(registrationForm.authResultI3P) }}

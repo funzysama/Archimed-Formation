@@ -137,7 +137,7 @@
     "search": "Rechercher:",
     "searchPlaceholder": "...",
     "thousands": ".",
-    "infoFiltered": "(filtrés depuis un total de _MAX_ éléments)",
+    "infoFiltered": "",
     "datetime": {
         "previous": "Précédent",
         "next": "Suivant",

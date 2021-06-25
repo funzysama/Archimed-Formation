@@ -22,14 +22,16 @@ export default class extends Controller {
                     if(confirm("Supprimer la valeurs \""+ $(this).text() +"\" ?")) $(this).remove();
                 });
 
-                $('button').on('click', (e) => {
+                $('button#mySubmit').on('click', (e) => {
                     e.preventDefault();
                     let valeurs = [];
                     $('.dashfolio-tag').each((id, elem)=>{
                         valeurs.push(elem.innerText);
                     })
                     $('#valeurs_array')[0].value = JSON.stringify(valeurs);
-                    $('form').submit();
+                    let form = $('form')[0]
+                    console.log(form);
+                    form.submit();
                 })
 
             });

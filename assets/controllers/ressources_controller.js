@@ -33,8 +33,13 @@ export default class extends Controller {
                 dom: 'ft',
                 responsive: true,
                 paginate: false,
+                language: {
+                    url: '../local/fr_fr.json'
+                },
+                initComplete: function () {
+                    $('#searchBox')[0].appendChild($('#dataTable_filter')[0]);
+                }
             });
-            $('#searchBox')[0].appendChild($('#dataTable_filter')[0]);
 
         });
     }

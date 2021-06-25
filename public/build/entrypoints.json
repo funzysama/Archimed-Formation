@@ -3,11 +3,11 @@
     "app": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-a667fe.js",
+        "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-1f7c90.js",
         "/build/app.js"
       ],
       "css": [
-        "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-a667fe.css",
+        "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-1f7c90.css",
         "/build/app.css"
       ]
     }

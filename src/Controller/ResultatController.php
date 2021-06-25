@@ -12,6 +12,9 @@ class ResultatController extends AbstractController
 {
     /**
      * @Route("/resultat/{name}/{id}", name="resultat")
+     * @param $name
+     * @param $id
+     * @return Response
      */
     public function index($name, $id): Response
     {

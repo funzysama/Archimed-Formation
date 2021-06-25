@@ -4,10 +4,14 @@
 namespace App\Controller\Tests;
 
 
+use App\Entity\IrmrResultat;
 use App\Form\IRMRType;
 use App\Repository\QuestionRepository;
 use App\Repository\TestRepository;
 use App\Service\IRMRCalculator;
+use App\Service\pdfDataFormatter;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +49,7 @@ class IRMRController extends AbstractController
                     'resultat'              => $resultat,
                 ]);
             }else{
-                $this->addFlash('success', 'Vos résultats ont bien été enregistrer, votre consultant reviendras vers vous pour vous les communiquer');
+                $this->addFlash('success', 'Vos résultats ont bien été enregistrés, votre consultant reviendra vers vous pour vous les communiquer. ');
                 return $this->redirectToRoute('main_home');
 
             }
@@ -60,7 +64,7 @@ class IRMRController extends AbstractController
      * @param $resultat
      * @return Response
      */
-    public function resultatIRMR($resultat): Response
+    public function resultatIRMR(IrmrResultat $resultat): Response
     {
 
         $orderedPourcent = [];
@@ -91,6 +95,57 @@ class IRMRController extends AbstractController
             'minor2'                => $minor2
         ]);
     }
+
+    /**
+     * @Route("/result/Riasec/{id}/pdf", name="resultat_irmr_pdf")
+     * @param IrmrResultat $resultat
+     */
+    public function resultatIRMRPDF(IrmrResultat $resultat)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set([
+            'isHtml5ParserEnabled' => true
+        ]);
+        $dompdf = new Dompdf($pdfOptions);
+
+        $orderedPourcent = [];
+        $orderedPourcent["Realiste"] = $resultat->getRealistePourcent();
+        $orderedPourcent["Investigateur"] = $resultat->getInvestigateurPourcent();
+        $orderedPourcent["Artiste"] = $resultat->getArtistePourcent();
+        $orderedPourcent["Social"] = $resultat->getSocialPourcent();
+        $orderedPourcent["Entrepreneur"] = $resultat->getEntrepreneurPourcent();
+        $orderedPourcent["Conventionnel"] = $resultat->getConventionnelPourcent();
+        arsort($orderedPourcent);
+        $minor1 = '';
+        $minor2 = '';
+        if(strlen($resultat->getMineur()) > 14){
+            $twoMineur = true;
+            $minors = preg_split('/ - /', $resultat->getMineur());
+            $minor1 = $minors[0];
+            $minor2 = $minors[1];
+        }else{
+            $twoMineur = false;
+        }
+        $calculator = new IRMRCalculator($resultat, $this->getUser());
+        $resultat = $calculator->getConsistance($resultat);
+        return $this->render('test/IRMR/resultat_pdf.html.twig', [
+            'resultat'              => $resultat,
+            'orderedPourcent'       => $orderedPourcent,
+            'twoMineur'             => $twoMineur,
+            'minor1'                => $minor1,
+            'minor2'                => $minor2
+        ]);
+
+//        $dompdf->loadHtml($html);
+//        $dompdf->setPaper('A4', 'portrait');
+//        $dompdf->render();
+//        $dompdf->outputHtml();
+//        $dompdf->stream('mon-profil-Irmr.pdf', [
+//            "Attachement"   => false
+//        ]);
+
+    }
+
 
     /**
      * @return Response

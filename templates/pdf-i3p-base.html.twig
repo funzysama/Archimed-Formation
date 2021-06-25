@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title></title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .margin-h-center {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        *, ::before, ::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #52575C;
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .container-fluid {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .content {
+            min-height: 250px;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 15px;
+            display: block;
+        }
+
+        .content-wrapper {
+            min-height: calc(100vh - 101px);
+            background-color: #ecf0f5;
+        }
+
+        .marginTop3 {
+            margin-top: 3em;
+        }
+
+        h3{
+            break-before: avoid;
+        }
+
+        .pdf-header{
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+
+        .pdf-header-title{
+            flex-basis: 80%;
+            justify-content: space-around;
+        }
+
+        .pdf-header-image{
+            position: relative;
+            top: 0;
+            left: 0;
+            float: left;
+            width: 20%;
+        }
+
+        .tableDescription{
+            width: 528px;
+            border-collapse: collapse;
+            margin: 3em auto 0 auto;
+        }
+
+        .tableDescription th {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            text-align: left;
+            padding: 5px;
+        }
+
+        .tableDescription td {
+            border:1px solid rgba(0, 0, 0, 0.125);
+            text-align: center;
+            padding: 5px;
+        }
+
+        .background-color-pink{
+            background-color: #ffd7c1;
+        }
+
+        .tableProfil{
+            border-collapse: collapse;
+            margin: 3em auto 0 auto;
+
+        }
+
+        .tableProfil th, .tableProfil td {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 5px;
+        }
+
+        .table-pole{
+            width: 500px;
+            border-collapse: collapse;
+            margin: 5em auto 0 auto;
+            break-after: page;
+        }
+
+        .titre-pole-left{
+            width: 184.5px;
+            text-align: right;
+        }
+
+        .titre-pole-right{
+            width: 184.5px;
+            text-align: left;
+        }
+
+        .table-pole th {
+            width: 53.5px;
+            margin: 5px 15px;
+        }
+
+        .table-pole th, .table-pole td {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 5px;
+        }
+
+        .table-pole-middle{
+            width: 32px;
+            border: none !important;
+        }
+        .table-row-middle{
+            height: 25px;
+        }
+
+        .table-row-middle td th{
+            height: 25px;
+            content: ' '
+        }
+
+
+        .table-row-middle td, .table-row-middle th{
+            border: none !important;
+        }
+
+        .table-fonctionnement{
+            width: 250px;
+            border-collapse: collapse;
+            margin: 5em auto 0 auto;
+            break-after: page;
+        }
+
+        .table-fonctionnement th {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            text-align: center;
+            padding: 5px;
+        }
+
+        .table-fonctionnement td {
+            border:1px solid rgba(0, 0, 0, 0.125);
+            text-align: left;
+            padding: 5px;
+        }
+
+        .text-small{
+            font-size: 12px;
+            /*line-height: 1;*/
+        }
+        .text-tiny{
+            font-size: 10px;
+            /*line-height: 1;*/
+        }
+        .title-valeurs{
+            text-align: left;
+            margin-top: 3em;
+            margin-bottom: 1em;
+        }
+
+        .title-valeurs span{
+            width: 25px;
+        }
+
+        .table-valeurs-container{
+            padding: 2px;
+            border: 3px solid #ffd7c1
+        }
+        .table-valeurs{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-valeurs th, .table-valeurs td{
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 5px 0;
+        }
+
+        .table-valeurs th {
+            width: 50px;
+            border-right: none !important;
+            content: '';
+        }
+
+        .table-valeurs td {
+            border-left: none !important;
+        }
+
+        .profilPerso{
+            page-break-after: always;
+        }
+
+        footer {
+            position: fixed;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            width: 100%;
+            color: #aaaaaa;
+            text-align: center;
+            line-height: 35px;
+        }
+
+        footer img {
+            position: fixed;
+            left: -15px;
+            bottom: 40px;
+        }
+
+    </style>
+</head>
+<body class="hold-transition">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    {% block page_content %}{% endblock %}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

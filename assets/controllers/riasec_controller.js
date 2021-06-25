@@ -19,7 +19,7 @@ export default class extends Controller {
             if(parseInt(size) !== 0){
                 images[i].style = "width:"+(parseInt(size)+50)+"px; height:"+(parseInt(size)+50)+"px;";
             }else{
-                images[i].style = "width:0; height:0;";
+                images[i].style = "width:25px; height:25px;";
             }
 
         }

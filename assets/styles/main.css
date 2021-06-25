@@ -7,9 +7,8 @@ body{
     padding: 0;
     margin: 0;
     width: 100%;
-    text-align: center;
-    color: #460B01;
 }
+
 @media screen and (min-width: 1200px) {
     body{
         position:fixed;

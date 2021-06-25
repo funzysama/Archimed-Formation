@@ -96,7 +96,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Module::class, fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Module;
 
@@ -148,6 +148,11 @@ class Utilisateur implements UserInterface
      * @ORM\OneToOne(targetEntity=IrmrResultat::class, inversedBy="utilisateur", cascade={"persist", "remove"})
      */
     private $ResultatRiasec;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Profession;
 
     public function __construct()
     {
@@ -551,6 +556,18 @@ class Utilisateur implements UserInterface
     public function setResultatRiasec(?IrmrResultat $ResultatRiasec): self
     {
         $this->ResultatRiasec = $ResultatRiasec;
+
+        return $this;
+    }
+
+    public function getProfession(): ?string
+    {
+        return $this->Profession;
+    }
+
+    public function setProfession(?string $Profession): self
+    {
+        $this->Profession = $Profession;
 
         return $this;
     }

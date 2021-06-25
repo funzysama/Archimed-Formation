@@ -19,6 +19,8 @@ class TestAdminController extends AbstractController
 
     /**
      * @Route("/editer", name="editer")
+     * @param Test $test
+     * @return Response
      */
     public function editerTest(Test $test): Response
     {
@@ -30,6 +32,9 @@ class TestAdminController extends AbstractController
 
     /**
      * @Route("/ajouterQuestion", name="add_question")
+     * @param Request $request
+     * @param Test $test
+     * @return Response
      */
     public function ajouterQuestion(Request $request, Test $test): Response
     {

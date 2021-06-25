@@ -48,8 +48,14 @@ class I3PController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($i3presultat);
             $em->flush();
+            if($user->getAuthResultI3P()){
+                return $this->redirectToRoute('resultat', ['name' => 'I3P', 'id' => $i3presultat->getId()]);
+            }else{
+                $this->addFlash('success', 'Vos résultats ont bien été enregistrés, votre consultant reviendra vers vous pour vous les communiquer. ');
+                return $this->redirectToRoute('main_home');
 
-            return $this->redirectToRoute('resultat', ['name' => 'I3P', 'id' => $i3presultat->getId()]);
+            }
+
         }
         return $this->render('test/I3P/test.html.twig', [
             'testName' => 'I3P',
@@ -58,7 +64,8 @@ class I3PController extends AbstractController
     }
 
     /**
-     * @param $resultat
+     * @param I3PResultat $resultat
+     * @param pdfDataFormatter $dataFormatter
      * @return Response
      */
     public function resultatI3P(I3PResultat $resultat, pdfDataFormatter $dataFormatter)
@@ -78,6 +85,8 @@ class I3PController extends AbstractController
 
     /**
      * @Route("/result/{id}/pdf", name="resultat_i3p_pdf")
+     * @param I3PResultat $resultat
+     * @param pdfDataFormatter $dataFormatter
      */
     public function resultatI3PPDF(I3PResultat $resultat, pdfDataFormatter $dataFormatter)
     {

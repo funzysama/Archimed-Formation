@@ -20,8 +20,12 @@ class PoleEmploiController extends AbstractController
     {
         return $this->render('pole_emploi/index.html.twig');
     }
+
     /**
      * @Route("/pole-emploi/ROME", name="api_pole_emploi")
+     * @param Request $request
+     * @param ApiCallsService $client
+     * @return Response
      */
     public function apiPoleEmploiROME(Request $request, ApiCallsService $client): Response
     {
@@ -52,14 +56,19 @@ class PoleEmploiController extends AbstractController
 
     /**
      * @Route("/pole-emploi/SoftSkills", name="soft_skills_pole_emploi")
+     * @param Request $request
+     * @param ApiCallsService $client
+     * @return Response
      */
     public function apiPoleEmploiSoftSkills(Request $request, ApiCallsService $client): Response
     {
         $code = $request->get('code');
+        $titre = $request->get('titre');
         $url = 'https://api.emploi-store.fr/partenaire/matchviasoftskills/v1/professions/job_skills?code='.$code;
         $token = $client->getBearerToken();
         $data = $client->postAllData($token, $url);
         return $this->render('pole_emploi/soft-skills-pole-emploi.html.twig', [
+            'titreMetier'   => $titre,
             'data'          => json_encode(array_values($data["skills"])),
         ]);
 //        return $this->json(json_decode($data));

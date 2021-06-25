@@ -23,9 +23,6 @@ export default class extends Controller
                         defaultContent: "libelle",
                         searchable: false,
                         responsivePriority: 1,
-                        render: ( data, type, row, meta ) => {
-                            return '<div class="pointer btn border-0 btn-hover-shine btn-outline-dark btn-pill" data-code="'+row.code+'">'+data+'</div>';
-                        }
 
                     },
                     {
@@ -51,29 +48,41 @@ export default class extends Controller
                     },
                     {
                         title: '',
-                        defaultContent: "Offre d'emploi",
+                        defaultContent: "Fiche Metier",
                         searchable: false,
                         sortable: false,
                         responsivePriority: 300,
                         render: ( data, type, row, meta ) => {
-                            return '<button class="btn btn-outline-dark btn-shadow border-0 btn-pill btn-hover-shine" id="pole_emploi" data-code="'+row.code+'">Offre d\'emploi</button>';
+                            return '<div class="btn-group btn-group-sm btn-shadow">' +
+                                '<button class="btn btn-sm btn-outline-primary btn-pill btn-hover-shine" id="pole_emploi" data-code="'+row.code+'">Fiche Métier</button>' +
+                                '<button class="btn btn-outline-primary btn-sm btn-hover-shine" id="offres_emploi" data-code="'+row.code+'">Offres d\'emploi</button>' +
+                                '<button class="btn btn-outline-primary btn-sm btn-pill btn-hover-shine" id="soft_skills" data-code="'+row.code+'" data-titre="'+row.libelle+'">Soft Skills</button>' +
+                                '</div>';
                         }
 
                     },
-                    {
-                        title: '',
-                        defaultContent: "Soft Skills",
-                        searchable: false,
-                        sortable: false,
-                        responsivePriority: 400,
-                        render: ( data, type, row, meta ) => {
-                            return '<button ' +
-                                'class="btn btn-outline-dark btn-shadow border-0 btn-pill btn-hover-shine" ' +
-                                'id="soft_skills" ' +
-                                'data-code="'+row.code+'">Soft Skills</button>';
-                        }
-
-                    },
+                    // {
+                    //     title: '',
+                    //     defaultContent: "Offre d'emploi",
+                    //     searchable: false,
+                    //     sortable: false,
+                    //     responsivePriority: 300,
+                    //     render: ( data, type, row, meta ) => {
+                    //         return '<button class="btn btn-outline-dark btn-shadow border-0 btn-sm btn-pill btn-hover-shine" id="pole_emploi" data-code="'+row.code+'">Offres d\'emploi</button>';
+                    //     }
+                    //
+                    // },
+                    // {
+                    //     title: '',
+                    //     defaultContent: "Soft Skills",
+                    //     searchable: false,
+                    //     sortable: false,
+                    //     responsivePriority: 400,
+                    //     render: ( data, type, row, meta ) => {
+                    //         return '<button class="btn btn-outline-dark btn-shadow border-0 btn-sm btn-pill btn-hover-shine" id="soft_skills" data-code="'+row.code+'">Soft Skills</button>';
+                    //     }
+                    //
+                    // },
 
                 ],
                 lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "Tout"]],
@@ -87,8 +96,6 @@ export default class extends Controller
                     { "search": riasecMajeur },
                     { "search": riasecMineur },
                     null,
-                    null,
-                    null
                 ]
 
             };
@@ -99,20 +106,21 @@ export default class extends Controller
             table.DataTable(options);
         });
         table.on('click','tr button', (e) => {
-            if(e.target.id === "pole_emploi"){
+            if(e.target.id === "pole_emploi") {
+                let code = e.target.dataset.code;
+                let url = new URL('https://candidat.pole-emploi.fr/marche-du-travail/fichemetierrome?codeRome=' + code);
+                window.open(url, '_blank');
+            }
+            if(e.target.id === "offres_emploi"){
                 let code = e.target.dataset.code;
                 let url = new URL('https://candidat.pole-emploi.fr/offres/recherche?motsCles='+code+'&offresPartenaires=true&rayon=10&tri=0');
                 window.open(url, '_blank');
             }
             if(e.target.id === "soft_skills"){
                 let code = e.target.dataset.code;
-                window.open('/pole-emploi/SoftSkills?code='+code,"_self");
+                let titre = e.target.dataset.titre;
+                window.open('/pole-emploi/SoftSkills?code='+code+'&titre='+titre,"_self");
             }
         });
-        table.on('click', 'td div', (e) => {
-            let code = e.target.dataset.code;
-            let url = new URL('https://candidat.pole-emploi.fr/marche-du-travail/fichemetierrome?codeRome='+code);
-            window.open(url, '_blank');
-        })
     }
 }

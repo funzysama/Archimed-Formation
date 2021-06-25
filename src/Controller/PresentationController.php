@@ -17,6 +17,8 @@ class PresentationController extends AbstractController
 {
     /**
      * @Route("/", name="presentation_index", methods={"GET"})
+     * @param PresentationRepository $presentationRepository
+     * @return Response
      */
     public function index(PresentationRepository $presentationRepository): Response
     {
@@ -27,6 +29,8 @@ class PresentationController extends AbstractController
 
     /**
      * @Route("/new", name="presentation_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class PresentationController extends AbstractController
 
     /**
      * @Route("/{id}", name="presentation_show", methods={"GET"})
+     * @param Presentation $presentation
+     * @return Response
      */
     public function show(Presentation $presentation): Response
     {
@@ -60,6 +66,9 @@ class PresentationController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="presentation_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Presentation $presentation
+     * @return Response
      */
     public function edit(Request $request, Presentation $presentation): Response
     {
@@ -79,6 +88,9 @@ class PresentationController extends AbstractController
 
     /**
      * @Route("/{id}", name="presentation_delete", methods={"POST"})
+     * @param Request $request
+     * @param Presentation $presentation
+     * @return Response
      */
     public function delete(Request $request, Presentation $presentation): Response
     {

@@ -37,7 +37,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
             $tests = $this->repository->findAll();
             $menu->addChild('acceuil', [
                 'route' => 'main_home',
-                'label' => 'Acceuil',
+                'label' => 'Accueil',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-home');
             $menu->addChild('monProfile', [
@@ -48,7 +48,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
             ])->setLabelAttribute('icon', 'lnr lnr-user');
             $menu->addChild('deco', [
                 'route' => 'app_logout',
-                'label' => 'Déconnection',
+                'label' => 'Déconnexion',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-exit');
         }
@@ -66,7 +66,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
         if(in_array("ROLE_ADMIN", $token->getRoleNames())){
             $menu->addChild('listRessource', [
                 'route' => 'ressource_index',
-                'label' => 'Gestion Resources',
+                'label' => 'Gestion Ressources',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'lnr lnr-earth');
             $menu->addChild('listModules', [

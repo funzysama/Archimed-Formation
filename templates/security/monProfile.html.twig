@@ -4,10 +4,6 @@
     {{ parent() }} Mon Profil
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}
-{% block page_title %}Mon Profil{% endblock %}
 {% block page_subtitle %}Bonjour {{ user.sexe|formatSexe }} {{ user.nom }} {{ user.prenom }}{% endblock %}
 {% block page_content %}
     <div class="col-xl-4 col-lg-6 col-xs-8 margin-h-center">

@@ -3,12 +3,6 @@
     width: 100%;
 }
 
-.iframe-wrapper iframe {
-    display:block;
-    width: 100%;
-    border: 0 solid black;
-}
-
 .presentationLabel-container > label {
     max-width: 100%;
 }

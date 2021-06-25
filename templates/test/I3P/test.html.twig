@@ -1,10 +1,5 @@
 {% extends 'main-base.html.twig' %}
 
-{% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
-
-{% block page_title%}Test {{ testName }}{% endblock %}
-
-{% block page_subtitle %}<strong>I</strong>ndicateur de <strong>P</strong>rofil <strong>P</strong>ersonnel et <strong>P</strong>rofessionnel{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -13,7 +8,14 @@
 {% block page_content %}
     <div class="col-sm-12">
         <div class="col-sm-9 margin-h-center card marginTop2 marginBot2">
-            //TODO: text d'introduction et instruction pour le passage du test a définir.
+            <ul class="mt-2">
+                <li>
+                    Cliquer sur la réponse de votre choix parmi les 2 proposées.
+                </li>
+                <li>
+                    Répondez en toute spontanéité, il n’y a ni bonne ni mauvaise réponse
+                </li>
+            </ul>
         </div>
         <div>
             {{ form_start(testForm, { 'attr': {'class': 'form-i3p'} }) }}

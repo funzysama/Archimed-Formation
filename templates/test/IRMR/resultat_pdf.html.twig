@@ -1,0 +1,136 @@
+{% extends 'pdf-riasec-base.html.twig' %}
+
+{% block page_content %}
+    <div class="row" data-controller="riasec">
+        <div class="col-sm-12 d-flex flex-column">
+            <div class="main-card mb-3 card">
+                <div class="card-header">Graphique</div>
+                <div class="card-body">
+                    <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+            <div class="main-card mb-3 card">
+                <div class="card-header">Resultat etendu</div>
+                <div class="card-body">
+                    <div class="d-flex flex-sm-row riasec-figures justify-content-between full-width marginTop2" data-controller="riasec">
+                        {% for key, value in orderedPourcent %}
+                            <div class="riasec-figure justify-content-center">
+                                <div class="{{ key }} Image" data-riasec="{{ value|json_encode }}">
+                                    <figure></figure>
+                                </div>
+                                ( {{ value }}% )
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="marginTop2">
+                        <h6>Vos 2 pôles les plus marqués :</h6>
+                        <h6>RIASEC majeur : <strong>{{ resultat.majeur }}</strong></h6>
+                        <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
+                        <hr>
+                        <h6>Vos 2 pôles les moins marqués :</h6>
+                        <h5><b>{{ resultat.inferieur1 }}</b></h5>
+                        <h5><b>{{ resultat.inferieur2 }}</b></h5>
+                        <hr>
+                        <h6 class="text-danger"><strong>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></strong></h6>
+                        <h5>Valeur de consistance de votre profil : {{ resultat.consistance }}</h5>
+                    </div>
+                    <div class="col-sm-12 marginTop1">
+                        <form action="{{ path('api_pole_emploi') }}" method="post">
+                            <input type="hidden" value="metier" name="type" id="type">
+                            <input type="hidden" value="{{ resultat.majeur|initial }}" name="riasecMajeur" id="riasecMajeur">
+                            <input type="hidden" value="{{ resultat.mineur|initial }}" name="riasecMineur" id="riasecMineur">
+                            <button class="btn btn-pill border-0 btn-outline-dark btn-hover-shine btn-shadow" type="submit">Consulter les metiers associés</button>
+                        </form>
+                    </div>
+                    <div class="marginTop2">
+                        <table class="mb-0 table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="realiste-head"></th>
+                                <th class="investigateur-head"></th>
+                                <th class="artiste-head"></th>
+                                <th class="social-head"></th>
+                                <th class="entrepreneur-head"></th>
+                                <th class="conventionnel-head"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Score brute</td>
+                                <td>{{ resultat.realiste }}</td>
+                                <td>{{ resultat.investigateur }}</td>
+                                <td>{{ resultat.artiste }}</td>
+                                <td>{{ resultat.social }}</td>
+                                <td>{{ resultat.entrepreneur }}</td>
+                                <td>{{ resultat.conventionnel }}</td>
+                            </tr>
+                            <tr>
+                                <td>Score étalonné</td>
+                                <td>{{ resultat.realisteEtalonne }}</td>
+                                <td>{{ resultat.investigateurEtalonne }}</td>
+                                <td>{{ resultat.artisteEtalonne }}</td>
+                                <td>{{ resultat.socialEtalonne }}</td>
+                                <td>{{ resultat.entrepreneurEtalonne }}</td>
+                                <td>{{ resultat.conventionnelEtalonne }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex col-sm-12 flex-column align-items-center flex-nowrap">
+                <div class="col-sm-10 row d-flex flex-row justify-content-center align-items-center">
+                    <div class="content-pdf-card">
+                        <div class="card ">
+                            <div class="card-header">
+                                <h5>Riasec Majeur</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="content-pdf-card">
+                                    <div class="content-pdf-card-front-{{ resultat.majeur|minimize }}"></div>
+                                    <div class="content-pdf-card-back-{{ resultat.majeur|minimize }}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5>Riasec Majeur</h5>
+                        <div class="content-pdf-card-front-{{ resultat.majeur|minimize }}"></div>
+                        <div class="content-pdf-card-back-{{ resultat.majeur|minimize }}"></div>
+                    </div>
+                    {% if twoMineur == false %}
+                        <div class="content-pdf-card">
+                            <h5>Riasec Mineur</h5>
+                            <div class="content-pdf-card-front-{{ resultat.mineur|minimize }}"></div>
+                            <div class="content-pdf-card-back-{{ resultat.mineur|minimize }}"></div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if twoMineur == true %}
+                    <div class="row">
+                        <div id="mineur" class="content-pdf-card">
+                            <h5>Premier Riasec Mineur</h5>
+                            <div class="content-pdf-card-front-{{ minor1|minimize }}"></div>
+                            <div class="content-pdf-card-back-{{ minor1|minimize }}"></div>
+                        </div>
+                        <div id="mineur" class="content-pdf-card">
+                            <h5>Deuxieme Riasec Mineur</h5>
+                            <div class="content-pdf-card-front-{{ minor2|minimize }}"></div>
+                            <div class="content-pdf-card-back-{{ minor2|minimize }}"></div>
+                        </div>
+                    </div>
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bottom_javascript %}
+    <script>
+        let dataRiasec = ['{{ resultat.realiste }}', '{{ resultat.investigateur }}', '{{ resultat.artiste }}', '{{ resultat.social }}', '{{ resultat.entrepreneur }}', '{{ resultat.conventionnel }}' ];
+        let dataEtalonne = ['{{ resultat.realisteEtalonne }}', '{{ resultat.investigateurEtalonne }}', '{{ resultat.artisteEtalonne }}', '{{ resultat.socialEtalonne }}', '{{ resultat.entrepreneurEtalonne }}', '{{ resultat.conventionnelEtalonne }}' ];
+    </script>
+{% endblock %}
+
+

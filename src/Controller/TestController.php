@@ -10,6 +10,8 @@ class TestController extends AbstractController
 {
     /**
      * @Route("/test/{name}", name="test")
+     * @param $name
+     * @return Response
      */
     public function index($name): Response
     {

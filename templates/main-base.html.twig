@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     {% endblock %}
-    <title>{% block title %}Archimed | {% endblock %}</title>
+    <title>{% block title %}Eurêka | {% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         {{ encore_entry_script_tags('app') }}
@@ -75,12 +75,12 @@
         </section>
     </aside>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper{% block loading %}{% endblock %}">
         {% block full_page_content %}
             <section class="content-header no-print">
                 <h1>
-                    {% block page_title %}Archi-med{% endblock %}
-                    <small>{% block page_subtitle %}Plateforme ressource{% endblock %}</small>
+                    {% block page_title %} <span style="color:#fd9644">Eurêka</span> {% endblock %}
+                    <small>{% block page_subtitle %}la plateforme d'Archi-Med{% endblock %}</small>
                 </h1>
 
                 {% block breadcrumb %}

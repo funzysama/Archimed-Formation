@@ -18,6 +18,9 @@ export default class extends Controller
             table.DataTable({
                 data: dataSet,
                 responsive: true,
+                language: {
+                    url: '../local/fr_fr.json'
+                },
                 columns: [
                     {
                         title: 'Nom',

@@ -1,7 +1,4 @@
 {% extends 'main-base.html.twig' %}
-{% block page_title%}{{ testName }}{% endblock %}
-{% block page_subtitle %}Bonjour {{ app.user.sexe|formatSexe }} {{ app.user.nom }} {{ app.user.prenom }}{% endblock %}
-{% block title %}{{ parent() }} Test {{ testName }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('res/js/IRMR-rendering.js') }}"></script>
@@ -13,7 +10,14 @@
 {% block page_content %}
 <div class="col-sm-10">
     <div class="col-sm-9 margin-h-center card marginTop2 marginBot2">
-        //TODO: text d'introduction et instruction pour le passage du test a définir.
+        <ul class="mt-2">
+            <li>
+                Choisir une activité parmi les 2 proposées puis cocher sur l’intensité de celle- ci (+++ /++ /+ / 0)
+            </li>
+            <li>
+                <span class="text-danger">Attention</span> : vous n’avez que 4 possibiltés pour l’intensité 0
+            </li>
+        </ul>
     </div>
     <div>
         {{ form_start(testForm, {'attr': {'id': 'riasecForm'}}) }}

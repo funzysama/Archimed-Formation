@@ -1,12 +1,9 @@
 {% extends 'main-base.html.twig' %}
 
-{% block title %}Edit Ressource{% endblock %}
+{% block page_subtitle %}Modifier ressources{% endblock %}
 
 {% block page_content %}
     <div class="card col-sm-6 margin-h-center" data-controller="imageRess">
-        <div class="card-header text-center">
-            <h4>Edit Ressource</h4>
-        </div>
         {{ form_start(form) }}
         <div class="card-body">
             {{ form_row(form.nom) }}
@@ -23,7 +20,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <img src="{{ asset('/uploads/ressources/images/'~ressource.image) }}" alt="Image originale">
+                        <img class="ressource_image_edit_preview" src="{{ asset('/uploads/ressources/images/'~ressource.image) }}" alt="Image originale">
                     </div>
                     <div class="card-footer d-flex justify-content-center">
                         <div>

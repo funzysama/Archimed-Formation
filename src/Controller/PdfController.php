@@ -11,6 +11,9 @@ class PdfController extends ManagerController
 {
     /**
      * @Route("/pdf/view", name="pdf_view")
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
      */
     public function index(Request $request): Response
     {

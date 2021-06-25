@@ -28,6 +28,8 @@ class MainController extends AbstractController
 
     /**
      * @Route("/utilisateurs", name="users")
+     * @param UtilisateurRepository $utilisateurRepository
+     * @return Response
      */
     public function listerUtilisateurs(UtilisateurRepository $utilisateurRepository): Response
     {
@@ -50,6 +52,8 @@ class MainController extends AbstractController
 
     /**
      * @Route("/tests", name="tests")
+     * @param TestRepository $testRepository
+     * @return Response
      */
     public function listerTests(TestRepository $testRepository): Response
     {
@@ -62,6 +66,8 @@ class MainController extends AbstractController
 
     /**
      * @Route("/ressources", name="ressources")
+     * @param RessourceRepository $ressourceRepository
+     * @return Response
      */
     public function listerRessources(RessourceRepository $ressourceRepository): Response
     {

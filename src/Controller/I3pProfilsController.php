@@ -17,6 +17,8 @@ class I3pProfilsController extends AbstractController
 {
     /**
      * @Route("/", name="i3p_profils_index", methods={"GET"})
+     * @param I3pProfilsRepository $i3pProfilsRepository
+     * @return Response
      */
     public function index(I3pProfilsRepository $i3pProfilsRepository): Response
     {
@@ -27,6 +29,8 @@ class I3pProfilsController extends AbstractController
 
     /**
      * @Route("/new", name="i3p_profils_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class I3pProfilsController extends AbstractController
 
     /**
      * @Route("/{id}", name="i3p_profils_show", methods={"GET"})
+     * @param I3pProfils $i3pProfil
+     * @return Response
      */
     public function show(I3pProfils $i3pProfil): Response
     {
@@ -60,6 +66,9 @@ class I3pProfilsController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="i3p_profils_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param I3pProfils $i3pProfil
+     * @return Response
      */
     public function edit(Request $request, I3pProfils $i3pProfil): Response
     {
@@ -90,6 +99,9 @@ class I3pProfilsController extends AbstractController
 
     /**
      * @Route("/{id}", name="i3p_profils_delete", methods={"POST"})
+     * @param Request $request
+     * @param I3pProfils $i3pProfil
+     * @return Response
      */
     public function delete(Request $request, I3pProfils $i3pProfil): Response
     {
@@ -100,5 +112,31 @@ class I3pProfilsController extends AbstractController
         }
 
         return $this->redirectToRoute('i3p_profils_index');
+    }
+
+    /**
+     * @Route("/get/edit_frame")
+     * @param Request $request
+     * @param I3pProfilsRepository $i3pProfilsRepository
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getEditFrame(Request $request, I3pProfilsRepository $i3pProfilsRepository)
+    {
+        $id = $request->get('id');
+        $profil = $i3pProfilsRepository->find($id);
+        $valeurs = $profil->getValeurs();
+        if($valeurs !== ""){
+            $valeursArray = explode(' | ', $valeurs);
+        }else{
+            $valeursArray = [];
+        }
+        $form = $this->createForm(I3pProfilsType::class, $profil);
+        $template = $this->render('i3p_profils/edit.html.twig', [
+            'i3p_profil' => $profil,
+            'form' => $form->createView(),
+            'id' => $id,
+            'valeurs' => $valeursArray
+        ])->getContent();
+        return $this->json($template);
     }
 }

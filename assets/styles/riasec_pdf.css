@@ -1,0 +1,85 @@
+.content-pdf {
+}
+
+.content-pdf-card{
+    background-color: transparent;
+    width: 440px;
+    height: 293px;
+}
+.content-pdf-card-back-realiste{
+    background: url("/assets/assets/images/riasec/cards/back-realiste.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+.content-pdf-card-front-realiste{
+    background: url("/assets/assets/images/riasec/cards/front-realiste.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+
+.content-pdf-card-back-investigateur{
+    background: url("/assets/assets/images/riasec/cards/back-investigateur.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+.content-pdf-card-front-investigateur{
+    background: url("/assets/assets/images/riasec/cards/front-investigateur.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+
+.content-pdf-card-back-artiste{
+    background: url("/assets/assets/images/riasec/cards/back-artiste.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+.content-pdf-card-front-artiste{
+    background: url("/assets/assets/images/riasec/cards/front-artiste.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+
+.content-pdf-card-back-social{
+    background: url("/assets/assets/images/riasec/cards/back-social.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+.content-pdf-card-front-social{
+    background: url("/assets/assets/images/riasec/cards/front-social.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+
+.content-pdf-card-back-entrepreneur{
+    background: url("/assets/assets/images/riasec/cards/back-entreprenant.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+.content-pdf-card-front-entrepreneur{
+    background: url("/assets/assets/images/riasec/cards/front-entreprenant.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+
+.content-pdf-card-back-conventionnel{
+    background: url("/assets/assets/images/riasec/cards/back-conventionnel.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}
+.content-pdf-card-front-conventionnel{
+    background: url("/assets/assets/images/riasec/cards/front-conventionnel.png");
+    background-size: cover;
+    height: inherit;
+    border: 1px solid #000000;
+}

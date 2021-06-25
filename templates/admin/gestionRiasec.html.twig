@@ -1,14 +1,18 @@
 {% extends '2tabbed-base.html.twig' %}
 
-{% block title %}{{ parent() }}Gestion Riasec{% endblock %}
+{% block page_subtitle %}Gestion Riasec{% endblock %}
 
 {% block tab1_title %}Presentation{% endblock %}
 {% block tab2_title %}Questions{% endblock %}
+{% block loading %} hasLoading{% endblock %}
+
 {% block tab1_content %}
     <div class="col-sm-12 d-flex flex-md-column" data-controller="iframe">
         <div class="col-sm-12 iframe-wrapper">
             <h4>Modifier</h4>
-            <iframe id="iframeEdit" src="{{ path('presentation_edit', { id: test.presentation.id }) }}" frameborder="0">iframe2</iframe>
+            <div id="editPrez-container">
+                {% include '/presentation/edit.html.twig' %}
+            </div>
         </div>
 {#        <div class="col-sm-12 iframe-wrapper marginTop3">#}
 {#            <h4>Aperçu</h4>#}

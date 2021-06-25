@@ -1,37 +1,37 @@
 {{ form_start(form) }}
-<div class="col-sm-12 d-flex flex-sm-column" data-controller="wysiwyg">
-    <div class="col-sm-12 text-left i3pProfilLabel-container">
-        {{ form_label(form.ProfilPerso) }}
+    <div class="col-sm-12 d-flex flex-sm-column">
+        <div class="col-sm-12 text-left i3pProfilLabel-container">
+            {{ form_label(form.ProfilPerso) }}
+        </div>
+        <div class="col-sm-12">
+            {{ form_widget(form.ProfilPerso) }}
+        </div>
     </div>
-    <div class="col-sm-12">
-        {{ form_widget(form.ProfilPerso) }}
+    <div class="col-sm-12 d-flex flex-sm-column marginTop2">
+        <div class="col-sm-12 text-left i3pProfilLabel-container">
+            {{ form_label(form.ProfilPro) }}
+        </div>
+        <div class="col-sm-12">
+            {{ form_widget(form.ProfilPro) }}
+        </div>
     </div>
-</div>
-<div class="col-sm-12 d-flex flex-sm-column marginTop2">
-    <div class="col-sm-12 text-left i3pProfilLabel-container">
-        {{ form_label(form.ProfilPro) }}
+    <div class="col-sm-12 d-flex flex-sm-column marginTop2">
+        <div class="col-sm-12 text-left i3pProfilLabel-container" data-controller="tag">
+            {{ form_label(form.Valeurs) }}
+        </div>
+        <div class="tag-container d-flex col-sm-12 justify-content-start marginBot1" id="tag-container">
+            {% if valeurs is defined  %}
+                {% for valeur in valeurs %}
+                    <span class="dashfolio-tag">{{ valeur }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-sm-12">
+            {{ form_widget(form.Valeurs) }}
+        </div>
     </div>
-    <div class="col-sm-12">
-        {{ form_widget(form.ProfilPro) }}
+    <div class="col-sm-12 marginTop3">
+        <input id="valeurs_array" name="valeursJson" type="hidden">
+        <button type="submit" name="mySubmit" id="mySubmit" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-success btn-lg">{{ button_label|default('Enregistrer') }}</button>
     </div>
-</div>
-<div class="col-sm-12 d-flex flex-sm-column marginTop2">
-    <div class="col-sm-12 text-left i3pProfilLabel-container" data-controller="tag">
-        {{ form_label(form.Valeurs) }}
-    </div>
-    <div class="tag-container d-flex col-sm-12 justify-content-start marginBot1" id="tag-container">
-        {% if valeurs is defined  %}
-            {% for valeur in valeurs %}
-                <span class="dashfolio-tag">{{ valeur }}</span>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <div class="col-sm-12">
-        {{ form_widget(form.Valeurs) }}
-    </div>
-</div>
-<div class="col-sm-12 marginTop3">
-    <input id="valeurs_array" name="valeursJson" type="hidden">
-    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-success btn-lg">{{ button_label|default('Enregistrer') }}</button>
-</div>
 {{ form_end(form) }}

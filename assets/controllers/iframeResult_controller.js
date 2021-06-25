@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus';
 import jQuery from 'jquery';
+import tinymce from "tinymce";
 
 
 /*
@@ -14,10 +15,11 @@ import jQuery from 'jquery';
 
 export default class extends Controller {
     connect() {
-        jQuery('#i3pProfil').on('change', (e) => {
-            let url = new URL(window.location.origin+'/i3p/profils/'+e.target.value+'/edit');
-            $('#iframeEditProfils').attr("src", url);
-        })
-
+        $(function(){
+            jQuery('#i3pProfil').on('change', (e) => {
+                let url = new URL(window.location.origin+'/i3p/profils/'+e.target.value+'/edit');
+                $('#iframeEditProfils')[0].attributes.src.value = url;
+            })
+        });
     }
 }

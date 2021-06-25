@@ -17,6 +17,8 @@ class ModuleController extends AbstractController
 {
     /**
      * @Route("/", name="module_index", methods={"GET"})
+     * @param ModuleRepository $moduleRepository
+     * @return Response
      */
     public function index(ModuleRepository $moduleRepository): Response
     {
@@ -27,6 +29,8 @@ class ModuleController extends AbstractController
 
     /**
      * @Route("/new", name="module_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class ModuleController extends AbstractController
 
     /**
      * @Route("/{id}", name="module_show", methods={"GET"})
+     * @param Module $module
+     * @return Response
      */
     public function show(Module $module): Response
     {
@@ -60,6 +66,9 @@ class ModuleController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="module_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Module $module
+     * @return Response
      */
     public function edit(Request $request, Module $module): Response
     {
@@ -80,6 +89,9 @@ class ModuleController extends AbstractController
 
     /**
      * @Route("/{id}", name="module_delete", methods={"POST"})
+     * @param Request $request
+     * @param Module $module
+     * @return Response
      */
     public function delete(Request $request, Module $module): Response
     {

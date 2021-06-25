@@ -101,7 +101,7 @@ $line-width: 4px !default;
   }
 
   .loader {
-    background: $white;
+    background: none;
     @include border-radius($border-radius);
     box-shadow: $box-shadow-default;
     padding: $layout-spacer-x;

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Form\PresentationType;
+use App\Repository\PresentationRepository;
 use App\Repository\TestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +25,27 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/gestion/i3p", name="gestion_i3p")
+     * @param PresentationRepository $presentationRepository
+     * @return Response
      */
-    public function gestionI3P(): Response
+    public function gestionI3P(PresentationRepository $presentationRepository): Response
     {
         $test = $this->testRepository->findOneBy(['Nom' => 'I3P']);
+        $presentation = $test->getPresentation();
+
+        $formEditPrez = $this->createForm(PresentationType::class, $presentation);
+        if($formEditPrez->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($presentation);
+            $em->flush();
+            return $this->redirectToRoute('admin_gestion_i3p', [
+                'form'  => $formEditPrez->createView()
+            ]);
+        }
 
         return $this->render('/admin/gestioni3p.html.twig', [
             'test' => $test,
+            'form'  => $formEditPrez->createView()
         ]);
     }
 
@@ -40,8 +56,21 @@ class AdminController extends AbstractController
     {
         $test = $this->testRepository->findOneBy(['Nom' => 'IRMR']);
 
-        return $this->render('/admin/gestionRiasec.html.twig', [
+        $presentation = $test->getPresentation();
+
+        $formEditPrez = $this->createForm(PresentationType::class, $presentation);
+        if($formEditPrez->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($presentation);
+            $em->flush();
+            return $this->redirectToRoute('admin_gestion_riasec', [
+                'form' => $formEditPrez->createView()
+            ]);
+        }
+        return $this->render('/admin/gestionriasec.html.twig', [
             'test' => $test,
+            'form'  => $formEditPrez->createView()
         ]);
+
     }
 }

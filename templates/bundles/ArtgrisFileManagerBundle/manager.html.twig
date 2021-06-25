@@ -37,17 +37,17 @@
                             <span class="fas fa-bars"></span>
                         </a> #}
                         {% if fileManager.parent %}
-                            <a class="btn btn-default btn-sm"
+                            <a class="btn btn-sm btn-outline-light btn-pill border-0 btn-hover-shine btn-shadow ml-1 mr-1"
                                title="{{ 'button.parent'|trans }}"
                                href="{{ fileManager.parent }}">
                                 <span class="fas fa-level-up-alt"></span></a>
                         {% endif %}
-                        <button type="button" title="{{ 'button.refresh'|trans }}" class="btn btn-default btn-sm "
+                        <button type="button" title="Rafraichir" class="btn btn-sm btn-outline-light btn-pill border-0 btn-hover-shine btn-shadow ml-1 mr-1"
                                 onClick="window.location.reload()">
                             <span class="fas fa-sync"></span>
                         </button>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <span class="btn btn-success btn-sm fileinput-button btn-action">
+                            <span class="btn btn-outline-success pointer btn-shadow btn-pill btn-sm fileinput-button btn-action  ml-1 mr-1">
                                 <span class="far fa-file"></span>
                                 <span class="bar-action">{{ 'button.add.files'|trans }}</span>
                                     <input id="fileupload" type="file"
@@ -55,14 +55,14 @@
                                            name="files[]" multiple=""
                                            accept="{{ fileManager.configuration.accept is defined ? fileManager.configuration.accept : (fileManager.type ? accept(fileManager.type)) }}">
                             </span>
-                            <button type="button" class="btn btn-primary btn-sm btn-action" data-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-outline-info btn-pill border-0 btn-hover-shine btn-shadow btn-action ml-1 mr-1" data-toggle="modal"
                                     data-target="#addFolder">
                                 <span class="far fa-folder-open"></span>
-                                <span class="bar-action">{{ 'button.add.folder'|trans }}</span>
+                                <span class="bar-action margin-r-5">Nouveau dossier...</span>
                             </button>
                             {% if fileManager.parent %}
                                 <button type="button"
-                                        class="btn btn-sm btn-danger btn-action js-delete-modal"
+                                        class="btn btn-sm btn-outline-danger btn-pill border-0 btn-hover-shine btn-shadow btn-action js-delete-modal ml-1 mr-1"
                                         data-trigger="click"
                                         data-container="body"
                                         data-toggle="modal"
@@ -71,11 +71,11 @@
                                         data-html="true"
                                         data-href='{{ path('file_manager_delete', fileManager.queryParameters) }}'>
                                     <span class="far fa-trash-alt"></span>
-                                    <span class="bar-action">{{ 'button.delete.current'|trans }}</span>
+                                    <span class="bar-action margin-r-5">Supprimer dossier actuel</span>
                                 </button>
                             {% endif %}
                             <a id="js-delete-multiple-modal"
-                               class="btn btn-sm btn-danger btn-action disabled"
+                               class="btn btn-sm btn-outline-danger btn-pill border-0 btn-hover-shine btn-shadow btn-action disabled ml-1 mr-1"
                                type="button"
                                data-trigger="click"
                                data-container="body"
@@ -84,12 +84,12 @@
                                data-placement="left"
                                data-html="true">
                                 <span class="far fa-check-square"></span>
-                                <span class="bar-action">{{ 'button.delete.selected'|trans }}</span>
+                                <span class="bar-action">Supprimer sélectionnés</span>
                             </a>
                         {% endif %}
                     {% endblock %}
                     {% block display %}
-                        <div class="btn-group pull-right d-inline-flex">
+                        <div class="btn-group pull-right d-inline-flex ml-1 mr-1">
                             <input type="search" class="form-control search"
                                    name="search" id="search" placeholder="{{ 'search.placeholder'|trans }}" aria-describedby="search">
 
@@ -110,7 +110,7 @@
                                class="btn btn-sm btn-default {{ fileManager.view == 'thumbnail' ? 'active' }}">
                                 <span class="fas fa-th"></span>
                             </a> #}
-                            <div class="d-flex align-items-center">
+                            <div class="is-hidden">
                                 <div><strong>{{ fileManager.baseName }}</strong></div>
                             </div>
                         </div>

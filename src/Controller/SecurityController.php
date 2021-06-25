@@ -20,6 +20,8 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -35,6 +37,8 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/profil/{id}", name="monProfile")
+     * @param Utilisateur $user
+     * @return Response
      */
     public function monProfile(Utilisateur $user): Response
     {
@@ -83,6 +87,9 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/edit/{id}")
+     * @param Request $request
+     * @param Utilisateur $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function editUser(Request $request, Utilisateur $user)
     {
@@ -110,6 +117,8 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/delete/{id}")
+     * @param Utilisateur $user
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function deleteUser(Utilisateur $user)
     {
@@ -127,6 +136,9 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/security/changePass", name="security_changePass")
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param Request $request
+     * @return Response
      */
     public function changePassword(UserPasswordEncoderInterface $passwordEncoder, Request $request): Response
     {
@@ -163,6 +175,8 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/security/changeEmail", name="security_changeEmail")
+     * @param Request $request
+     * @return Response
      */
     public function changeEmail(Request $request): Response
     {
@@ -194,6 +208,11 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/PasswordUpdate/{id}", name="security_firstChangePass")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UtilisateurRepository $userRepository
+     * @param $id
+     * @return Response
      */
     public function firstChangePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, UtilisateurRepository $userRepository, $id): Response
     {
@@ -241,6 +260,9 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/switchActif", methods="POST")
+     * @param Request $request
+     * @param UtilisateurRepository $repository
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function switchActif(Request $request, UtilisateurRepository $repository)
     {

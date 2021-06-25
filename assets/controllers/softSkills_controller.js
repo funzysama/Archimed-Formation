@@ -22,9 +22,10 @@ export default class extends Controller
                     data: dataSet,
                     lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "Tout"]],
                     language: {
+                        infoFiltered: "<span class='quickApproveTable_info_filtered_span'>(filtered from _MAX_ total entries)</span>",
                         url: '../local/fr_fr.json'
                     },
-                    dom: '<"top d-flex flex-md-row justify-content-between"li>rtp',
+                    dom: 't',
                     order: [[ 2, "asc"]],
                     columns: [
                         {
@@ -39,33 +40,24 @@ export default class extends Controller
                             title: 'Résumé',
                             data: 'summary',
                             defaultContent: "Aucun",
+                            render: (data) => {
+                                return '<div style="color: #fd9644;text-decoration: underline">'+data+'</div>'
+                            }
                         },
                         {
                             title: 'Details',
                             data: 'details',
                             defaultContent: "pas de details",
-                            searchable: false
+                            searchable: false,
+                            className: 'détails_soft_skills',
                         },
                     ],
                 };
             table.DataTable(options);
         });
-        table.on('click','tr button', (e) => {
-            if(e.target.id === "pole_emploi"){
-                let code = e.target.dataset.code;
-                let url = new URL('https://candidat.pole-emploi.fr/offres/recherche?motsCles='+code+'&offresPartenaires=true&rayon=10&tri=0');
-                window.open(url, '_blank');
-            }
-            if(e.target.id === "soft_skills"){
-                let code = e.target.dataset.code;
-                window.open('/pole-emploi/SoftSkills?code='+code);
-            }
+        $(() => {
+           $('<button class="btn btn-outline-primary btn-hover-shine btn-shadow btn-pill"><i class="fa fa-arrow-left btn-icon-wrapper"></i>Retour</button>')
         });
-        table.on('click', 'td div', (e) => {
-            let code = e.target.dataset.code;
-            let url = new URL('https://candidat.pole-emploi.fr/marche-du-travail/fichemetierrome?codeRome='+code);
-            window.open(url, '_blank');
-        })
 
     }
 }
