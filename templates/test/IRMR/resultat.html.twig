@@ -7,150 +7,345 @@
 </style>
 {% endblock %}
 {% block page_content %}
-    <div class="col-sm-12 marginTop3 marginBot3" data-controller="riasec">
-        <div class="row full-width">
-            <div class="col-md-6">
-                <div class="main-card mb-3 card">
-                    <div class="card-header">Graphique</div>
-                    <div class="card-body">
-                        <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+    <div id="resultData">
+        <div class="col-sm-12 marginTop3 marginBot3" data-controller="riasec">
+            <div class="row full-width">
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-header">Graphique</div>
+                        <div class="card-body">
+                            <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="main-card mb-3 card">
-                    <div class="card-header">Resultat etendu</div>
-                    <div class="card-body">
-                        <div class="d-flex flex-sm-row riasec-figures justify-content-between full-width marginTop2" data-controller="riasec">
-                            {% for key, value in orderedPourcent %}
-                                <div class="riasec-figure justify-content-center">
-                                    <div class="{{ key }} Image" data-riasec="{{ value|json_encode }}">
-                                        <figure></figure>
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-header">Resultat etendu</div>
+                        <div class="card-body">
+                            <div class="d-flex flex-sm-row riasec-figures justify-content-between full-width marginTop2">
+                                {% for key, value in orderedPourcent %}
+                                    <div class="riasec-figure justify-content-center">
+                                        <div class="{{ key }} Image" data-riasec="{{ value|json_encode }}">
+                                            <figure></figure>
+                                        </div>
+                                        ( {{ value }}% )
                                     </div>
-                                    ( {{ value }}% )
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <div class="marginTop2">
-                            <h6>Vos 2 pôles les plus marqués :</h6>
-                            <h6>RIASEC majeur : <strong>{{ resultat.majeur }}</strong></h6>
-                            <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
-                            <hr>
-                            <h6>Vos 2 pôles les moins marqués :</h6>
-                            <h5><b>{{ resultat.inferieur1 }}</b></h5>
-                            <h5><b>{{ resultat.inferieur2 }}</b></h5>
-                            <hr>
-                            <h6 class="text-danger"><strong>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></strong></h6>
-                            <h5>Valeur de consistance de votre profil : {{ resultat.consistance }}</h5>
-                        </div>
-                        <div class="col-sm-12 marginTop1">
-                            <form action="{{ path('api_pole_emploi') }}" method="post">
-                                <input type="hidden" value="metier" name="type" id="type">
-                                <input type="hidden" value="{{ resultat.majeur|initial }}" name="riasecMajeur" id="riasecMajeur">
-                                <input type="hidden" value="{{ resultat.mineur|initial }}" name="riasecMineur" id="riasecMineur">
-                                <button class="btn btn-pill border-0 btn-outline-dark btn-hover-shine btn-shadow" type="submit">Consulter les metiers associés</button>
-                            </form>
-                        </div>
-                        <div class="marginTop2">
-                            <table class="mb-0 table">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th class="realiste-head"></th>
-                                    <th class="investigateur-head"></th>
-                                    <th class="artiste-head"></th>
-                                    <th class="social-head"></th>
-                                    <th class="entrepreneur-head"></th>
-                                    <th class="conventionnel-head"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Score brute</td>
-                                    <td>{{ resultat.realiste }}</td>
-                                    <td>{{ resultat.investigateur }}</td>
-                                    <td>{{ resultat.artiste }}</td>
-                                    <td>{{ resultat.social }}</td>
-                                    <td>{{ resultat.entrepreneur }}</td>
-                                    <td>{{ resultat.conventionnel }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Score étalonné</td>
-                                    <td>{{ resultat.realisteEtalonne }}</td>
-                                    <td>{{ resultat.investigateurEtalonne }}</td>
-                                    <td>{{ resultat.artisteEtalonne }}</td>
-                                    <td>{{ resultat.socialEtalonne }}</td>
-                                    <td>{{ resultat.entrepreneurEtalonne }}</td>
-                                    <td>{{ resultat.conventionnelEtalonne }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                {% endfor %}
+                            </div>
+                            <div class="marginTop2">
+                                <h6>Vos 2 pôles les plus marqués :</h6>
+                                <h6>RIASEC majeur : <strong>{{ resultat.majeur }}</strong></h6>
+                                <h6>RIASEC mineur : <strong>{{ resultat.mineur }}</strong></h6>
+                                <hr>
+                                <h6>Vos 2 pôles les moins marqués :</h6>
+                                <h5><b>{{ resultat.inferieur1 }}</b></h5>
+                                <h5><b>{{ resultat.inferieur2 }}</b></h5>
+                                <hr>
+                                <h6 class="text-danger"><strong>La valeur de différenciation de votre profil: <b>{{ resultat.differenciation }}</b></strong></h6>
+                                <h5>Valeur de consistance de votre profil : {{ resultat.consistance }}</h5>
+                            </div>
+                            <div class="col-sm-12 marginTop1">
+                                <form action="{{ path('api_pole_emploi') }}" method="post">
+                                    <input type="hidden" value="metier" name="type" id="type">
+                                    <input type="hidden" value="{{ resultat.majeur|initial }}" name="riasecMajeur" id="riasecMajeur">
+                                    <input type="hidden" value="{{ resultat.mineur|initial }}" name="riasecMineur" id="riasecMineur">
+                                    <button class="btn btn-pill border-0 btn-outline-dark btn-hover-shine btn-shadow" type="submit">Consulter les metiers associés</button>
+                                </form>
+                            </div>
+                            <div class="marginTop2">
+                                <table class="mb-0 table">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="realiste-head"></th>
+                                        <th class="investigateur-head"></th>
+                                        <th class="artiste-head"></th>
+                                        <th class="social-head"></th>
+                                        <th class="entrepreneur-head"></th>
+                                        <th class="conventionnel-head"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Score brute</td>
+                                        <td>{{ resultat.realiste }}</td>
+                                        <td>{{ resultat.investigateur }}</td>
+                                        <td>{{ resultat.artiste }}</td>
+                                        <td>{{ resultat.social }}</td>
+                                        <td>{{ resultat.entrepreneur }}</td>
+                                        <td>{{ resultat.conventionnel }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Score étalonné</td>
+                                        <td>{{ resultat.realisteEtalonne }}</td>
+                                        <td>{{ resultat.investigateurEtalonne }}</td>
+                                        <td>{{ resultat.artisteEtalonne }}</td>
+                                        <td>{{ resultat.socialEtalonne }}</td>
+                                        <td>{{ resultat.entrepreneurEtalonne }}</td>
+                                        <td>{{ resultat.conventionnelEtalonne }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row full-width">
-            <div class="d-flex col-sm-12 justify-content-around flex-row flex-nowrap">
-                <div id="majeur" class="riasec-card">
-                    <h5>Riasec Majeur</h5>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="content-card-front-{{ resultat.majeur|minimize }}"></div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="content-card-back-{{ resultat.majeur|minimize }}"></div>
+            <div class="row full-width">
+                <div class="d-flex col-sm-12 justify-content-around flex-row flex-nowrap">
+                    <div id="majeur" class="riasec-card">
+                        <h5>Riasec Majeur</h5>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="content-card-front-{{ resultat.majeur|minimize }}"></div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div class="content-card-back-{{ resultat.majeur|minimize }}"></div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    {% if twoMineur == true %}
+                        <div id="mineur" class="riasec-card">
+                            <h5>Premier Riasec Mineur</h5>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div class="content-card-front-{{ minor1|minimize }}"></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="content-card-back-{{ minor1|minimize }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="mineur" class="riasec-card">
+                            <h5>Deuxieme Riasec Mineur</h5>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div class="content-card-front-{{ minor2|minimize }}"></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="content-card-back-{{ minor2|minimize }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div id="mineur" class="riasec-card">
+                            <h5>Riasec Mineur</h5>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div class="content-card-front-{{ resultat.mineur|minimize }}"></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="content-card-back-{{ resultat.mineur|minimize }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row full-width">
+                <div class="card mt-3">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <table class="table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Dom. Holland</th>
+                                <th>Données générale</th>
+                                <th>Environnement</th>
+                                <th>Activités types</th>
+                                <th>Points forts</th>
+                                <th>Métiers</th>
+                                <th>Caractéristiques</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>Réaliste</th>
+                                <td>Le besoin de toucher les choses, l’engagement physique</td>
+                                <td>Environnement simple et naturel. Il est caractérisé par son sens pratique. Il a le goût des résultats tangibles et des gestes concrets. Adroit de ses mains, il aime manier des outils ou conduire des « machines ». Il a de l’endurance physique et/ou de la dextérité manuelle. Il aime obtenir des résultats concrets et travaille avec régularité</td>
+                                <td>Réparer, utiliser des outils,
+                                    conduire   des   machines,
+                                    travailler avec ses mains, se
+                                    dépenser physiquement</td>
+                                <td>Modestie,  franchise,  efficacité
+                                    dans   le   travail,   autonome,
+                                    gestion   efficace   du   temps,
+                                    capacité   à   trouver   des
+                                    solutions   concrètes   à   des
+                                    problèmes</td>
+                                <td>Ingénieur   technique,
+                                    conducteur   d’autobus,
+                                    militaire, sportif, agriculteur</td>
+                                <td>Sens pratique, aventureux, capacités
+                                    mécaniques,   peu   à   l’aise   dans   les
+                                    rapports sociaux, peu d’intérêt pour
+                                    la nouveauté</td>
+                            </tr>
+                            <tr>
+                                <th>Investigateur</th>
+                                <td>Le besoin de comprendre, la rigueur intellectuelle</td>
+                                <td>Privilégie   les   activités   intellectuelles,   notamment   d’ordre
+                                    scientifique, à l’action. Il aime analyser, observer, expérimenter
+                                    pour comprendre les phénomènes qui l’entourent. Il est guidé
+                                    par le besoin de comprendre et d’accroître ses connaissances. Il
+                                    apprécie   la   stimulation   intellectuelle,   notamment   par
+                                    l’apprentissage.   Il   est   peu   intéressé   par   les   relations
+                                    interpersonnelles</td>
+                                <td>Résoudre   des   problèmes,
+                                    conduire   des   recherches,
+                                    analyser   des   données,
+                                    travailler   de   façon
+                                    autonome</td>
+                                <td>Esprit   critique,   synthétique,
+                                    d’analyse,   indépendant,
+                                    méthodique, curieux, rigoureux</td>
+                                <td>Informaticien,   biologiste,
+                                    médecin,   mathématicien,
+                                    sociologue</td>
+                                <td>Capacités   à   susciter   un
+                                    questionnement,  à programmer  des
+                                    projets   complexes,   aptitudes
+                                    scientifiques, difficulté à manager, à
+                                    prendre des décisions concrètes et à
+                                    s’intéresser aux réalisations pratiques</td>
+                            </tr>
+                            <tr>
+                                <th>Artiste</th>
+                                <td>L’expression   de   soi,   le
+                                    goût du changement</td>
+                                <td>L’artiste   s’oppose   au   type   conventionnel.   Il   est   avant   tout
+                                    quelqu’un qui a besoin de s’exprimer dans ce qu’il fait. Il est
+                                    souvent attiré par des activités à caractère artistique mais peut
+                                    exercer sa créativité dans tout autre domaine. Il éprouve une
+                                    aversion pour les tâches trop systématiques et contraignantes.
+                                    Il   apprécie   le   changement   dans   son   travail   et   s’adapte
+                                    facilement à de nouvelles conditions</td>
+                                <td>Jouer   un   rôle,   décorer,
+                                    créer,   imaginer,   écrire,
+                                    s’exprimer</td>
+                                <td>Indépendant, sensible, intuitif,
+                                    idéaliste,   créatif,   original,
+                                    anticipateur </td>
+                                <td>Chargé   de   communication,
+                                    relations   publiques,
+                                    publicitaire,   journaliste,
+                                    musicien, professeur d’arts</td>
+                                <td>Fort enthousiasme face à des activités
+                                    nouvelles   et   attirantes,   impulsif,
+                                    travaillera  plus facilement  dans  des
+                                    environnements   flexibles   ou   peu
+                                    contraignants,   peu   pratique   et   peu
+                                    diplomate,   présente   parfois   des
+                                    difficultés   à   s’intégrer   dans   une
+                                    équipe</td>
+                            </tr>
+                            <tr>
+                                <th>Social</th>
+                                <td>Le désir de communiquer,
+                                    le travail en équipe</td>
+                                <td>Le   social  est  celui qui s’éloigne   le  plus  du  type  réaliste.   Il
+                                    recherche les contacts avec les autres pour les conseiller, les
+                                    informer,  les aider...  ce qui le  prédispose  à des activités  à
+                                    vocation sociale ou de communication. Leader et populaire, il
+                                    aime être au centre des activités et est peu enclin aux activités
+                                    à caractère administratif. Il est à l’aise dans un environnement
+                                    chaleureux   et   participatif   qui   satisfait   son   besoin
+                                    d’appartenance</td>
+                                <td>Enseigner, conseiller, aider,
+                                    informer,   rencontrer   des
+                                    personnes</td>
+                                <td>Généreux,   tolérant,
+                                    responsable,   accueillant,
+                                    bonne   éloquence   verbale,
+                                    idéaliste,   coopératif,
+                                    disponible, diplomate.</td>
+                                <td>Le désir de communiquer, le
+                                    travail en équipe</td>
+                                <td>Doué pour les relations humaines, il
+                                    se   mobilise   aisément,   bonne
+                                    intelligence   des   situations   sociales,
+                                    difficulté à trancher par souci de «
+                                    blesser », manque de rigueur avec les
+                                    chiffres et les budgets à gérer</td>
+                            </tr>
+                            <tr>
+                                <th>Entreprenant</th>
+                                <td>Le besoin de pouvoir, la
+                                    force de conviction</td>
+                                <td>Aime prendre des initiatives et exercer une influence sur les
+                                    autres   par   son   pouvoir   de   persuasion   et   son   sens   de
+                                    l’organisation.  Réactif,  il  est  à l’aise  dans les  situations  qui
+                                    réclament de la rapidité de décision et de la combativité. Il lui
+                                    faut relever des challenges à la mesure de son ambition. Il a le
+                                    goût des relations d’affaires et les activités commerciales. Il est
+                                    apte à diriger les autres, à prendre des décisions, à réaliser des
+                                    projets d’envergure.</td>
+                                <td>Vendre, gagner de l’argent,
+                                    faire de la politique, diriger,
+                                    décider,   convaincre,
+                                    persuader</td>
+                                <td>Energique, aptitude à prendre
+                                    des   risques,   fin   stratège,
+                                    populaire   en   étant   souvent
+                                    leader,   expression   aisée,
+                                    persuasif,   persévérant,
+                                    extraverti</td>
+                                <td>Directeur   général,
+                                    responsable   marketing,
+                                    agent immobilier, gérant de
+                                    PME, homme politique</td>
+                                <td>Convaincant,   compétitif,   besoin
+                                    d’activités,   goût   de   l’argent,   esprit
+                                    aventureux,   parfois   autoritaire,
+                                    difficulté   à   avoir   une   vue   à   long
+                                    terme, il a tendance à parfois trop se
+                                    précipiter</td>
+                            </tr>
+                            <tr>
+                                <th>Conventionnel</th>
+                                <td>L’efficacité   dans   les
+                                    structures,   le   goût   du
+                                    travail bien fait</td>
+                                <td>Apprécie   les   environnements   stables   et   structurés.   D’une
+                                    grande conscience professionnelle, il aime le travail bien fait,
+                                    l’exactitude et la rapidité d’exécution. Il a le sens des chiffres,
+                                    apprécie les activités de gestion. Il apparaît soit comme un bon
+                                    exécutant   soit   comme   un   réalisateur   systématique   et
+                                    méthodique et exige des directives claires. Il attribue de la
+                                    valeur à la réussite matérielle et sociale</td>
+                                <td>Organiser,   vérifier,   classer,
+                                    rédiger des notes, gérer</td>
+                                <td>Consciencieux,   calme,
+                                    méthodique,   de   confiance,
+                                    soucieux du travail de qualité,
+                                    impliqué   professionnellement,
+                                    persévérant,   rigoureux,
+                                    ordonné, minutieux, loyal</td>
+                                <td>Comptable,   statisticien,
+                                    banquier, agent des impôts</td>
+                                <td>Prudent,   difficulté   à   innover,   à
+                                    remettre   en  cause le savoir  acquis,
+                                    laisse   transparaître   une   certaine
+                                    résistance au changement,
+                                    respectueux   des   hiérarchies,   peu
+                                    imaginatif</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                {% if twoMineur == true %}
-                    <div id="mineur" class="riasec-card">
-                        <h5>Premier Riasec Mineur</h5>
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="content-card-front-{{ minor1|minimize }}"></div>
-                                </div>
-                                <div class="flip-card-back">
-                                    <div class="content-card-back-{{ minor1|minimize }}"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="mineur" class="riasec-card">
-                        <h5>Deuxieme Riasec Mineur</h5>
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="content-card-front-{{ minor2|minimize }}"></div>
-                                </div>
-                                <div class="flip-card-back">
-                                    <div class="content-card-back-{{ minor2|minimize }}"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% else %}
-                    <div id="mineur" class="riasec-card">
-                        <h5>Riasec Mineur</h5>
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="content-card-front-{{ resultat.mineur|minimize }}"></div>
-                                </div>
-                                <div class="flip-card-back">
-                                    <div class="content-card-back-{{ resultat.mineur|minimize }}"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
             </div>
         </div>
     </div>
-
+<div id="getPdf" data-id="{{ resultat.id }}" class="pointer col-sm-12 pdf-button-riasec"></div>
 {% endblock %}
 
 {% block bottom_javascript %}

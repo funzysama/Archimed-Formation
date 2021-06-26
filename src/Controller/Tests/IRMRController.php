@@ -10,6 +10,8 @@ use App\Repository\QuestionRepository;
 use App\Repository\TestRepository;
 use App\Service\IRMRCalculator;
 use App\Service\pdfDataFormatter;
+use Dompdf\Css\Style;
+use Dompdf\Css\Stylesheet;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -97,17 +99,29 @@ class IRMRController extends AbstractController
     }
 
     /**
-     * @Route("/result/Riasec/{id}/pdf", name="resultat_irmr_pdf")
+     * @Route("/result/Riasec/{id}/pdf", name="resultat_irmr_pdf", methods={"POST","GET"})
      * @param IrmrResultat $resultat
      */
-    public function resultatIRMRPDF(IrmrResultat $resultat)
+    public function resultatIRMRPDF(Request $request, IrmrResultat $resultat)
     {
+        if($request->isMethod('POST')){
+            $data = $request->request->all();
+            $image64 = json_decode($data["image"]);
+        }else{
+            $image64 = "";
+        }
+
         $pdfOptions = new Options();
         $pdfOptions->set([
-            'isHtml5ParserEnabled' => true
+            'isHtml5ParserEnabled'  => true,
+            'isRemoteEnabled'       => true
         ]);
-        $dompdf = new Dompdf($pdfOptions);
 
+        $dompdf = new Dompdf($pdfOptions);
+        $stylesheet = new Stylesheet($dompdf);
+        $dompdf->getOptions()->setChroot('C:\xampp\htdocs\Archimed\public');
+        $dompdf->setBasePath('C:\xampp\htdocs\Archimed\public');
+        dump($dompdf->getBasePath(), $stylesheet, $request);
         $orderedPourcent = [];
         $orderedPourcent["Realiste"] = $resultat->getRealistePourcent();
         $orderedPourcent["Investigateur"] = $resultat->getInvestigateurPourcent();
@@ -128,20 +142,30 @@ class IRMRController extends AbstractController
         }
         $calculator = new IRMRCalculator($resultat, $this->getUser());
         $resultat = $calculator->getConsistance($resultat);
-        return $this->render('test/IRMR/resultat_pdf.html.twig', [
+        $html = $this->renderView('test/IRMR/resultat_pdf.html.twig', [
+            'graph'                 => $image64,
             'resultat'              => $resultat,
             'orderedPourcent'       => $orderedPourcent,
             'twoMineur'             => $twoMineur,
             'minor1'                => $minor1,
             'minor2'                => $minor2
         ]);
-
-//        $dompdf->loadHtml($html);
-//        $dompdf->setPaper('A4', 'portrait');
-//        $dompdf->render();
-//        $dompdf->outputHtml();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        return $this->json([
+            "pdf" => base64_encode($dompdf->output())
+        ]);
 //        $dompdf->stream('mon-profil-Irmr.pdf', [
-//            "Attachement"   => false
+//            "Attachement"   => true
+//        ]);
+//        return $this->render('test/IRMR/resultat_pdf.html.twig', [
+//            'graph'                 => $image64,
+//            'resultat'              => $resultat,
+//            'orderedPourcent'       => $orderedPourcent,
+//            'twoMineur'             => $twoMineur,
+//            'minor1'                => $minor1,
+//            'minor2'                => $minor2
 //        ]);
 
     }

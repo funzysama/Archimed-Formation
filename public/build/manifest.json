@@ -311,5 +311,10 @@
   "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-7a8052.css": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-7a8052.css",
   "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-7a8052.js": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-7a8052.js",
   "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-e39353.css": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-e39353.css",
-  "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-e39353.js": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-e39353.js"
+  "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-e39353.js": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-e39353.js",
+  "build/vendors-node_modules_html2canvas_dist_html2canvas_js.js": "/build/vendors-node_modules_html2canvas_dist_html2canvas_js.js",
+  "build/vendors-node_modules_dompurify_dist_purify_js.js": "/build/vendors-node_modules_dompurify_dist_purify_js.js",
+  "build/vendors-node_modules_canvg_lib_index_es_js.js": "/build/vendors-node_modules_canvg_lib_index_es_js.js",
+  "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-67b159.css": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-67b159.css",
+  "build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-67b159.js": "/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-67b159.js"
 }

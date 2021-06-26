@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus';
 import jQuery from 'jquery';
+import { jsPDF } from 'jspdf'
 
 /*
  * This is an example Stimulus controller!
@@ -61,7 +62,35 @@ export default class extends Controller {
                 }
             }
         }
-        var myChart = new Chart(ctx, config);
-
+        let myChart = new Chart(ctx, config);
+        $('#getPdf').on('click', (e) => {
+            const doc = new jsPDF();
+            let html = $('#resultData');
+            console.log(html[0]);
+            doc.html(html[0], {
+                callback: function (doc) {
+                    doc.save();
+                },
+                x: 10,
+                y: 10
+            })
+            //doc.save('test.pdf');
+            // let chartImage = myChart.toBase64Image();
+            // let jsonData = JSON.stringify(chartImage);
+            // $.ajax({
+            //     url: '/result/Riasec/'+e.target.dataset.id+'/pdf',
+            //     type: 'post',
+            //     data: {
+            //         image: jsonData
+            //     },
+            //     success: (data) => {
+            //         let a = document.createElement("a");
+            //         a.href = "data:application/pdf;base64,"+data.pdf;
+            //         a.download = "riasec.pdf";
+            //         a.click();
+            //         console.log(data)
+            //     }
+            // })
+        })
     }
 }

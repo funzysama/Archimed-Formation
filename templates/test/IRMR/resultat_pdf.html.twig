@@ -6,7 +6,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-header">Graphique</div>
                 <div class="card-body">
-                    <canvas class="marginTop3" id="myChart" width="300" height="300"></canvas>
+                    <img src="{{ graph }}">
                 </div>
             </div>
             <div class="main-card mb-3 card">
@@ -82,22 +82,24 @@
             <div class="d-flex col-sm-12 flex-column align-items-center flex-nowrap">
                 <div class="col-sm-10 row d-flex flex-row justify-content-center align-items-center">
                     <div class="content-pdf-card">
-                        <div class="card ">
-                            <div class="card-header">
-                                <h5>Riasec Majeur</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="content-pdf-card">
-                                    <div class="content-pdf-card-front-{{ resultat.majeur|minimize }}"></div>
-                                    <div class="content-pdf-card-back-{{ resultat.majeur|minimize }}"></div>
-                                </div>
-                            </div>
-                        </div>
                         <h5>Riasec Majeur</h5>
                         <div class="content-pdf-card-front-{{ resultat.majeur|minimize }}"></div>
                         <div class="content-pdf-card-back-{{ resultat.majeur|minimize }}"></div>
                     </div>
-                    {% if twoMineur == false %}
+                </div>
+                <div class="col-sm-10 row d-flex flex-row justify-content-center align-items-center">
+                    {% if twoMineur == true %}
+                            <div id="mineur" class="content-pdf-card">
+                                <h5>Premier Riasec Mineur</h5>
+                                <div class="content-pdf-card-front-{{ minor1|minimize }}"></div>
+                                <div class="content-pdf-card-back-{{ minor1|minimize }}"></div>
+                            </div>
+                            <div id="mineur" class="content-pdf-card">
+                                <h5>Deuxieme Riasec Mineur</h5>
+                                <div class="content-pdf-card-front-{{ minor2|minimize }}"></div>
+                                <div class="content-pdf-card-back-{{ minor2|minimize }}"></div>
+                            </div>
+                    {% else %}
                         <div class="content-pdf-card">
                             <h5>Riasec Mineur</h5>
                             <div class="content-pdf-card-front-{{ resultat.mineur|minimize }}"></div>
@@ -105,21 +107,6 @@
                         </div>
                     {% endif %}
                 </div>
-                {% if twoMineur == true %}
-                    <div class="row">
-                        <div id="mineur" class="content-pdf-card">
-                            <h5>Premier Riasec Mineur</h5>
-                            <div class="content-pdf-card-front-{{ minor1|minimize }}"></div>
-                            <div class="content-pdf-card-back-{{ minor1|minimize }}"></div>
-                        </div>
-                        <div id="mineur" class="content-pdf-card">
-                            <h5>Deuxieme Riasec Mineur</h5>
-                            <div class="content-pdf-card-front-{{ minor2|minimize }}"></div>
-                            <div class="content-pdf-card-back-{{ minor2|minimize }}"></div>
-                        </div>
-                    </div>
-                {% else %}
-                {% endif %}
             </div>
         </div>
     </div>

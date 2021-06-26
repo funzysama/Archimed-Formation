@@ -5,13 +5,81 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title></title>
-    {{ encore_entry_link_tags('app') }}
-    {{ encore_entry_script_tags('app') }}
+    <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost() }}/build/app.css">
+    <script src="{{ app.request.getSchemeAndHttpHost() }}/build/runtime.js" defer=""></script>
+    <script src="{{ app.request.getSchemeAndHttpHost() }}/build/vendors-node_modules_chenfengyuan_datepicker_dist_datepicker_js-node_modules_symfony_stimulus-1f7c90.js" defer=""></script>
+    <script src="{{ app.request.getSchemeAndHttpHost() }}/build/app.js" defer=""></script>
+{#    {{ encore_entry_link_tags('app') }}#}
+{#    {{ encore_entry_script_tags('app') }}#}
     <style>
         body{
             position: unset;
             overflow: auto;
         }
+        .Realiste figure{
+            background: url(/assets/assets/images/riasec/REALISTE.png);
+            display: block;
+            background-size: contain;
+            height: inherit;
+        }
+
+        .Investigateur figure{
+            background: url(/assets/assets/images/riasec/INVESTIGATEUR.png);
+            display: block;
+            background-size: contain;
+            height: inherit;
+        }
+
+        .Artiste figure{
+            background: url(/assets/assets/images/riasec/ARTISTIQUE.png);
+            display: block;
+            background-size: contain;
+            height: inherit;
+        }
+
+        .Social figure{
+            background: url(/assets/assets/images/riasec/SOCIAL.png);
+            display: block;
+            background-size: contain;
+            height: inherit;
+        }
+
+        .Entrepreneur figure{
+            background: url(/assets/assets/images/riasec/ENTREPRENANT.png);
+            display: block;
+            background-size: contain;
+            height: inherit;
+        }
+
+        .Conventionnel figure{
+            background: url(/assets/assets/images/riasec/CONVENTIONNEL.png);
+            display: block;
+            background-size: contain;
+            height: inherit;
+        }
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fffcf9;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 0.25rem;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            border-bottom-width: 1px;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-right: 0.625rem;
+            height: 3.5rem;
+            text-transform: capitalize;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
     </style>
 </head>
 <body>

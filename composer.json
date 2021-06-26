@@ -55,7 +55,8 @@
         "twig/extensions": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "ext-http": "*"
+        "ext-http": "*",
+        "ext-gd": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.2",
